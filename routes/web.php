@@ -24,3 +24,4 @@ Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('home');
 Route::resource('/user', 'UserController')->except('show');
+Route::resource('/profile', 'ProfileController')->except('show');

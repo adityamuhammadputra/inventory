@@ -9,8 +9,10 @@
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, web ui kit, dashboard template, admin template">
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-    <title> | Panorama</title>
-	<link href="admin/css/app.css" rel="stylesheet">
+
+    <title>@hasSection('level2') @yield('level2') | @endif Panorama</title>
+	<link href="/admin/css/app.css" rel="stylesheet">
+	<link href="/css/app.css" rel="stylesheet">
 </head>
 
 <body>
@@ -82,7 +84,7 @@
 						<div class="mb-3 text-sm">
 							Are you need help ?
 						</div>
-						<a href="https://bins.co.id" target="_blank" class="btn btn-outline-primary btn-block">Contact Me</a>
+						<a href="https://ariusdev.bins.co.id" target="_blank" class="btn btn-outline-primary btn-block">Contact Me</a>
 					</div>
 				</div>
 			</div>
@@ -184,7 +186,7 @@
 								<a class="dropdown-item" href="/user"><i class="align-middle mr-1" data-feather="users"></i> Users</a>
 								<a class="dropdown-item" href="/profile"><i class="align-middle mr-1" data-feather="user"></i> Profile</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="/help"><i class="align-middle mr-1" data-feather="help-circle"></i> Help Center</a>
+								<a class="dropdown-item" href="https://ariusdev.bins.co.id" target="_blank"><i class="align-middle mr-1" data-feather="help-circle"></i> Help Center</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/logout"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -218,7 +220,10 @@
 							</nav>
 						</div>
 					</div>
+
 					@yield('content')
+
+
 				</div>
 			</main>
 
@@ -245,6 +250,7 @@
 
 	{{-- <script src="js/vendor.js"></script> --}}
 	<script src="admin/js/app.js"></script>
+	<script src="/js/app.js"></script>
     @stack('scripts')
 </body>
 
