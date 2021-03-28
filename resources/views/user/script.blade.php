@@ -1,5 +1,7 @@
 @push('scripts')
     <script>
-        $('.table').dataTable();
+        $('.table').dataTable({
+            "bSort": true,
+        });
     </script>
 @endpush

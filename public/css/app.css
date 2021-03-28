@@ -10948,3 +10948,33 @@ a.text-dark:focus {
   right: -60px;
 }
 
+.dataTables_paginate {
+  float: right;
+}
+
+.dataTables_filter {
+  float: right;
+}
+
+.dataTables_filter,
+.dataTables_length {
+  color: transparent;
+  font-size: 0px;
+  padding: 15px 15px 0px;
+}
+
+table.dataTable thead .sorting {
+  background-image: url(/images/sort_both.png?9a6486086d09bb38cf66a57cc559ade3);
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
+table.dataTable thead .sorting_asc {
+  background-image: url(/images/sort_asc.png?9326ad44ae4bebdedd141e7a53c2a730) !important;
+}
+
+table.dataTable thead .sorting_desc {
+  background-image: url(/images/sort_desc.png?1fc418e33fd5a687290258b23fac4e98) !important;
+}
+
