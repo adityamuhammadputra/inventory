@@ -25,6 +25,7 @@
     "dependencies": {
         "datatables.net": "^1.10.24",
         "datatables.net-bs4": "^1.10.24",
+        "mdi-icons": "^1.0.1",
         "typed.js": "^2.0.12"
     }
 }

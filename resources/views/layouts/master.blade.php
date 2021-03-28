@@ -19,13 +19,13 @@
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
+				<a class="sidebar-brand" href="/">
                     <span class="align-middle">Panorama</span>
                 </a>
                 <ul class="sidebar-nav">
                     <li class="sidebar-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
                         <a class="sidebar-link" href="/dashboard">
-                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard </span>
                         </a>
                     </li>
                     <li class="sidebar-header">
@@ -238,7 +238,7 @@
 						<div class="col-6 text-right">
 							<ul class="list-inline">
 								<li class="list-inline-item">
-									<a class="text-muted" href="#">&copy; 2021 | Panorama</a>
+                                    <a class="text-muted" href="#">&copy; 2021 | Panorama </a>
 								</li>
 							</ul>
 						</div>
