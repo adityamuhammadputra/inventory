@@ -2,7 +2,7 @@
 
 <script>
     $('.userEdit').on('click', function(){
-        alert('c')
+        toastr.info('Test 1234?')
     })
 
     var options = {
@@ -13,6 +13,5 @@
     };
 
     var typed = new Typed('.notes', options);
-
 </script>
 @endpush

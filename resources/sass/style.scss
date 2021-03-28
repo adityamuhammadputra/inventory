@@ -32,3 +32,8 @@ table.dataTable thead .sorting_asc {
 table.dataTable thead .sorting_desc {
     background-image: url(../../public/img/sort_desc.png) !important;
 }
+
+
+.navbar-expand .navbar-nav .dropdown-menu {
+    width: max-content;
+}

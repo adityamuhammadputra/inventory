@@ -26,6 +26,8 @@
         "datatables.net": "^1.10.24",
         "datatables.net-bs4": "^1.10.24",
         "mdi-icons": "^1.0.1",
+        "sweetalert": "^2.1.2",
+        "toastr": "^2.1.4",
         "typed.js": "^2.0.12"
     }
 }
