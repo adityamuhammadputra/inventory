@@ -151,5 +151,5 @@
     </div>
 </div>
 @endsection
-{{-- @include('profile.script') --}}
+@include('profile.script')
 
