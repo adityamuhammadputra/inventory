@@ -26,8 +26,8 @@
                         <td>
                             <img src="img/avatars/1.jpg" width="48" height="48" class="rounded-circle mr-2" alt="Avatar"> {{ $item->name }} <br> <a href="#" class="email-detail">{{ $item->email }}</a>
                         </td>
-                        <td><span class="mdi mdi-account"></span></td>
-                        <td>{{ $item->created_at }}</td>
+                        <td> {{ $item->phone ?? '-' }}</td>
+                        <td>{{ dateTimeOutput($item->created_at) }}</td>
                         <td>
                             <a href="#" class="userEdit">
                                 <span data-feather="edit" class="mr-1"></span>

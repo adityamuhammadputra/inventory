@@ -30,7 +30,7 @@
                 <ul class="list-unstyled mb-0">
                     <li class="mb-1"><span data-feather="mail" class="feather-sm mr-1"></span> <a href="#">{{ request()->user()->email }}</a></li>
                     <li class="mb-1"><span data-feather="smartphone" class="feather-sm mr-1"></span> <a href="#">{{ request()->user()->phone ?? '-' }}</a></li>
-                    <li class="mb-1"><span data-feather="power" class="feather-sm mr-1"></span> Created At <a href="#">{{ request()->user()->created_at ?? '' }}</a></li>
+                    <li class="mb-1"><span data-feather="power" class="feather-sm mr-1"></span> Created At <a href="#">{{ dateTimeOutput(request()->user()->created_at) ?? '' }}</a></li>
                 </ul>
             </div>
         </div>
