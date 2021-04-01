@@ -13,7 +13,7 @@
                 </h5>
             </div>
             <div class="card-body text-center">
-                <img src="{{ request()->user()->avatar ?? 'img/avatars/1.jpg' }}" alt="Christina Mason" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+                <img src="{{ request()->user()->avatar ?? '/images/avatars/1.jpg' }}" alt="Christina Mason" class="img-fluid rounded-circle mb-2" width="128" height="128" />
                 <h5 class="card-title mb-0">{{ request()->user()->name }}</h5>
                 <div>
                     <a class="btn btn-primary btn-sm" href="#"><span data-feather="award"></span> Admin Aplikasi</a>
@@ -22,7 +22,8 @@
             <hr class="my-0" />
             <div class="card-body">
                 <h5 class="h6 card-title">Notes</h5>
-                <textarea class="form-control notes" name="notes"></textarea>
+                <textarea class="form-control notes" name=""></textarea>
+                <textarea class="form-control" name="notes"></textarea>
             </div>
             <hr class="my-0" />
             <div class="card-body">

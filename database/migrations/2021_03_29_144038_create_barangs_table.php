@@ -15,6 +15,7 @@ class CreateBarangsTable extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('kategori');
             $table->string('kode')->unique();
             $table->string('barcode')->nullable();
             $table->string('jenis')->nullable();
@@ -23,9 +24,9 @@ class CreateBarangsTable extends Migration
             $table->string('serial_number')->nullable();
             $table->string('kondisi')->nullable();
             $table->string('harga')->nullable();
-            $table->string('status')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
-            $table->string('created_by')->nullable();
+            $table->integer('created_by')->nullable();
         });
     }
 

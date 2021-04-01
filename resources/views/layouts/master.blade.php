@@ -8,7 +8,7 @@
 	<meta name="description" content="Responsive Web UI Kit &amp; Dashboard Template based on Bootstrap">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, web ui kit, dashboard template, admin template">
-	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+	<link rel="shortcut icon" href="/images/icons/icon-48x48.png" />
 
     <title>@hasSection('level2') @yield('level2') | @endif Panorama</title>
 	<link href="/admin/css/app.css" rel="stylesheet">
@@ -180,7 +180,7 @@
                             </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-                                <img src="img/avatars/1.jpg" class="avatar img-fluid rounded mr-1" alt="{{ auth()->user()->name }}" /> <span class="text-dark">{{ auth()->user()->name }}</span>
+                                <img src="/images/avatars/1.jpg" class="avatar img-fluid rounded mr-1" alt="{{ auth()->user()->name }}" /> <span class="text-dark">{{ auth()->user()->name }}</span>
                             </a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<a class="dropdown-item" href="/user"><i class="align-middle mr-1" data-feather="users"></i> Users</a>
