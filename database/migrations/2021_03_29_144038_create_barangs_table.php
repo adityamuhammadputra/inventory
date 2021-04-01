@@ -16,17 +16,20 @@ class CreateBarangsTable extends Migration
         Schema::create('barangs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('kategori');
+            $table->string('kategori_no');
             $table->string('kode')->unique();
             $table->string('barcode')->nullable();
             $table->string('jenis')->nullable();
             $table->string('merk')->nullable();
             $table->string('type')->nullable();
             $table->string('serial_number')->nullable();
-            $table->string('kondisi')->nullable();
+            $table->integer('kondisi')->nullable();
             $table->string('harga')->nullable();
             $table->integer('status')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
-            $table->integer('created_by')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
