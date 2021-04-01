@@ -20,8 +20,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', 'DashboardController@index')->name('home');
+    Route::resource('/user', 'UserController')->except('show');
 
+    Route::resource('/profile', 'ProfileController')->except('show', 'destroy');
 
-Route::get('/dashboard', 'DashboardController@index')->name('home');
-Route::resource('/user', 'UserController')->except('show');
-Route::resource('/profile', 'ProfileController')->except('show');
+    Route::resource('/item', 'ItemController')->only('create', 'index');
+});

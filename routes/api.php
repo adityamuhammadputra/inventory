@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('v1')->middleware('auth:api')->group(function () {
+    Route::resource('item', 'Api\ItemController')->except('create', 'index');
+    Route::post('item/datatable', 'Api\ItemController@dataTable');
+});
