@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
-                'avatar' => '/images/avatars/1.jpg',
+                'avatar' => '/img/avatars/1.jpg',
                 'phone' => '0812345678',
                 'status' => 1,
                 'password' => Hash::make('password'),
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'user',
                 'email' => 'user@gmail.com',
-                'avatar' => '/images/avatars/avatar.jpg',
+                'avatar' => '/img/avatars/avatar.jpg',
                 'phone' => '0912345678',
                 'status' => 1,
                 'password' => Hash::make('password'),
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'user dua',
                 'email' => 'user2@gmail.com',
-                'avatar' => '/images/avatars/avatar-2.jpg',
+                'avatar' => '/img/avatars/avatar-2.jpg',
                 'phone' => '0912345678',
                 'status' => 1,
                 'password' => Hash::make('password'),

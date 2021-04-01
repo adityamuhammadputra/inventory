@@ -1,17 +1,46 @@
 @push('scripts')
 
 <script>
-    $('.userEdit').on('click', function(){
-        toastr.info('Test 1234?')
-    })
+     $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        urlTable = "{{ url('api/v1/item/datatable') }}?" + $('#wrap-filter').serialize();
+        table = $('#dataTable').dataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url : urlTable,
+                method: 'POST'
+            },
+            columns: [
+                {
+                    data: null,
+                    searchable:false
+                },
+                {data: 'kode'},
+                { data: 'jenis'},
+                { data: 'merk'},
+                { data: 'type'},
+                { data: 'harga',},
+                { data: 'action', name: 'action', orderable:false, searchable:false},
+                { data: 'created_at', name: 'created_at', searchable:false, visible:false},
+            ],
+            order:[[7, 'desc']],
 
-    var options = {
-        strings: ['Suka sama kamu huhu.', 'Suka sama dia huhu.'],
-        typeSpeed: 40,
-        loop: true,
-        cursorChar: ' ',
-    };
-
-    var typed = new Typed('.notes', options);
+        });
+        // table.on('draw.dt', function () {
+        //     var info = table.page.info();
+        //     table.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+        //         cell.innerHTML = i + 1 + info.start;
+        //     });
+        // });
+        // table.on( 'click', 'button', function () {
+        //     var data = table.row( $(this).parents('tr') ).data();
+        //     window.location = "/project/disposisi/" + data.Id
+        // } );
+    });
 </script>
 @endpush
