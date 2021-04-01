@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('level2', 'User')
+@section('level1', 'User')
 @section('level2', 'Profile')
 @section('title', 'Profile' . request()->user()->name)
 
@@ -46,7 +46,7 @@
             <div class="card-body h-100">
 
                 <div class="media">
-                    <img src="img/avatars/avatar-5.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Vanessa Tucker">
+                    <img src="/images/avatars/avatar-5.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Vanessa Tucker">
                     <div class="media-body">
                         <small class="float-right text-navy">5m ago</small>
                         <strong>Vanessa Tucker</strong> started following <strong>Christina Mason</strong><br />
@@ -57,7 +57,7 @@
 
                 <hr />
                 <div class="media">
-                    <img src="img/avatars/avatar.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Charles Hall">
+                    <img src="/images/avatars/avatar.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Charles Hall">
                     <div class="media-body">
                         <small class="float-right text-navy">30m ago</small>
                         <strong>Charles Hall</strong> posted something on <strong>Christina Mason</strong>'s timeline<br />
@@ -74,7 +74,7 @@
 
                 <hr />
                 <div class="media">
-                    <img src="img/avatars/avatar-4.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Christina Mason">
+                    <img src="/images/avatars/avatar-4.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Christina Mason">
                     <div class="media-body">
                         <small class="float-right text-navy">1h ago</small>
                         <strong>Christina Mason</strong> posted a new blog<br />
@@ -85,7 +85,7 @@
 
                 <hr />
                 <div class="media">
-                    <img src="img/avatars/avatar-2.jpg" width="36" height="36" class="rounded-circle mr-2" alt="William Harris">
+                    <img src="/images/avatars/avatar-2.jpg" width="36" height="36" class="rounded-circle mr-2" alt="William Harris">
                     <div class="media-body">
                         <small class="float-right text-navy">3h ago</small>
                         <strong>William Harris</strong> posted two photos on <strong>Christina Mason</strong>'s timeline<br />
@@ -93,10 +93,10 @@
 
                         <div class="row no-gutters mt-1">
                             <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                                <img src="img/photos/unsplash-1.jpg" class="img-fluid pr-2" alt="Unsplash">
+                                <img src="/images/photos/unsplash-1.jpg" class="img-fluid pr-2" alt="Unsplash">
                             </div>
                             <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                                <img src="img/photos/unsplash-2.jpg" class="img-fluid pr-2" alt="Unsplash">
+                                <img src="/images/photos/unsplash-2.jpg" class="img-fluid pr-2" alt="Unsplash">
                             </div>
                         </div>
 
@@ -106,7 +106,7 @@
 
                 <hr />
                 <div class="media">
-                    <img src="img/avatars/avatar-2.jpg" width="36" height="36" class="rounded-circle mr-2" alt="William Harris">
+                    <img src="/images/avatars/avatar-2.jpg" width="36" height="36" class="rounded-circle mr-2" alt="William Harris">
                     <div class="media-body">
                         <small class="float-right text-navy">1d ago</small>
                         <strong>William Harris</strong> started following <strong>Christina Mason</strong><br />
@@ -114,7 +114,7 @@
 
                         <div class="media mt-1">
                             <a class="pr-3" href="#">
-                                <img src="img/avatars/avatar-4.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Christina Mason">
+                                <img src="/images/avatars/avatar-4.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Christina Mason">
                             </a>
                             <div class="media-body">
                                 <div class="border text-sm text-muted p-2 mt-1">
@@ -127,7 +127,7 @@
 
                 <hr />
                 <div class="media">
-                    <img src="img/avatars/avatar-4.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Christina Mason">
+                    <img src="/images/avatars/avatar-4.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Christina Mason">
                     <div class="media-body">
                         <small class="float-right text-navy">1d ago</small>
                         <strong>Christina Mason</strong> posted a new blog<br />
@@ -137,7 +137,7 @@
 
                 <hr />
                 <div class="media">
-                    <img src="img/avatars/avatar.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Charles Hall">
+                    <img src="/images/avatars/avatar.jpg" width="36" height="36" class="rounded-circle mr-2" alt="Charles Hall">
                     <div class="media-body">
                         <small class="float-right text-navy">1d ago</small>
                         <strong>Charles Hall</strong> started following <strong>Christina Mason</strong><br />
