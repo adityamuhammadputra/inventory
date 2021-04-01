@@ -14,7 +14,7 @@ class BarangSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Barangs')->insert(
+        DB::table('Barangs')->insert([
             [
                 'id' => uuid(),
                 'kategori' => 'IP',
@@ -105,6 +105,6 @@ class BarangSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'created_by' => 1,
             ],
-        );
+        ]);
     }
 }

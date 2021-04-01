@@ -13,28 +13,28 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(
-        [
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'avatar' => '/images/avatars/1.jpg',
-            'phone' => '0812345678',
-            'password' => Hash::make('password'),
-        ],
-        [
-            'name' => 'user',
-            'email' => 'user@gmail.com',
-            'avatar' => '/images/avatars/avatar.jpg',
-            'phone' => '0912345678',
-            'password' => Hash::make('password'),
-        ],
-        [
-            'name' => 'user dua',
-            'email' => 'user2@gmail.com',
-            'avatar' => '/images/avatars/avatar-2.jpg',
-            'phone' => '0912345678',
-            'password' => Hash::make('password'),
-        ],
-    );
+        DB::table('users')->insert([
+            [
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'avatar' => '/images/avatars/1.jpg',
+                'phone' => '0812345678',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name' => 'user',
+                'email' => 'user@gmail.com',
+                'avatar' => '/images/avatars/avatar.jpg',
+                'phone' => '0912345678',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name' => 'user dua',
+                'email' => 'user2@gmail.com',
+                'avatar' => '/images/avatars/avatar-2.jpg',
+                'phone' => '0912345678',
+                'password' => Hash::make('password'),
+            ],
+        ]);
     }
 }
