@@ -5,8 +5,15 @@
 @import 'variables';
 
 // Bootstrap
+
 @import '~bootstrap/scss/bootstrap';
-@import 'style';
 
 @import "toastr";
+@import "select2";
+// @import "../../public/admin/css/app.css";
+
+
+// custom
+@import 'style';
+
 

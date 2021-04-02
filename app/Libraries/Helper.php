@@ -84,5 +84,6 @@ function dateTimeOutputId($dateTime, $printDay = false, $printTime = true) //Car
 
 function generateBarcode($name)
 {
+    // generateBarcode('test123');
     return Storage::disk('public_barcode')->put($name.'.svg', DNS1D::getBarcodeSVG("4445645656", "C128", 2, 100));
 }

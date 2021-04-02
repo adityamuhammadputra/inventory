@@ -11,8 +11,9 @@
 	<link rel="shortcut icon" href="/img/icons/icon-48x48.png" />
 
     <title>@hasSection('level2') @yield('level2') | @endif Panorama</title>
-	<link href="/admin/css/app.css" rel="stylesheet">
 	<link href="/css/app.css" rel="stylesheet">
+	<link href="/admin/css/app.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -251,6 +252,9 @@
 	{{-- <script src="js/vendor.js"></script> --}}
 	<script src="admin/js/app.js"></script>
 	<script src="/js/app.js"></script>
+    <script>
+        $('.select2').select2();
+    </script>
     @stack('scripts')
 
 </body>

@@ -7,10 +7,10 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">advanced Filter</div>
+            <div class="card-header">Advanced Filter</div>
             <div class="card-body">
                 <form class="form" id="wrap-filter">
-                    <select name="type" id="type" class="form-control">
+                    <select name="type" id="type" class="form-control select2">
                         <option disabled selected>---pilih type---</option>
                         <option value="1">Type 1</option>
                         <option value="2">Type 2</option>
@@ -24,7 +24,12 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-body">
+            <div class="card-header pt-4">
+                <h6 class="card-subtitle text-muted">Daftar <code>Item</code>
+                    <button class="btn btn-square btn-primary float-right"><i class="fa fa-plus"></i> Tambah</button>
+                </h6>
+            </div>
+            <div class="card-body pt-0">
                 <table class="table" id="dataTable">
                     <thead>
                         <tr>

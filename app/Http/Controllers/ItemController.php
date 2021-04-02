@@ -8,7 +8,6 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        generateBarcode('test123');
         return view('item.index');
     }
 
