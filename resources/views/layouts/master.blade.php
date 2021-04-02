@@ -49,9 +49,13 @@
                         <a href="#ui" data-toggle="collapse" class="sidebar-link collapsed">
                             <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Barang</span>
                         </a>
-                        <ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-                            <li class="sidebar-item"><a class="sidebar-link" href="/equipment">Equipment</a></li>
-                            <li class="sidebar-item"><a class="sidebar-link" href="/item">Item</a></li>
+                        <ul id="ui" class="sidebar-dropdown list-unstyled collapse {{ (request()->is('equipment') || request()->is('item')) ? 'show' : '' }}" data-parent="#sidebar">
+                            <li class="sidebar-item {{ (request()->is('equipment')) ? 'active' : '' }}">
+                                <a class="sidebar-link" href="/equipment">Equipment</a>
+                            </li>
+                            <li class="sidebar-item {{ (request()->is('item')) ? 'active' : '' }}">
+                                <a class="sidebar-link" href="/item">Item</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="sidebar-item {{ (request()->is('operator') || request()->is('vendor') || request()->is('rental')) ? 'active' : '' }}">
