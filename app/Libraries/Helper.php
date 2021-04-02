@@ -2,7 +2,9 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
+use DNS1D;
 
 function uuid()
 {
@@ -78,4 +80,9 @@ function dateTimeOutputId($dateTime, $printDay = false, $printTime = true) //Car
         return $dateId . ' ' .$splitTime;
     else
         return $dateId;
+}
+
+function generateBarcode($name)
+{
+    return Storage::disk('public_barcode')->put($name.'.svg', DNS1D::getBarcodeSVG("4445645656", "C128", 2, 100));
 }
