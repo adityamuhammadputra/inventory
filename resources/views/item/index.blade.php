@@ -9,12 +9,29 @@
         <div class="card">
             <div class="card-header">Advanced Filter</div>
             <div class="card-body">
-                <form class="form" id="wrap-filter">
-                    <select name="type" id="type" class="form-control select2">
-                        <option disabled selected>---pilih type---</option>
-                        <option value="1">Type 1</option>
-                        <option value="2">Type 2</option>
-                    </select>
+                <form class="form row" id="wrap-filter">
+                    <div class="col-4">
+                        <select name="type" id="type" class="form-control">
+                            <option disabled selected>---pilih jenis---</option>
+                            <option value="1">jenis 1</option>
+                            <option value="2">jenis 2</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <select name="merk" id="merk" class="form-control">
+                            <option disabled selected>---pilih merk---</option>
+                            @foreach ($data->merk as $key => $val)
+                                <option value="{{ $key }}">{{ $val }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <select name="type" id="type" class="form-control">
+                            <option disabled selected>---pilih type---</option>
+                            <option value="1">Type 1</option>
+                            <option value="2">Type 2</option>
+                        </select>
+                    </div>
                 </form>
             </div>
         </div>
@@ -24,7 +41,7 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header pt-4">
+            <div class="card-header pt-4 pb-0">
                 <h6 class="card-subtitle text-muted">Daftar <code>Item</code>
                     <button class="btn btn-square btn-primary float-right"><i class="fa fa-plus"></i> Tambah</button>
                 </h6>

@@ -35547,7 +35547,7 @@ window.Typed = __webpack_require__(/*! typed.js */ "./node_modules/typed.js/lib/
 window.swal = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 window.toastr = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
 window.select2 = __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
-
+ // require('../views/profile/script');
 
 /***/ }),
 

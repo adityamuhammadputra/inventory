@@ -25,8 +25,12 @@
                 { data: 'merk'},
                 { data: 'type'},
                 { data: 'harga',},
-                { data: 'action', name: 'action', orderable:false, searchable:false},
-                { data: 'created_at', name: 'created_at', searchable:false, visible:false},
+                {
+                    data: 'action',
+                    orderable:false,
+                    searchable:false,
+                },
+                { data: 'created_at', searchable:false, visible:false},
             ],
             order:[[7, 'desc']],
 

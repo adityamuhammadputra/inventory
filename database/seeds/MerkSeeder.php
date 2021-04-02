@@ -4,7 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ClientSeeder extends Seeder
+class MerkSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,29 +13,29 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('clients')->insert([
+        DB::table('merks')->insert([
             [
-                'id' => uuid(),
-                'nama' => 'clients 1',
-                'kontak' => '08123455',
-                'alamat' => 'alamat 1',
+                'id' => 1,
+                'nama' => 'Sony',
                 'keterangan' => 'keterangan 1 lorem ipsum is amet',
                 'created_at' => Carbon::now(),
             ],
             [
-                'id' => uuid(),
-                'nama' => 'clients 2',
-                'kontak' => '08123455',
-                'alamat' => 'alamat 2',
+                'id' => 2,
+                'nama' => 'Samsung',
                 'keterangan' => 'keterangan 2 lorem ipsum is amet',
                 'created_at' => Carbon::now(),
             ],
             [
-                'id' => uuid(),
-                'nama' => 'clients 3',
-                'kontak' => '08123455',
-                'alamat' => 'alamat 3',
+                'id' => 3,
+                'nama' => 'Cannon',
                 'keterangan' => 'keterangan 3 lorem ipsum is amet',
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'id' => 4,
+                'nama' => 'Nikkon',
+                'keterangan' => 'keterangan 4 lorem ipsum is amet',
                 'created_at' => Carbon::now(),
             ],
         ]);
