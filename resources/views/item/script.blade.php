@@ -43,7 +43,6 @@
                 { data: 'created_at', searchable:false, visible:false},
             ],
             order:[[10, 'desc']],
-
         });
     });
 </script>

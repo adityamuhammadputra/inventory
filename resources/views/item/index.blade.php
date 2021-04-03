@@ -11,14 +11,14 @@
             <div class="card-body">
                 <form class="form row" id="wrap-filter">
                     <div class="col-4">
-                        <select name="type" id="type" class="form-control">
+                        <select name="type" id="type-filter" class="form-control">
                             <option disabled selected>---pilih jenis---</option>
                             <option value="1">jenis 1</option>
                             <option value="2">jenis 2</option>
                         </select>
                     </div>
                     <div class="col-4">
-                        <select name="merk" id="merk" class="form-control">
+                        <select name="merk" id="merk-filter" class="form-control">
                             <option disabled selected>---pilih merk---</option>
                             @foreach ($data->merk as $key => $val)
                                 <option value="{{ $key }}">{{ $val }}</option>
@@ -26,7 +26,7 @@
                         </select>
                     </div>
                     <div class="col-4">
-                        <select name="type" id="type" class="form-control">
+                        <select name="type" id="type-filter" class="form-control">
                             <option disabled selected>---pilih type---</option>
                             <option value="1">Type 1</option>
                             <option value="2">Type 2</option>
@@ -35,6 +35,7 @@
                 </form>
             </div>
         </div>
+        @include('item.form')
     </div>
 </div>
 
