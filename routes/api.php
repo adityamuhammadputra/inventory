@@ -22,4 +22,8 @@ Route::prefix('v1')->group(function () {
     Route::resource('item', 'Api\ItemController')->except('create', 'index');
     Route::post('item/datatable', 'Api\ItemController@dataTable');
 
+
+    Route::get('generate-barcode/{kode}', 'Api\Controller@generateBarcode');
+    Route::get('check-visible-barang', 'Api\Controller@checkVisibleBarang');
+
 });

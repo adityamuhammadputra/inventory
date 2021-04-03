@@ -2,7 +2,10 @@
     <div class="card-header">Form Input</div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-3" id="wrap-barcode">
+                <img src="/img/barcode/IP001.svg" id="barcode" class="img img-reponsive" style="width: 100%">
+            </div>
+            <div class="col-md-8 offset-md-1">
                 <form method="POST" action="" class="form form-horizontal">
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
@@ -34,11 +37,10 @@
                             <label for="harga">Harga Barang</label>
                         </div>
                     </div>
+                    <button class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Save</button>
                 </form>
             </div>
-            <div class="col-md-3 offset-md-1">
-                <img src="/img/barcode/IP001.svg" id="barcode" class="img img-reponsive" style="width: 100%">
-            </div>
+
         </div>
 
     </div>

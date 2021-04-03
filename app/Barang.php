@@ -39,6 +39,16 @@ class Barang extends Model
     }
 
 
+    public function scopeCheckBarang($query)
+    {
+        $query->when(request('column'), function ($query) {
+            $column = request('column');
+            $value = request('value');
+
+            $query->where($column, $value);
+        });
+    }
+
     public function scopeItem($query)
     {
         $query->where('kategori', 'IP');
