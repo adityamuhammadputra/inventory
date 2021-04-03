@@ -10,22 +10,32 @@ class ItemController extends Controller
 {
     public function dataTable()
     {
-        $data = Barang::filtered();
+        $data = Barang::item()->filtered();
 
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
-
-                $delete = '<a data-id="' . $data->id . '"
-                                data-title="' . $data->kode . '"
-                                data-url="/aktivitas/list/'.$data->id.'"
-                                class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only text-danger deleteData"><i class="fa fa-ban"></i>
-                            </a>';
-                return '<a href="/aktivitas/list/' . $data->id . '/edit"
-                            class="btn btn-outline-warning m-btn m-btn--icon m-btn--icon-only text-warning"><i class="fa fa-edit"></i>
+                return '<a href="'.$data->barcode.'" target="_blank"
+                            class="btn btn-outline-info text-info"><i class="fa fa-print"></i>
+                        </a>
+                        <a data-id="' . $data->id . '"
+                            data-title="' . $data->kode . '"
+                            data-url="/api/v1/item/' . $data->id . '"
+                            class="btn btn-outline-warning text-warning editData"><i class="fa fa-edit"></i>
+                        </a>
+                        <a data-id="' . $data->id . '"
+                            data-title="' . $data->kode . '"
+                            data-url="/aktivitas/list/'.$data->id.'"
+                            class="btn btn-outline-danger text-danger deleteData"><i class="fa fa-ban"></i>
                         </a>'
-                        .$delete;
+                        ;
             })
-            ->rawColumns(['action'])
+            ->addColumn('barcode', function ($data) {
+                return "<img src='$data->barcode' alt='barcode' width='80px'>";
+            })
+            ->addColumn('status_label', function ($data) {
+                return $data->status_label;
+            })
+            ->rawColumns(['action', 'barcode', 'status_label'])
             ->make(true);
     }
 

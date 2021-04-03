@@ -9,8 +9,15 @@ class Barang extends Model
     protected $guarded = [''];
     protected $keyType = 'string';
     public $incrementing = false;
+    protected $appends = ['status_label'];
 
+    public function getStatusLabelAttribute()
+    {
+        if($this->status == 1)
+            return '<span class="badge badge-primary">available</span>';
 
+        return '<span class="badge badge-secondary">not available</span>';
+    }
 
     public function scopeFiltered($query)
     {
@@ -22,14 +29,23 @@ class Barang extends Model
                 ->orWhere('merk', 'like', $param)
                 ->orWhere('type', 'like', $param)
                 ->orWhere('serial_number', 'like', $param);
-
-            // ->orWhereHas('mapUnitOrg', function($q) use($param) {
-            //     $q->whereHas('pegawai', function($q) use ($param){
-            //         $q->where('nm_peg', 'like', $param);
-            //         $q->orWhere('Nip', 'like', $param);
+            // ->orWhereHas('x', function($q) use($param) {
+            //     $q->whereHas('t', function($q) use ($param){
+            //         $q->where('x', 'like', $param);
+            //         $q->orWhere('x', 'like', $param);
             //     });
             // })
         });
     }
 
+
+    public function scopeItem($query)
+    {
+        $query->where('kategori', 'IP');
+    }
+
+    public function scopeEquipment($query)
+    {
+        $query->where('kategori', 'EP');
+    }
 }

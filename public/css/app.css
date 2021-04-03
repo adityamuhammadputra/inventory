@@ -11908,11 +11908,16 @@ button.toast-close-button {
   padding: 15px 0px 15px 0px;
 }
 
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc {
+  cursor: pointer !important;
+  background-repeat: no-repeat !important;
+  background-position: center right !important;
+}
+
 table.dataTable thead .sorting {
-  background-image: url(/images/sort_both.png?9a6486086d09bb38cf66a57cc559ade3);
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-position: center right;
+  background-image: url(/images/sort_both.png?9a6486086d09bb38cf66a57cc559ade3) !important;
 }
 
 table.dataTable thead .sorting_asc {

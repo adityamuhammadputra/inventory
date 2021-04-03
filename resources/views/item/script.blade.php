@@ -18,13 +18,23 @@
             columns: [
                 {
                     data: null,
-                    searchable:false
+                    searchable:false,
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
                 },
-                {data: 'kode'},
+                {
+                    data: 'barcode',
+                    orderable:false,
+                    searchable:false,
+                },
+                { data: 'kode'},
                 { data: 'jenis'},
                 { data: 'merk'},
                 { data: 'type'},
-                { data: 'harga',},
+                { data: 'serial_number'},
+                { data: 'harga'},
+                { data: 'status_label'},
                 {
                     data: 'action',
                     orderable:false,
@@ -32,19 +42,9 @@
                 },
                 { data: 'created_at', searchable:false, visible:false},
             ],
-            order:[[7, 'desc']],
+            order:[[10, 'desc']],
 
         });
-        // table.on('draw.dt', function () {
-        //     var info = table.page.info();
-        //     table.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
-        //         cell.innerHTML = i + 1 + info.start;
-        //     });
-        // });
-        // table.on( 'click', 'button', function () {
-        //     var data = table.row( $(this).parents('tr') ).data();
-        //     window.location = "/project/disposisi/" + data.Id
-        // } );
     });
 </script>
 @endpush

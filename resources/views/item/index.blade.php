@@ -51,11 +51,14 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>barcode</th>
                             <th>kode</th>
                             <th>jenis</th>
                             <th>merk</th>
                             <th>type</th>
+                            <th>Serial Number</th>
                             <th>harga</th>
+                            <th>status</th>
                             <th>action</th>
                             <th></th>
                         </tr>
