@@ -138,5 +138,10 @@
 
     $("#form-submit").validate();
 
+    // jQuery(function($) {
+    //     $('.rupiah').autoNumeric('init');
+    // });
+
+
 </script>
 @endpush

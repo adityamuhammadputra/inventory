@@ -5,7 +5,9 @@
             <span data-feather="chevron-down"></span>
         </a>
     </div>
-    <div class="card-body card-add" style="display: none;">
+    <div class="card-body card-add"
+        {{-- style="display: none;" --}}
+        >
         <div class="row">
             <div class="col-md-3" id="wrap-barcode">
                 <img src="/img/temp_barcode.PNG" id="barcode" class="img img-reponsive" style="width: 100%">
@@ -40,7 +42,7 @@
                             <label for="serial_number">Serial Number</label>
                         </div>
                         <div class="form-label-group col-md-6">
-                            <input type="number" id="harga" name="harga" class="form-control" placeholder="Harga Barang" required>
+                            <input type="text" id="harga" name="harga" class="form-control rupiah" placeholder="Harga Barang" required>
                             <label for="harga">Harga Barang</label>
                         </div>
                     </div>
