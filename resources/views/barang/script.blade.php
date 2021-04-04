@@ -36,14 +36,14 @@
                 { data: 'serial_number'},
                 { data: 'harga'},
                 { data: 'status_label'},
+                { data: 'created_at', searchable:false },
                 {
                     data: 'action',
                     orderable:false,
                     searchable:false,
                 },
-                { data: 'created_at', searchable:false, visible:false},
             ],
-            order:[[10, 'desc']],
+            order:[[9, 'desc']],
         });
     });
 

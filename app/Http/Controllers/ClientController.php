@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Barang;
 use Illuminate\Http\Request;
 
-class OperatorController extends Controller
+class ClientController extends Controller
 {
     public function index(Request $request)
     {
         $data = (object) [
-            'model' => 'Operator',
+            'model' => 'CL',
         ];
 
-        return view('jasa.operator.index', compact('data'));
+        return view('jasa.client.index', compact('data'));
     }
 
     public function show($id)

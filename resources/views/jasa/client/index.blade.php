@@ -1,12 +1,12 @@
 @extends('layouts.master')
 @section('level1', 'Master')
 @section('level2', 'Jasa')
-@section('title', 'Vendor')
+@section('title', 'Client')
 
 @section('content')
 <div class="row">
     <div class="col-12">
-        @include('jasa.vendor.form')
+        @include('jasa.client.form')
     </div>
 </div>
 
@@ -14,7 +14,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pt-4 pb-0">
-                <h6 class="card-subtitle text-muted">Daftar Vendor
+                <h6 class="card-subtitle text-muted">Daftar Client
                     <button class="btn btn-square btn-primary float-right" id="btn-add"><i class="fa fa-plus"></i> Tambah</button>
                 </h6>
             </div>
@@ -23,10 +23,9 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Kode</th>
-                            <th>Nama Vendor</th>
+                            <th>Nama Client</th>
                             <th>Kontak</th>
-                            <th>Harga</th>
+                            <th>Alamat</th>
                             <th>Keterangan</th>
                             <th>created at</th>
                             <th></th>

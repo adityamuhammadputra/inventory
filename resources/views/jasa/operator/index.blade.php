@@ -19,16 +19,16 @@
                 </h6>
             </div>
             <div class="card-body pt-0">
-                <table class="table" id="dataTable">
+                <table class="table" id="dataTable" data-model="{{ $data->model }}">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th></th>
                             <th>Vendor</th>
                             <th>Kode</th>
                             <th>Nama Opertor</th>
                             <th>Tugas</th>
                             <th>Harga</th>
-                            <th>Action</th>
+                            <th>created at</th>
                             <th></th>
                         </tr>
                     </thead>

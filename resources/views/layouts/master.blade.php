@@ -58,19 +58,19 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="sidebar-item {{ (request()->is('operator') || request()->is('vendor') || request()->is('rental')) ? 'active' : '' }}">
+                    <li class="sidebar-item {{ (request()->is('operator') || request()->is('vendor') || request()->is('client')) ? 'active' : '' }}">
                         <a href="#forms" data-toggle="collapse" class="sidebar-link collapsed">
                             <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Jasa</span>
                         </a>
-                        <ul id="forms" class="sidebar-dropdown list-unstyled collapse {{ (request()->is('operator') || request()->is('vendor') || request()->is('rental')) ? 'show' : '' }}" data-parent="#sidebar">
+                        <ul id="forms" class="sidebar-dropdown list-unstyled collapse {{ (request()->is('operator') || request()->is('vendor') || request()->is('client')) ? 'show' : '' }}" data-parent="#sidebar">
                             <li class="sidebar-item {{ (request()->is('operator')) ? 'active' : '' }}">
                                 <a class="sidebar-link" href="/operator">Operator</a>
                             </li>
                             <li class="sidebar-item {{ (request()->is('vendor')) ? 'active' : '' }}">
                                 <a class="sidebar-link" href="/vendor">Vendor Event</a>
                             </li>
-                            <li class="sidebar-item {{ (request()->is('rental')) ? 'active' : '' }}">
-                                <a class="sidebar-link" href="/rental">Client Rental</a>
+                            <li class="sidebar-item {{ (request()->is('client')) ? 'active' : '' }}">
+                                <a class="sidebar-link" href="/client">Client Rental</a>
                             </li>
                         </ul>
                     </li>
@@ -107,7 +107,7 @@
                     <i class="hamburger align-self-center"></i>
                 </a>
 
-				<form class="form-inline d-none d-sm-inline-block">
+				<form class="form-inline d-none d-sm-inline-block mb-0">
 					<div class="input-group input-group-navbar">
 						<input type="text" class="form-control" placeholder="Search…" aria-label="Search">
 						<div class="input-group-append">
@@ -122,7 +122,7 @@
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-toggle="dropdown">
-								<div class="position-relative">
+								<div class="position-relative" style="top: 5px;">
 									<i class="align-middle" data-feather="bell"></i>
 									<span class="indicator">4</span>
 								</div>

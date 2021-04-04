@@ -10,9 +10,8 @@ class VendorController extends Controller
     public function index(Request $request)
     {
         $data = (object) [
-            'model' => 'Operator',
+            'model' => 'VE',
         ];
-
         return view('jasa.vendor.index', compact('data'));
     }
 

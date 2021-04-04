@@ -10,7 +10,7 @@
         >
         <div class="row">
             <div class="col-md-3">
-                <img src="/img/operator.jpg" class="img img-reponsive" style="width: 100%">
+                <img src="/img/vendor.png" class="img img-reponsive" style="width: 100%">
             </div>
 
             <div class="col-md-9 pt-4">
@@ -18,35 +18,29 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
-                            <select name="vendor_id" id="vendor_id" class="form-control" required>
-
-                                @foreach ($data->vendor as $key => $val)
-                                    <option value="{{ $key }}">{{ $val }}</option>
-                                @endforeach
-                            </select>
-                            <label for="vendor_id">--Pilih Vendor--</label>
-                        </div>
-                        <div class="form-label-group col-md-6">
-                            <input type="text" id="kode" name="kode" class="form-control" placeholder="KodeOperator" value="" required>
+                            <input type="text" id="kode" name="kode" class="form-control" placeholder="Kode Vendor" value="" required>
                             <label id="kode-has-value" class="error kode-has-value" for="kode" style="display: none;"></label>
-                            <label for="kode">Kode Petugas</label>
+                            <label for="kode">Kode Vendor</label>
+                        </div>
+                        <div class="form-label-group col-md-6">
+                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Vendor" value="" required>
+                            <label for="nama">Nama vendor</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
-                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Operator" required>
-                            <label for="nama">Nama Petugas</label>
+                            <input type="number" id="kontak" name="kontak" class="form-control" placeholder="Nama Vendor" required>
+                            <label for="kontak">Kontak</label>
                         </div>
                         <div class="form-label-group col-md-6">
-                            <input type="text" id="harga" name="harga" class="form-control rupiah" placeholder="Harga Operator" required>
-                            <label for="harga">Harga Petugas</label>
+                            <input type="text" id="harga" name="harga" class="form-control rupiah" placeholder="Harga Vendor" required>
+                            <label for="harga">Harga Vendor</label>
                         </div>
-
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
-                            <textarea id="tugas" name="tugas" class="form-control" placeholder="Tugas Operator" required></textarea>
-                            <label for="tugas">Tugas</label>
+                            <textarea id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan Vendor" required></textarea>
+                            <label for="keterangan">Keterangan</label>
                         </div>
                         <div class="form-label-group col-md-6">
                             <button type="submit" class="btn btn-primary btn-square float-right mt-4" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>

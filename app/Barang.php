@@ -11,6 +11,14 @@ class Barang extends Model
     public $incrementing = false;
     protected $appends = ['status_label'];
 
+
+    public function getCreatedAtAttribute($val)
+    {
+        if($val)
+            return dateTimeOutput($val);
+        return '-';
+    }
+
     public function getStatusLabelAttribute()
     {
         if($this->status == 1)
