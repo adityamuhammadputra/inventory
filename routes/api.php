@@ -22,6 +22,10 @@ Route::prefix('v1')->group(function () {
     Route::resource('barang', 'Api\BarangController')->except('create', 'index');
     Route::post('barang/datatable', 'Api\BarangController@dataTable');
 
+    Route::resource('jasa', 'Api\JasaController')->except('create', 'index');
+    Route::post('jasa/datatable', 'Api\JasaController@dataTable');
+
+
 
     Route::get('generate-barcode/{kode}', 'Api\Controller@generateBarcode');
     Route::get('check-visible-barang', 'Api\Controller@checkVisibleBarang');

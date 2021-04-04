@@ -35580,14 +35580,47 @@ __webpack_require__(/*! ./helper */ "./resources/js/helper.js");
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+$(document).on('click', '.deleteData', function () {
+  var id = $(this).data('id');
+  var title = 'Anda yakin menghapus data ' + $(this).data('title');
+  swal({
+    title: "Konfirmasi",
+    text: title,
+    icon: "warning",
+    buttons: true,
+    dangerMode: true
+  }).then(function (willDelete) {
+    if (willDelete) {
+      $.ajax({
+        url: "/api/v1/barang/" + id,
+        type: "POST",
+        data: {
+          '_token': $('meta[name="csrf-token"]').attr('content'),
+          '_method': 'DELETE'
+        },
+        success: function success(res) {
+          toastr.info('Data Berhasil Dihapus');
+          table.api().ajax.reload();
+        },
+        error: function error() {}
+      });
+    }
+  });
+});
 var autoNumericRupiah = {
   digitGroupSeparator: '.',
   decimalCharacter: ',',
   floatPos: true,
   currencySymbol: 'Rp. '
 };
-new autoNumeric('.rupiah', autoNumericRupiah);
-new autoNumeric('.rupiahFilter', autoNumericRupiah);
+
+if ($(".card-body .rupiah")[0]) {
+  new autoNumeric('.rupiah', autoNumericRupiah);
+}
+
+if ($(".card-body .rupiahFilter")[0]) {
+  new autoNumeric('.rupiahFilter', autoNumericRupiah);
+}
 
 /***/ }),
 

@@ -13,7 +13,7 @@
                 <img src="/img/temp_barcode.PNG" id="barcode" class="img img-reponsive" style="width: 100%">
                 <p id="label-barcode" class="text-center">{{ $data->maxKode }}</p>
             </div>
-            <div class="col-md-8 offset-md-1">
+            <div class="col-md-8 offset-md-1 pt-1">
                 <form method="POST" action="/api/v1/barang" class="form form-horizontal" id="form-submit">
                     @csrf
                     <div class="form-row">
@@ -47,11 +47,9 @@
                             <label for="harga">Harga Barang</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Save</button>
+                    <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
                 </form>
             </div>
-
         </div>
-
     </div>
 </div>

@@ -85,60 +85,6 @@
         }
     });
 
-    $(document).on('click','.deleteData', function(){
-            let id  = $(this).data('id');
-            let title = 'Anda yakin menghapus data ' + $(this).data('title');
-            swal({
-                title: "Konfirmasi",
-                text: title,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        url: "/api/v1/barang/" + id,
-                        type: "POST",
-                        data: {
-                            '_token' : $('meta[name="csrf-token"]').attr('content'),
-                            '_method' : 'DELETE',
-                        },
-                        success: function(res){
-                            toastr.info('Data Berhasil Dihapus')
-                            table.api().ajax.reload()
-                        },
-                        error: function(){
-                        }
-                    })
-                }
-            });
-            // jconfirm.defaults.content = isicontent;
-            // // jconfirm.defaults.type = 'red';
-            // $.confirm({
-            //     buttons: {
-            //         confirm: {
-            //             btnClass: 'btn-info',
-            //             action: function(){
-            //                 $.ajax({
-            //                     url: "{{ url('master') }}/" +id+'/'+type,
-            //                     type: "DELETE",
-            //                     success: function(data){
-            //                         berhasil(data,pesan=' Berhasil dihapus', table='#data-register', form=null);
-            //                     },
-            //                     error: function(){
-            //                         alert(alerterror);
-            //                     }
-            //                 })
-            //             }
-            //         },
-
-            //         batal: function () {
-            //         },
-            //     }
-            // });
-        });
-
 
     let generateBarcode = (kode) => {
         $.ajax({

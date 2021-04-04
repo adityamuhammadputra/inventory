@@ -28,6 +28,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/item', 'ItemController')->only('create', 'index');
     Route::resource('/equipment', 'EquipmentController')->only('create', 'index');
-
+    Route::resource('/operator', 'OperatorController')->only('create', 'index');
 
 });

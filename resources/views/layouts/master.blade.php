@@ -62,10 +62,16 @@
                         <a href="#forms" data-toggle="collapse" class="sidebar-link collapsed">
                             <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Jasa</span>
                         </a>
-                        <ul id="forms" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
-                            <li class="sidebar-item"><a class="sidebar-link" href="/operator">Operator</a></li>
-                            <li class="sidebar-item"><a class="sidebar-link" href="/vendor">Vendor Event</a></li>
-                            <li class="sidebar-item"><a class="sidebar-link" href="/rental">Client Rental</a></li>
+                        <ul id="forms" class="sidebar-dropdown list-unstyled collapse {{ (request()->is('operator') || request()->is('vendor') || request()->is('rental')) ? 'show' : '' }}" data-parent="#sidebar">
+                            <li class="sidebar-item {{ (request()->is('operator')) ? 'active' : '' }}">
+                                <a class="sidebar-link" href="/operator">Operator</a>
+                            </li>
+                            <li class="sidebar-item {{ (request()->is('vendor')) ? 'active' : '' }}">
+                                <a class="sidebar-link" href="/vendor">Vendor Event</a>
+                            </li>
+                            <li class="sidebar-item {{ (request()->is('rental')) ? 'active' : '' }}">
+                                <a class="sidebar-link" href="/rental">Client Rental</a>
+                            </li>
                         </ul>
                     </li>
 

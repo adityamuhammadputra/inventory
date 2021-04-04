@@ -47,15 +47,16 @@ class BarangController extends Controller
 
     public function store(Request $request)
     {
+        $barang = $request->all();
+        $barang['id'] = uuid();
+        $barang['harga'] = inputRupiah($request->harga);
+        $barang['kategori'] = substr($request->kode, 0, 2);
+        $barang['kategori_no'] = substr($request->kode, 2);
+        $barang['barcode'] = generateBarcode($request->kode);
+        $barang['user_id'] = 1;
+        $barang['status'] = 1;
+
         try {
-            $barang = $request->all();
-            $barang['id'] = uuid();
-            $barang['harga'] = inputRupiah($request->harga);
-            $barang['kategori'] = substr($request->kode, 0, 2);
-            $barang['kategori_no'] = substr($request->kode, 2);
-            $barang['barcode'] = generateBarcode($request->kode);
-            $barang['user_id'] = 1;
-            $barang['status'] = 1;
             $barang = Barang::create($barang);
             $data = [
                 'barang' => $barang,
