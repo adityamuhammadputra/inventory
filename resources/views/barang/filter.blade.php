@@ -28,7 +28,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">harga >=</div>
                     </div>
-                    <input type="text" id="harga-filter" name="harga" class="form-control rupiah" placeholder="harga Barang" required>
+                    <input type="text" id="harga-filter" name="harga" class="form-control rupiahFilter" placeholder="harga Barang" required>
                 </div>
             </div>
         </form>

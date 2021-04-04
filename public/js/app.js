@@ -35566,13 +35566,6 @@ window.swal = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/d
 window.toastr = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
 window.select2 = __webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
 window.autoNumeric = __webpack_require__(/*! autonumeric */ "./node_modules/autonumeric/dist/autoNumeric.min.js");
-var autoNumericRupiah = {
-  digitGroupSeparator: '.',
-  decimalCharacter: ',',
-  decimalCharacterAlternative: '.',
-  currencySymbol: 'Rp. '
-};
-new autoNumeric('.rupiah', autoNumericRupiah);
 
 __webpack_require__(/*! ./helper */ "./resources/js/helper.js");
 
@@ -35590,10 +35583,11 @@ __webpack_require__(/*! ./helper */ "./resources/js/helper.js");
 var autoNumericRupiah = {
   digitGroupSeparator: '.',
   decimalCharacter: ',',
-  decimalCharacterAlternative: '.',
+  floatPos: true,
   currencySymbol: 'Rp. '
 };
 new autoNumeric('.rupiah', autoNumericRupiah);
+new autoNumeric('.rupiahFilter', autoNumericRupiah);
 
 /***/ }),
 

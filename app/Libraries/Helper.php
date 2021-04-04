@@ -38,6 +38,12 @@ function dateTimeOutput($date)
     return Carbon::parse($date)->format('d F Y H:i');
 }
 
+function inputRupiah($input)
+{
+    // Rp. 123.123.123,00
+    return str_replace(['Rp. ', '.'] , '', explode(",", $input)[0]);
+}
+
 function dateTimeOutputId($dateTime, $printDay = false, $printTime = true) //Carbon::setLocale('id') doesnt work
 {
 	$day = [1 =>    'Senin',
@@ -85,5 +91,6 @@ function dateTimeOutputId($dateTime, $printDay = false, $printTime = true) //Car
 function generateBarcode($name)
 {
     // generateBarcode('test123');
-    return Storage::disk('public_barcode')->put($name.'.svg', DNS1D::getBarcodeSVG("$name", "C128", 2, 100));
+    Storage::disk('public_barcode')->put($name.'.svg', DNS1D::getBarcodeSVG("$name", "C128", 2, 100));
+    return '/img/barcode/'.$name . '.svg';
 }

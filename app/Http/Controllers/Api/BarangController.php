@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Barang;
+use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -46,7 +47,21 @@ class BarangController extends Controller
 
     public function store(Request $request)
     {
-        //
+        try {
+            $barang = $request->all();
+            $barang['id'] = uuid();
+            $barang['harga'] = inputRupiah($request->harga);
+            $barang['kategori'] = substr($request->kode, 0, 2);
+            $barang['kategori_no'] = substr($request->kode, 2);
+            $barang['barcode'] = generateBarcode($request->kode);
+            $barang['user_id'] = 1;
+            $barang['status'] = 1;
+            $data = Barang::create($barang);
+        } catch (Exception $th) {
+            $data = $th;
+        }
+
+        return response()->json($data);
     }
 
     public function show($id)

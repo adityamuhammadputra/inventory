@@ -12020,6 +12020,16 @@ table.dataTable thead .sorting_desc {
   background-image: url(/images/sort_desc.png?1fc418e33fd5a687290258b23fac4e98) !important;
 }
 
+.toast-info {
+  background: #3b7ddd !important;
+  background-repeat: no-repeat !important;
+  background-position: center left !important;
+}
+
+.toast-success {
+  background: #28a745 !important;
+}
+
 .navbar-expand .navbar-nav .dropdown-menu {
   width: -webkit-max-content;
   width: -moz-max-content;

@@ -1,6 +1,7 @@
 @push('scripts')
 
 <script>
+    var table;
     $(function() {
         $.ajaxSetup({
             headers: {
@@ -58,6 +59,29 @@
 
     })
 
+    $("#form-submit").validate({
+        submitHandler: function(form) {
+            $.ajax({
+                url: form.action,
+                type: form.method,
+                data: $(form).serialize(),
+                beforeSend: function(){
+                    loadingIconButton($('#submit'))
+                },
+                success: function(res) {
+                    table.api().ajax.reload()
+                    loadingIconButton($('#submit'), reset = true)
+                    toastr.info(res.merk + ' Berhasil disimpan')
+                },
+                error: function(res) {
+                    console.log(res);
+                }
+            });
+            return false;
+        }
+    });
+
+
     let generateBarcode = (kode) => {
         $.ajax({
             url: "/api/v1/generate-barcode/" + kode,
@@ -81,7 +105,7 @@
         }, 500);
     }
 
-    let loadingIcon = (that, reset = false) => {
+    let loadingIconText = (that, reset = false) => {
         if(reset == true) {
             that.closest('div').find('.loading-icon').remove();
             return false;
@@ -89,6 +113,14 @@
         let html = '<div class="spinner-border spinner-border-sm text-secondary loading-icon" role="status">\
                     </div>';
         that.before(html);
+    }
+
+    let loadingIconButton = (that, reset = false) => {
+        if(reset == true) {
+            that.find('i').addClass('fa-plus').removeClass('spinner-border spinner-border-sm')
+            return false;
+        }
+        that.find('i').removeClass('fa-plus').addClass('spinner-border spinner-border-sm')
     }
 
 
@@ -101,10 +133,10 @@
                 'value' : value,
             },
             beforeSend: function() {
-                loadingIcon($('#' + column))
+                loadingIconText($('#' + column))
             },
             success: function(data) {
-                loadingIcon($('#' + column), reset = true);
+                loadingIconText($('#' + column), reset = true);
                 if(data) {
                     $('#' + column).css('border-color', '#bd2130')
                     $('#' + column +'-has-value').html(column + ' already available').show()
@@ -135,8 +167,6 @@
     $('#btn-add').on('click', function(){
         $('.card-add').slideDown();
     })
-
-    $("#form-submit").validate();
 
     // jQuery(function($) {
     //     $('.rupiah').autoNumeric('init');

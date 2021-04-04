@@ -36,6 +36,19 @@ table.dataTable thead .sorting_desc {
     background-image: url(../../public/img/sort_desc.png) !important;
 }
 
+.toast, .toast-success, .toast-danger{
+    // background-position: center left !important;
+}
+
+.toast-info{
+    background: #3b7ddd !important;
+    background-repeat: no-repeat !important;
+    background-position: center left !important;
+}
+
+.toast-success{
+    background: #28a745 !important;
+}
 
 .navbar-expand .navbar-nav .dropdown-menu {
     width: max-content;
