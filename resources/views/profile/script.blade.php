@@ -13,5 +13,7 @@
     };
 
     var typed = new Typed('.notes', options);
+
+
 </script>
 @endpush

@@ -30,7 +30,7 @@ class BarangController extends Controller
                         </a>
                         <a data-id="' . $data->id . '"
                             data-title="' . $data->kode . '"
-                            data-url="/aktivitas/list/'.$data->id.'"
+                            data-url="/api/v1/barang/'.$data->id.'"
                             class="btn btn-outline-danger text-danger deleteData"><i class="fa fa-ban"></i>
                         </a>'
                         ;
@@ -78,9 +78,9 @@ class BarangController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Barang $barang)
     {
-        //
+        return $barang->delete();
     }
 
 }
