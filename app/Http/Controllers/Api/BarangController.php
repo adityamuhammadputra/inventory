@@ -56,7 +56,11 @@ class BarangController extends Controller
             $barang['barcode'] = generateBarcode($request->kode);
             $barang['user_id'] = 1;
             $barang['status'] = 1;
-            $data = Barang::create($barang);
+            $barang = Barang::create($barang);
+            $data = [
+                'barang' => $barang,
+                'maxKode' => Barang::maxKode($barang->kategori),
+            ];
         } catch (Exception $th) {
             $data = $th;
         }

@@ -71,7 +71,11 @@
                 success: function(res) {
                     table.api().ajax.reload()
                     loadingIconButton($('#submit'), reset = true)
-                    toastr.info(res.merk + ' Berhasil disimpan')
+                    toastr.info(res.barang.merk + ' Berhasil disimpan')
+                    generateBarcodeTemp(res.maxKode)
+                    $('#form-submit')[0].reset()
+                    $('#kode').val(res.maxKode)
+                    $('.card-add').slideUp();
                 },
                 error: function(res) {
                     console.log(res);
@@ -117,10 +121,10 @@
 
     let loadingIconButton = (that, reset = false) => {
         if(reset == true) {
-            that.find('i').addClass('fa-plus').removeClass('spinner-border spinner-border-sm')
+            that.find('i').addClass('fa-check-circle').removeClass('spinner-border spinner-border-sm')
             return false;
         }
-        that.find('i').removeClass('fa-plus').addClass('spinner-border spinner-border-sm')
+        that.find('i').removeClass('fa-check-circle').addClass('spinner-border spinner-border-sm')
     }
 
 
@@ -143,7 +147,6 @@
                 } else {
                     $('#' + column).removeAttr('style')
                     $('#' + column +'-has-value').hide()
-
                 }
             },
             error: function(error) {

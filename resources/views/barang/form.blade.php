@@ -6,7 +6,7 @@
         </a>
     </div>
     <div class="card-body card-add"
-        {{-- style="display: none;" --}}
+        style="display: none;"
         >
         <div class="row">
             <div class="col-md-3" id="wrap-barcode">
