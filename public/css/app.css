@@ -12054,6 +12054,33 @@ h3,
   height: 50px;
 }
 
+label.error {
+  position: absolute !important;
+  top: 26px !important;
+  color: #bd2130 !important;
+  font-size: 11px;
+}
+
+input.error {
+  border-color: #bd2130 !important;
+}
+
+#label-barcode {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.filter-icon {
+  position: absolute;
+  right: 210px;
+  padding-top: 18px;
+  z-index: 1111;
+}
+
+.filter-icon :hover {
+  cursor: pointer;
+}
+
 @media (min-width: 992px) {
   .content {
     padding: 1.8rem 1.8rem 0.5rem !important;

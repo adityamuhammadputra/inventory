@@ -7,7 +7,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        urlTable = "{{ url('api/v1/item/datatable') }}?" + $('#wrap-filter').serialize();
+        urlTable = "{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize();
         table = $('#dataTable').dataTable({
             processing: true,
             serverSide: true,
@@ -50,7 +50,7 @@
         let val = $(this).val();
         if(val.length > 4){
             checkVisibleBarang('kode', val)
-            generateBarcode(val)
+            generateBarcodeTemp(val)
         }
 
         if(val.length == 1 && val == 'I' || val.length < 1)
@@ -63,7 +63,6 @@
             url: "/api/v1/generate-barcode/" + kode,
             method : 'GET',
             beforeSend: function() {
-                // $('#wrap-barcode').html(loadingBarcode(50))
             },
             success: function(data) {
                 setTimeout(function(){
@@ -76,17 +75,10 @@
         })
     }
 
-    let loadingBarcode = (wh) => {
-        let html = '<div class="text-center pt-5">\
-                        <div class="spinner-grow text-secondary mr-3 wh-' + wh + '" role="status">\
-                        </div>\
-                        <div class="spinner-grow text-secondary mr-3 wh-' + wh + '" role="status">\
-                        </div>\
-                        <div class="spinner-grow text-secondary mr-3 wh-' + wh + '" role="status">\
-                        </div>\
-                    </div>'
-
-        return html;
+    let generateBarcodeTemp = (kode) => {
+        setTimeout(function(){
+            $('#label-barcode').html(kode)
+        }, 500);
     }
 
     let loadingIcon = (that, reset = false) => {
@@ -94,7 +86,6 @@
             that.closest('div').find('.loading-icon').remove();
             return false;
         }
-
         let html = '<div class="spinner-border spinner-border-sm text-secondary loading-icon" role="status">\
                     </div>';
         that.before(html);
@@ -114,17 +105,38 @@
             },
             success: function(data) {
                 loadingIcon($('#' + column), reset = true);
-                if(data)
-                    $('#' + column).css('border-color', 'red')
-                else
+                if(data) {
+                    $('#' + column).css('border-color', '#bd2130')
+                    $('#' + column +'-has-value').html(column + ' already available').show()
+                } else {
                     $('#' + column).removeAttr('style')
+                    $('#' + column +'-has-value').hide()
 
+                }
             },
             error: function(error) {
                 console.log(error)
             }
         })
     }
+
+    $('.card-header-down').on('click', function(){
+        let cardBody = $(this).closest('.card').find('.card-body');
+        if(cardBody.attr('style') != '')
+            cardBody.slideDown();
+        else
+            cardBody.slideUp();
+    })
+
+    $('.filter-icon').on('click', function(){
+        $('.card-filter').slideDown();
+    })
+
+    $('#btn-add').on('click', function(){
+        $('.card-add').slideDown();
+    })
+
+    $("#form-submit").validate();
 
 </script>
 @endpush

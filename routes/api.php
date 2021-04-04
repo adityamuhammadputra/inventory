@@ -19,8 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::resource('item', 'Api\ItemController')->except('create', 'index');
-    Route::post('item/datatable', 'Api\ItemController@dataTable');
+    Route::resource('barang', 'Api\BarangController')->except('create', 'index');
+    Route::post('barang/datatable', 'Api\BarangController@dataTable');
 
 
     Route::get('generate-barcode/{kode}', 'Api\Controller@generateBarcode');

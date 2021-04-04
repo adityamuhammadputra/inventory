@@ -3,6 +3,7 @@
 // require( 'datatables.net' );
 require( 'datatables.net-bs4' );
 window.$ = require('jquery');
+window.validate = require('./jquery.validate');
 window.Typed = require( 'typed.js' );
 window.swal = require( 'sweetalert' );
 window.toastr = require( 'toastr' );

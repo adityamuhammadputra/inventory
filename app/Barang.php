@@ -58,4 +58,11 @@ class Barang extends Model
     {
         $query->where('kategori', 'EP');
     }
+
+    public function scopeMaxKode($query, $kategori)
+    {
+        $max = $query->max('kategori_no');
+        $maxPlus = str_pad($max + 1, 3, '00', STR_PAD_LEFT);
+        return $kategori . $maxPlus;
+    }
 }

@@ -6,11 +6,16 @@ use App\Barang;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class ItemController extends Controller
+class BarangController extends Controller
 {
-    public function dataTable()
+    public function dataTable(Request $request)
     {
-        $data = Barang::item()->filtered();
+        if($request->kategori == 'IP')
+            $data = Barang::item();
+        else{
+            $data = Barang::equipment();
+        }
+        $data = $data->filtered();
 
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
