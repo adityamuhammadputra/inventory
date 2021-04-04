@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('level1', 'Master')
 @section('level2', 'Barang')
-@section('title', 'Item')
+@section('title', $data->title)
 
 @section('content')
 <div class="row">
@@ -15,7 +15,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pt-4 pb-0">
-                <h6 class="card-subtitle text-muted">Daftar <code>Item</code>
+                <h6 class="card-subtitle text-muted">Daftar {{ $data->title }}
                     <button class="btn btn-square btn-primary float-right" id="btn-add"><i class="fa fa-plus"></i> Tambah</button>
                 </h6>
             </div>

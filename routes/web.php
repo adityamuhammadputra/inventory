@@ -27,4 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/profile', 'ProfileController')->except('show', 'destroy');
 
     Route::resource('/item', 'ItemController')->only('create', 'index');
+    Route::resource('/equipment', 'EquipmentController')->only('create', 'index');
+
+
 });

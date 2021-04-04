@@ -6,14 +6,14 @@ use App\Barang;
 use App\Merk;
 use Illuminate\Http\Request;
 
-class ItemController extends Controller
+class EquipmentController extends Controller
 {
     public function index(Request $request)
     {
         $data = (object) [
-            'maxKode' => Barang::maxKode('IP'),
-            'kategori' => 'IP',
-            'title' => 'Data Item'
+            'maxKode' => Barang::maxKode('EP'),
+            'kategori' => 'EP',
+            'title' => 'Data Equipment'
         ];
 
         return view('barang.index', compact('data'));
