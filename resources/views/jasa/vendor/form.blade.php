@@ -6,7 +6,7 @@
         </a>
     </div>
     <div class="card-body card-add"
-        {{-- style="display: none;" --}}
+        style="display: none;"
         >
         <div class="row">
             <div class="col-md-3">
@@ -43,7 +43,7 @@
                             <label for="keterangan">Keterangan</label>
                         </div>
                         <div class="form-label-group col-md-6">
-                            <button type="submit" class="btn btn-primary btn-square float-right mt-4" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
+                            <button class="btn btn-primary btn-square float-right mt-4" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
                         </div>
                     </div>
                 </form>

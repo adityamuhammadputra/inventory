@@ -12029,6 +12029,7 @@ button.toast-close-button {
 table.dataTable thead th {
   font-weight: 400 !important;
   font-size: 14px !important;
+  border-bottom: none;
 }
 
 table.dataTable thead .sorting,
@@ -12049,6 +12050,11 @@ table.dataTable thead .sorting_asc {
 
 table.dataTable thead .sorting_desc {
   background-image: url(/images/sort_desc.png?1fc418e33fd5a687290258b23fac4e98) !important;
+}
+
+.table td,
+.table th {
+  padding: 0.6rem !important;
 }
 
 .toast-info {
@@ -12124,6 +12130,16 @@ input.error {
 
 text {
   display: none;
+}
+
+.select2-container--default .select2-selection--single {
+  border: 1px solid #d4d4d4;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0px;
+  position: relative;
+  top: 3px;
 }
 
 @media (min-width: 992px) {

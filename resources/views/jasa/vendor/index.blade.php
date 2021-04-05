@@ -22,8 +22,8 @@
                 <table class="table" id="dataTable" data-model="{{ $data->model }}">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Kode</th>
+                            <th style="width: 5px;"></th>
+                            <th>Kode Vendor</th>
                             <th>Nama Vendor</th>
                             <th>Kontak</th>
                             <th>Harga</th>

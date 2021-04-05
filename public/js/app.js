@@ -35582,6 +35582,7 @@ __webpack_require__(/*! ./helper */ "./resources/js/helper.js");
 
 $(document).on('click', '.deleteData', function () {
   var id = $(this).data('id');
+  var url = $(this).data('url');
   var title = 'Anda yakin menghapus data ' + $(this).data('title');
   swal({
     title: "Konfirmasi",
@@ -35592,7 +35593,7 @@ $(document).on('click', '.deleteData', function () {
   }).then(function (willDelete) {
     if (willDelete) {
       $.ajax({
-        url: "/api/v1/barang/" + id,
+        url: url,
         type: "POST",
         data: {
           '_token': $('meta[name="csrf-token"]').attr('content'),
@@ -35606,6 +35607,16 @@ $(document).on('click', '.deleteData', function () {
       });
     }
   });
+});
+$('.card-header-down').on('click', function () {
+  var cardBody = $(this).closest('.card').find('.card-body');
+  if (cardBody.attr('style') != '') cardBody.slideDown();else cardBody.slideUp();
+});
+$('.filter-icon').on('click', function () {
+  $('.card-filter').slideDown();
+});
+$('#btn-add').on('click', function () {
+  $('.card-add').slideDown();
 });
 var autoNumericRupiah = {
   digitGroupSeparator: '.',

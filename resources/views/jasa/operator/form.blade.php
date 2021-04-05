@@ -18,10 +18,10 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
-                            <select name="vendor_id" id="vendor_id" class="form-control" required>
-
+                            <select name="vendor_id" id="vendor_id" class="form-control select2" required>
+                                <option value="" selected disabled></option>
                                 @foreach ($data->vendor as $key => $val)
-                                    <option value="{{ $key }}">{{ $val }}</option>
+                                    <option value="{{ $val->id }}">{{ $val->kode }} - {{ $val->nama }} </option>
                                 @endforeach
                             </select>
                             <label for="vendor_id">--Pilih Vendor--</label>

@@ -109,25 +109,6 @@
         }, 500);
     }
 
-    let loadingIconText = (that, reset = false) => {
-        if(reset == true) {
-            that.closest('div').find('.loading-icon').remove();
-            return false;
-        }
-        let html = '<div class="spinner-border spinner-border-sm text-secondary loading-icon" role="status">\
-                    </div>';
-        that.before(html);
-    }
-
-    let loadingIconButton = (that, reset = false) => {
-        if(reset == true) {
-            that.find('i').addClass('fa-check-circle').removeClass('spinner-border spinner-border-sm')
-            return false;
-        }
-        that.find('i').removeClass('fa-check-circle').addClass('spinner-border spinner-border-sm')
-    }
-
-
     let checkVisibleBarang = (column, value) => {
         $.ajax({
             url: "/api/v1/check-visible-barang",
@@ -155,21 +136,27 @@
         })
     }
 
-    $('.card-header-down').on('click', function(){
-        let cardBody = $(this).closest('.card').find('.card-body');
-        if(cardBody.attr('style') != '')
-            cardBody.slideDown();
-        else
-            cardBody.slideUp();
-    })
 
-    $('.filter-icon').on('click', function(){
-        $('.card-filter').slideDown();
-    })
+    var loadingIconText = (that, reset = false) => {
+        if(reset == true) {
+            that.closest('div').find('.loading-icon').remove();
+            return false;
+        }
+        let html = '<div class="spinner-border spinner-border-sm text-secondary loading-icon" role="status">\
+                    </div>';
+        that.before(html);
+    }
 
-    $('#btn-add').on('click', function(){
-        $('.card-add').slideDown();
-    })
+    var loadingIconButton = (that, reset = false) => {
+        that.attr('disabled', 'disabled')
+        if(reset == true) {
+            that.find('span').addClass('fa-check-circle').removeClass('spinner-border spinner-border-sm')
+            that.attr('disabled', false)
+            return false;
+        }
+        that.find('span').removeClass('fa-check-circle').addClass('spinner-border spinner-border-sm')
+    }
+
 
     // jQuery(function($) {
     //     $('.rupiah').autoNumeric('init');

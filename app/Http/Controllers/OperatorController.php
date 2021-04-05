@@ -12,7 +12,7 @@ class OperatorController extends Controller
     {
         $data = (object) [
             'model' => 'OP',
-            'vendor' => Vendor::pluck('nama', 'id')
+            'vendor' => Vendor::get(),
         ];
 
         return view('jasa.operator.index', compact('data'));

@@ -45,9 +45,11 @@ class JasaController extends Controller
     public function store(Request $request)
     {
         $input = $request->except('_token');
+        $input['id'] = uuid();
         try {
             if($request->model == 'OP') :
                 $table = 'tableOperator';
+                $input['vendor_nama'] = Vendor::find($request->vendor_id)->nama;
                 $data = Operator::create($input);
             elseif($request->model == 'VE') :
                 $table = 'tableVendor';
@@ -88,9 +90,9 @@ class JasaController extends Controller
         if($request->model == 'OP')
             $data = Operator::findOrFail($id);
         else if($request->model == 'VE')
-            $data = Operator::findOrFail($id);
+            $data = Vendor::findOrFail($id);
         else
-            $data = Operator::findOrFail($id);
+            $data = Client::findOrFail($id);
 
         $result = $data;
         $data->delete();

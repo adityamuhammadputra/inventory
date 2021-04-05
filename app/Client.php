@@ -9,4 +9,12 @@ class Client extends Model
     protected $guarded = [''];
     protected $keyType = 'string';
     public $incrementing = false;
+
+
+    public function getCreatedAtAttribute($val)
+    {
+        if($val)
+            return dateTimeOutput($val);
+        return '-';
+    }
 }
