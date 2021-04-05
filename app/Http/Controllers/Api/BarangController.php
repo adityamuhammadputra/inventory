@@ -21,17 +21,17 @@ class BarangController extends Controller
         return DataTables::of($data)
             ->addColumn('action', function ($data) {
                 return '<a href="'.$data->barcode.'" target="_blank"
-                            class="btn btn-outline-info text-info"><i class="fa fa-print"></i>
+                            class="text-info"><i class="fa fa-print"></i>
                         </a>
                         <a data-id="' . $data->id . '"
                             data-title="' . $data->kode . '"
                             data-url="/api/v1/item/' . $data->id . '"
-                            class="btn btn-outline-warning text-warning editData"><i class="fa fa-edit"></i>
+                            class="text-warning editData"><i class="fa fa-edit"></i>
                         </a>
                         <a data-id="' . $data->id . '"
                             data-title="' . $data->kode . '"
                             data-url="/api/v1/barang/'.$data->id.'"
-                            class="btn btn-outline-danger text-danger deleteData"><i class="fa fa-ban"></i>
+                            class="text-danger deleteData"><i class="fa fa-trash"></i>
                         </a>'
                         ;
             })

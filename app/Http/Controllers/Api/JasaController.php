@@ -26,12 +26,13 @@ class JasaController extends Controller
                 return '<a data-id="' . $data->id . '"
                             data-title="' . $data->nama . '"
                             data-url="/api/v1/jasa/' . $data->id . '/edit?model=' . $request->model . '"
-                            class="btn btn-outline-warning text-warning editData"><i class="fa fa-edit"></i>
+                            class="text-warning editData"><i class="fa fa-edit mr-1"></i>
                         </a>
                         <a data-id="' . $data->id . '"
                             data-title="' . $data->nama . '"
                             data-url="/api/v1/jasa/' . $data->id . '?model=' . $request->model . '"
-                            class="btn btn-outline-danger text-danger deleteData"><i class="fa fa-ban"></i>
+                            class="text-danger deleteData">
+                            <i class="fa fa-trash"></i>
                         </a>'
                         ;
             })
