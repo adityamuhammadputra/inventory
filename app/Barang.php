@@ -44,6 +44,20 @@ class Barang extends Model
             //     });
             // })
         });
+
+
+        $query->when(request('jenis'), function ($query) {
+            $query->where('jenis', request('jenis'));
+        });
+
+        $query->when(request('status'), function ($query) {
+            $query->where('status', request('status'));
+        });
+
+        $query->when(request('harga'), function ($query) {
+            if(inputRupiah(request('harga')))
+                $query->where('harga','>=', inputRupiah(request('harga')));
+        });
     }
 
 

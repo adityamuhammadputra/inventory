@@ -12142,6 +12142,13 @@ text {
   top: 3px;
 }
 
+select {
+  border-top: none !important;
+  border-left: none !important;
+  border-radius: 0 !important;
+  border-right: none !important;
+}
+
 @media (min-width: 992px) {
   .content {
     padding: 1.8rem 1.8rem 0.5rem !important;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Barang;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -41,7 +42,7 @@ function dateTimeOutput($date)
 function inputRupiah($input)
 {
     // Rp. 123.123.123,00
-    return str_replace(['Rp. ', '.'] , '', explode(",", $input)[0]);
+    return str_replace(['Rp. ', 'Rp.', '.'] , '', explode(",", $input)[0]);
 }
 
 function dateTimeOutputId($dateTime, $printDay = false, $printTime = true) //Carbon::setLocale('id') doesnt work
@@ -86,6 +87,12 @@ function dateTimeOutputId($dateTime, $printDay = false, $printTime = true) //Car
         return $dateId . ' ' .$splitTime;
     else
         return $dateId;
+}
+
+
+function getAllJenis()
+{
+    return Barang::orderBy('jenis')->pluck('id', 'jenis');
 }
 
 function generateBarcode($name)

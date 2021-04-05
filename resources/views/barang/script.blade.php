@@ -2,13 +2,13 @@
 
 <script>
     var table;
+    var urlTable = "{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize();
     $(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        urlTable = "{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize();
         table = $('#dataTable').dataTable({
             processing: true,
             serverSide: true,
@@ -47,6 +47,14 @@
         });
     });
 
+    $('#status-filter, #jenis-filter').on('change', function(){
+        table.api(urlTable).ajax.url("{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize()).load();
+    })
+    $('#harga-filter').on('keyup', function(){
+        table.api(urlTable).ajax.url("{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize()).load();
+    })
+
+
     $('#kode').on('keyup', function(){
         let val = $(this).val();
         if(val.length > 4){
@@ -84,6 +92,9 @@
             return false;
         }
     });
+
+
+
 
 
     let generateBarcode = (kode) => {

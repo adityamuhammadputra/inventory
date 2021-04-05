@@ -9,18 +9,18 @@
         <form class="form row" id="wrap-filter">
             <input type="hidden" name="kategori" value="{{ $data->kategori }}">
             <div class="col-4">
-                <select name="type" id="type-filter" class="form-control">
+                <select name="status" id="status-filter" class="form-control">
                     <option value="" selected>---pilih status---</option>
                     <option value="1">available</option>
                     <option value="9">not available</option>
                 </select>
             </div>
             <div class="col-4">
-                <select name="merk" id="merk-filter" class="form-control">
+                <select name="jenis" id="jenis-filter" class="form-control">
                     <option value="" selected>---pilih jenis---</option>
-                    <option value="Jenis1">Jenis1</option>
-                    <option value="Jenis2">Jenis2</option>
-                    <option value="Jenis2">Jenis2</option>
+                    @foreach ($data->jenis as $key => $val)
+                        <option value="{{ $key }}">{{ $key }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-4">

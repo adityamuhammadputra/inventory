@@ -12,6 +12,7 @@ class EquipmentController extends Controller
     {
         $data = (object) [
             'maxKode' => Barang::maxKode('EP'),
+            'jenis' => getAllJenis(),
             'kategori' => 'EP',
             'title' => 'Data Equipment'
         ];

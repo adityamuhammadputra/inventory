@@ -13,6 +13,7 @@ class ItemController extends Controller
         $data = (object) [
             'maxKode' => Barang::maxKode('IP'),
             'kategori' => 'IP',
+            'jenis' => getAllJenis(),
             'title' => 'Data Item'
         ];
 
