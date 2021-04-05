@@ -24,7 +24,7 @@ class Barang extends Model
         if($this->status == 1)
             return '<span class="badge badge-primary">available</span>';
 
-        return '<span class="badge badge-secondary">not available</span>';
+        return '<span class="badge badge-secondary" style="text-decoration: line-through;">available</span>';
     }
 
     public function scopeFiltered($query)
