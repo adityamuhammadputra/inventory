@@ -35627,6 +35627,31 @@ $('#btn-cancel').on('click', function () {
   $(this).closest('form').attr('action', $(this).data('action'));
   $(this).closest('form').attr('method', 'post');
 });
+$(document).on('click', '.editData', function () {
+  var url = $(this).data('url');
+  $.ajax({
+    url: url,
+    method: 'GET',
+    success: function success(res) {
+      $('.card-form').slideDown();
+
+      for (var key in res.barang) {
+        if (!res.barang.hasOwnProperty(key)) {
+          continue;
+        }
+
+        $("#" + key).val(res.barang[key]);
+      }
+
+      ;
+      $('.card-form').find('form').attr('action', res.action);
+      $('.card-form').find('form').attr('method', 'PATCH');
+    },
+    error: function error(_error) {
+      console.log(_error);
+    }
+  });
+});
 
 var getMaxKode = function getMaxKode(kode) {
   $.ajax({

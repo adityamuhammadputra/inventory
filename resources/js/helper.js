@@ -60,6 +60,30 @@ $('#btn-cancel').on('click', function(){
     $(this).closest('form').attr('method', 'post')
 })
 
+$(document).on('click', '.editData', function(){
+    let url =  $(this).data('url');
+    $.ajax({
+        url: url,
+        method : 'GET',
+        success: function(res) {
+            $('.card-form').slideDown();
+            for (var key in res.barang)  {
+                if (!res.barang.hasOwnProperty(key)){
+                    continue;
+                }
+                $("#" + key).val(res.barang[key])
+
+            };
+            $('.card-form').find('form').attr('action', res.action)
+            $('.card-form').find('form').attr('method', 'PATCH')
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    })
+})
+
+
 let getMaxKode = (kode) => {
     $.ajax({
         url: '/api/v1/barang/max-kode/' + kode,
