@@ -25,7 +25,7 @@ class JasaController extends Controller
             ->addColumn('action', function ($data) use($request){
                 return '<a data-id="' . $data->id . '"
                             data-title="' . $data->nama . '"
-                            data-url="/api/v1/jasa/' . $data->id . '/edit?model=' . $request->model . '"
+                            data-url="/api/v1/jasa/' . $data->id . '?model=' . $request->model . '"
                             class="text-warning editData"><i class="fa fa-edit mr-1"></i>
                         </a>
                         <a data-id="' . $data->id . '"
@@ -76,9 +76,31 @@ class JasaController extends Controller
         return response()->json($result, $result->status);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        try {
+            if($request->model == 'OP') :
+                $data = Operator::findOrFail($id);
+            elseif($request->model == 'VE') :
+                $data = Vendor::findOrFail($id);
+            else :
+                $data = Client::findOrFail($id);
+            endif;
+            $result = (object) [
+                'status' => 200,
+                'data' => $data,
+                'action' => "/api/v1/jasa/{$data->id}"
+            ];
+
+        } catch (Exception $th) {
+            $result = (object) [
+                'data' => $th,
+                'status' => 401,
+            ];
+            $data = $th;
+        }
+
+        return response()->json($result, $result->status);
     }
 
     public function update(Request $request, $id)

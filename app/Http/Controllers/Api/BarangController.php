@@ -51,24 +51,24 @@ class BarangController extends Controller
 
         try {
             $barang = Barang::create($input);
-            $data = [
+            $result = [
                 'barang' => $barang,
                 'maxKode' => Barang::maxKode($barang->kategori),
             ];
         } catch (Exception $th) {
-            $data = $th;
+            $result = $th;
         }
 
-        return response()->json($data);
+        return response()->json($result);
     }
 
     public function show(Barang $barang)
     {
-        $data = [
-            'barang' => $barang,
+        $result = [
+            'data' => $barang,
             'action' => "/api/v1/barang/{$barang->id}"
         ];
-        return response()->json($data);
+        return response()->json($result);
     }
 
     public function update(Request $request, Barang $barang)
@@ -77,15 +77,15 @@ class BarangController extends Controller
        $input = $this->inputData($request);
         try {
             $barang->update($input);
-            $data = [
+            $result = [
                 'barang' => $barang,
                 'maxKode' => Barang::maxKode($barang->kategori),
             ];
         } catch (Exception $th) {
-            $data = $th;
+            $result = $th;
         }
 
-        return response()->json($data);
+        return response()->json($result);
     }
 
 

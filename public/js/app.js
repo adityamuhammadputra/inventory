@@ -35635,17 +35635,21 @@ $(document).on('click', '.editData', function () {
     success: function success(res) {
       $('.card-form').slideDown();
 
-      for (var key in res.barang) {
-        if (!res.barang.hasOwnProperty(key)) {
+      for (var key in res.data) {
+        if (!res.data.hasOwnProperty(key)) {
           continue;
         }
 
-        $("#" + key).val(res.barang[key]);
+        $("#" + key).val(res.data[key]);
       }
 
       ;
+      if ($(".card-body #label-barcode")[0]) $('#label-barcode').html(res.data.kode);
       $('.card-form').find('form').attr('action', res.action);
       $('.card-form').find('form').attr('method', 'PATCH');
+      $("html, body").animate({
+        scrollTop: 0
+      }, "slow");
     },
     error: function error(_error) {
       console.log(_error);
