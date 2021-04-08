@@ -44,9 +44,35 @@ $('.filter-icon').on('click', function(){
 })
 
 $('#btn-add').on('click', function(){
-    $('.card-add').slideDown();
+    $('.card-form').slideDown();
 })
 
+$('#btn-cancel').on('click', function(){
+    $('.card-form').slideUp();
+    if($(this).data('max-kode') == true)
+        var kodeTemp = $(this).closest('form').find('#kode').val();
+    $(this).closest('form')[0].reset();
+    $(this).closest('form')[0].reset();
+    if($(this).data('max-kode') == true)
+        getMaxKode(kodeTemp);
+
+    $(this).closest('form').attr('action', $(this).data('action'))
+    $(this).closest('form').attr('method', 'post')
+})
+
+let getMaxKode = (kode) => {
+    $.ajax({
+        url: '/api/v1/barang/max-kode/' + kode,
+        type: "GET",
+        success: function(res){
+            $('#kode').val(res)
+            $('#label-barcode').html(res)
+        },
+        error: function(res){
+            console.log(res);
+        }
+    })
+}
 
 const autoNumericRupiah = {
     digitGroupSeparator        : '.',

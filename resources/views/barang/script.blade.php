@@ -83,7 +83,7 @@
                     generateBarcodeTemp(res.maxKode)
                     $('#form-submit')[0].reset()
                     $('#kode').val(res.maxKode)
-                    $('.card-add').slideUp();
+                    $('.card-form').slideUp();
                 },
                 error: function(res) {
                     console.log(res);
@@ -93,9 +93,30 @@
         }
     });
 
+    $(document).on('click', '.editData', function(){
+        let url =  $(this).data('url');
+        $.ajax({
+            url: url,
+            method : 'GET',
+            success: function(res) {
+                $('.card-form').slideDown();
+                $("#kode").val(res.barang.kode)
+                $('#label-barcode').html(res.barang.kode)
+                $("#jenis").val(res.barang.jenis)
+                $("#merk").val(res.barang.merk)
+                $("#type").val(res.barang.type)
+                $("#serial_number").val(res.barang.serial_number)
+                $("#harga").val(res.barang.harga)
+                $("#harga").val(res.barang.harga)
 
-
-
+                $('.card-form').find('form').attr('action', res.action)
+                $('.card-form').find('form').attr('method', 'PATCH')
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        })
+    })
 
     let generateBarcode = (kode) => {
         $.ajax({

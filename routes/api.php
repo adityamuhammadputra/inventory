@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::resource('barang', 'Api\BarangController')->except('create', 'index');
     Route::post('barang/datatable', 'Api\BarangController@dataTable');
+    Route::get('barang/max-kode/{kode}', 'Api\BarangController@maxKode');
+
 
     Route::resource('jasa', 'Api\JasaController')->except('create', 'index');
     Route::post('jasa/datatable', 'Api\JasaController@dataTable');

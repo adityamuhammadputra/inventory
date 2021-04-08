@@ -117,7 +117,7 @@
                     loadingIconButton($('#submit'), reset = true)
                     toastr.info(res.data.nama + ' Berhasil disimpan')
                     $('#form-submit')[0].reset()
-                    $('.card-add').slideUp();
+                    $('.card-form').slideUp();
                     return false;
                 },
                 error: function(res) {

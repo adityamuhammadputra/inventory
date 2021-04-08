@@ -5,7 +5,7 @@
             <span data-feather="chevron-down"></span>
         </a>
     </div>
-    <div class="card-body card-add"
+    <div class="card-body card-form"
         style="display: none;"
         >
         <div class="row">
@@ -43,7 +43,8 @@
                             <label for="keterangan">Keterangan</label>
                         </div>
                         <div class="form-label-group col-md-6">
-                            <button class="btn btn-primary btn-square float-right mt-4" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
+                            <button type="submit" class="btn btn-primary btn-square float-right mt-4" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
+                            <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-action="/api/v1/jasa?model={{ $data->model }}"> Batal</a>
                         </div>
                     </div>
                 </form>

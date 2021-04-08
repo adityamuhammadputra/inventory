@@ -45,6 +45,11 @@ function inputRupiah($input)
     return str_replace(['Rp. ', 'Rp.', '.'] , '', explode(",", $input)[0]);
 }
 
+function outputRupiah($input)
+{
+    return "Rp. " . number_format($input,2,',','.');
+}
+
 function dateTimeOutputId($dateTime, $printDay = false, $printTime = true) //Carbon::setLocale('id') doesnt work
 {
 	$day = [1 =>    'Senin',

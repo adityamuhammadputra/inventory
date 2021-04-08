@@ -27,6 +27,12 @@ class Barang extends Model
         return '<span class="badge badge-secondary" style="text-decoration: line-through;">available</span>';
     }
 
+
+    public function getHargaAttribute()
+    {
+        return outputRupiah($this->attributes['harga']);
+    }
+
     public function scopeFiltered($query)
     {
         //for custom datatable
