@@ -12,7 +12,10 @@
                                 }
                             },
                             {
-                                data: 'vendor_nama',
+                                data: 'vendor.nama',
+                                render: function (data, type, row, meta) {
+                                    return row.vendor.kode + ' - ' + data;
+                                }
                             },
                             { data: 'kode'},
                             { data: 'nama'},

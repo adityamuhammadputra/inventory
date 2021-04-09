@@ -48,6 +48,7 @@ class BarangController extends Controller
     public function store(Request $request)
     {
        $input = $this->inputData($request);
+       $input['id'] = uuid();
 
         try {
             $barang = Barang::create($input);
@@ -102,8 +103,7 @@ class BarangController extends Controller
 
     function inputData($request)
     {
-        $barang = $request->execp('_token');
-        $barang['id'] = uuid();
+        $barang = $request->except('_token', '_method');
         $barang['harga'] = inputRupiah($request->harga);
         $barang['kategori'] = substr($request->kode, 0, 2);
         $barang['kategori_no'] = substr($request->kode, 2);

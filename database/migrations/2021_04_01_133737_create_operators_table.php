@@ -16,7 +16,6 @@ class CreateOperatorsTable extends Migration
         Schema::create('operators', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('vendor_id');
-            $table->string('vendor_nama');
             $table->string('kode')->unique();
             $table->string('nama');
             $table->string('tugas')->nullable();

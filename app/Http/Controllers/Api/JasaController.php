@@ -14,7 +14,7 @@ class JasaController extends Controller
     public function dataTable(Request $request)
     {
         if($request->model == 'OP') :
-            $data = Operator::query();
+            $data = Operator::with('vendor');
         elseif($request->model == 'VE') :
             $data = Vendor::query();
         else :
@@ -45,12 +45,11 @@ class JasaController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request->except('_token');
+        $input = $request->except('_token', '_method');
         $input['id'] = uuid();
         try {
             if($request->model == 'OP') :
                 $table = 'tableOperator';
-                $input['vendor_nama'] = Vendor::find($request->vendor_id)->nama;
                 $data = Operator::create($input);
             elseif($request->model == 'VE') :
                 $table = 'tableVendor';
@@ -66,12 +65,11 @@ class JasaController extends Controller
                 'status' => 200,
             ];
 
-        } catch (Exception $th) {
+        } catch (Exception $e) {
             $result = (object) [
-                'data' => $th,
+                'data' => $e,
                 'status' => 401,
             ];
-            $data = $th;
         }
         return response()->json($result, $result->status);
     }
@@ -89,15 +87,14 @@ class JasaController extends Controller
             $result = (object) [
                 'status' => 200,
                 'data' => $data,
-                'action' => "/api/v1/jasa/{$data->id}"
+                'action' => "/api/v1/jasa/{$data->id}?model={$request->model}"
             ];
 
-        } catch (Exception $th) {
+        } catch (Exception $e) {
             $result = (object) [
-                'data' => $th,
+                'data' => $e,
                 'status' => 401,
             ];
-            $data = $th;
         }
 
         return response()->json($result, $result->status);
@@ -105,7 +102,29 @@ class JasaController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->except('_token', '_method');
+        if($request->model == 'OP')
+            $data = Operator::findOrFail($id);
+        else if($request->model == 'VE')
+            $data = Vendor::findOrFail($id);
+        else
+            $data = Client::findOrFail($id);
+
+        try {
+            $data->update($input);
+            $result = (object) [
+                'status' => 200,
+                'data' => $data,
+                'action' => "/api/v1/jasa/{$data->id}"
+            ];
+        } catch (Exception $e) {
+            $result = (object) [
+                'data' => $e,
+                'status' => 401,
+            ];
+        }
+
+        return response()->json($result, $result->status);
     }
 
     public function destroy(Request $request, $id)

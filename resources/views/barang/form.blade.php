@@ -16,6 +16,7 @@
             <div class="col-md-8 offset-md-1 pt-1">
                 <form method="POST" action="/api/v1/barang" class="form form-horizontal" id="form-submit">
                     @csrf
+                    @method('POST')
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
                             <input type="text" id="kode" name="kode" class="form-control" placeholder="Kode Barang" value="{{ $data->maxKode }}" required>

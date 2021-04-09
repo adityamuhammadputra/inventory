@@ -35617,6 +35617,8 @@ $('.filter-icon').on('click', function () {
 });
 $('#btn-add').on('click', function () {
   $('.card-form').slideDown();
+  $('.card-form').find('form [name="_method"]').val('POST');
+  $('.card-form').find('form').attr('action', $(this).data('action'));
 });
 $('#btn-cancel').on('click', function () {
   $('.card-form').slideUp();
@@ -35625,7 +35627,7 @@ $('#btn-cancel').on('click', function () {
   $(this).closest('form')[0].reset();
   if ($(this).data('max-kode') == true) getMaxKode(kodeTemp);
   $(this).closest('form').attr('action', $(this).data('action'));
-  $(this).closest('form').attr('method', 'post');
+  $(this).closest('form').find('[name="_method"]').val('POST');
 });
 $(document).on('click', '.editData', function () {
   var url = $(this).data('url');
@@ -35641,12 +35643,13 @@ $(document).on('click', '.editData', function () {
         }
 
         $("#" + key).val(res.data[key]);
+        if ($(".card-form select")[0]) $("#" + key).val(res.data[key]).trigger('change');
       }
 
       ;
       if ($(".card-body #label-barcode")[0]) $('#label-barcode').html(res.data.kode);
       $('.card-form').find('form').attr('action', res.action);
-      $('.card-form').find('form').attr('method', 'PATCH');
+      $('.card-form').find('form [name="_method"]').val('PATCH');
       $("html, body").animate({
         scrollTop: 0
       }, "slow");

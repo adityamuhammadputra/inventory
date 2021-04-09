@@ -16,6 +16,7 @@
             <div class="col-md-9 pt-4">
                 <form method="POST" action="/api/v1/jasa?model={{ $data->model }}" class="form form-horizontal" id="form-submit">
                     @csrf
+                    @method('POST')
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
                             <select name="vendor_id" id="vendor_id" class="form-control select2" required>
