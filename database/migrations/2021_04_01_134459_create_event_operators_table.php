@@ -15,9 +15,9 @@ class CreateEventOperatorsTable extends Migration
     {
         Schema::create('event_operators', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('event_id');
-            $table->uuid('operator_id');
-            $table->string('operator_harga');
+            $table->uuid('event_id')->nullable();
+            $table->uuid('operator_id')->nullable();
+            $table->string('operator_harga')->nullable();
             $table->timestamps();
         });
     }

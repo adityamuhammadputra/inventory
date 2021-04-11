@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRentalBarangsTable extends Migration
+class CreateRentalBarangItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateRentalBarangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rental_barangs', function (Blueprint $table) {
+        Schema::create('rental_barang_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('rental_id');
+            $table->uuid('rental_barang_id');
             $table->uuid('barang_id')->nullable();
             $table->uuid('barang_name')->nullable();
             $table->string('barang_temp')->nullable();
@@ -31,6 +31,6 @@ class CreateRentalBarangsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rental_barangs');
+        Schema::dropIfExists('rental_barang_items');
     }
 }
