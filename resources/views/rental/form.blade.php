@@ -1,0 +1,94 @@
+<div class="card">
+    <div class="card-header">
+        Form Input
+        <a class="card-header-down float-right">
+            <span data-feather="chevron-down"></span>
+        </a>
+    </div>
+    <div class="card-body card-form"
+        {{-- style="display: none;" --}}
+        >
+        <div class="row">
+            <form method="POST" action="/rental" class="form form-horizontal" id="form-submit">
+                <div class="col-md-3">
+                    <img src="/img/operator.jpg" class="img img-reponsive" style="width: 100%">
+                </div>
+                <div class="col-md-8 offset-md-1 pt-1">
+                    @csrf
+                    @method('POST')
+                    <div class="form-row">
+                        <div class="form-label-group col-6">
+                            <input type="text" id="noreg" name="noreg" class="form-control" placeholder="Noreg Rental" value="{{ $data->noReg }}" required>
+                            <label id="noreg-has-value" class="error noreg-has-value" for="noreg" style="display: none;"></label>
+                            <label for="noreg">Noreg Rental</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label-group col-6">
+                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama" required>
+                            <label for="nama">Nama </label>
+                        </div>
+                        <div class="form-label-group col-6">
+                            <div class="custom-control custom-switch" style="top: 22px;">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1">Ambil Dari Master</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label-group col-6">
+                            <input type="text" id="kontak" name="kontak" class="form-control" placeholder="kontak" required>
+                            <label for="kontak">Kontak</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label-group col-6">
+                            <textarea id="alamat" name="alamat" class="form-control" placeholder="Alamat Client" required></textarea>
+                            <label for="alamat">Alamat</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label-group col-5">
+                            <input type="text" id="start" name="start" class="form-control" placeholder="Rental Start" required>
+                            <label for="start">Rental Date Start</label>
+                        </div>
+                        <div class="col-2 text-center">
+                            <label class="">s/d</label>
+                        </div>
+                        <div class="form-label-group col-md-5">
+                            <input type="text" id="end" name="end" class="form-control" placeholder="Rental End" required>
+                            <label for="end">Rental Date End</label>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-row row-multiple">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Equipment Name</th>
+                                    <th>Item Name</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <input type="text" class="form-control" name="equpment[]">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="item[]">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
+                    <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/rental"> Batal</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

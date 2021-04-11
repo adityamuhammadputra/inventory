@@ -32,5 +32,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/vendor', 'VendorController')->only('create', 'index');
     Route::resource('/client', 'ClientController')->only('create', 'index');
 
-
+    Route::resource('/rental', 'RentalController')->except('create');
 });
