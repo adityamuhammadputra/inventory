@@ -76,10 +76,10 @@
                             <tbody>
                                 <tr id="1">
                                     <td>1</td>
-                                    <td><input type="text" class="form-control" name="equpment[1]"></td>
+                                    <td><input type="text" class="form-control autoCompleteEquipment equipment1" dataid="1" name="equpment[1]"></td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="item[1][1]">
+                                            <input type="text" class="form-control autoCompleteItem item1" dataid="1" name="item[1][1]">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <a class="addItem" data-id="1"><span class="fa fa-plus"></span></a>
@@ -87,7 +87,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td><input type="text" class="form-control rupiah" name="price[1]"></td>
+                                    <td><input type="text" class="form-control rupiah price1" name="price[1]"></td>
                                     <td></td>
                                 </tr>
                             </tbody>

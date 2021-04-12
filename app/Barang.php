@@ -36,7 +36,7 @@ class Barang extends Model
     public function scopeFiltered($query)
     {
         //for custom datatable
-        $query->when(request('search')['value'], function ($query) {
+        $query->when(request('search'), function ($query) {
             $param = '%' . request('search')['value'] . '%';
             $query->where('kode', 'like', $param)
                 ->orWhere('jenis', 'like', $param)
@@ -63,6 +63,16 @@ class Barang extends Model
         $query->when(request('harga'), function ($query) {
             if(inputRupiah(request('harga')))
                 $query->where('harga','>=', inputRupiah(request('harga')));
+        });
+
+        $query->when(request('q'), function ($query) {
+            $param = '%' . request('q') . '%';
+            $query->where('kategori_no', 'like', $param)
+                ->orWhere('kode', 'like', $param)
+                ->orWhere('merk', 'like', $param)
+                ->orWhere('jenis', 'like', $param)
+                ->orWhere('type', 'like', $param)
+                ->orWhere('serial_number', 'like', $param);
         });
     }
 

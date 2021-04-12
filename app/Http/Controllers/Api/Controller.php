@@ -61,4 +61,24 @@ class Controller extends BaseController
 
         return response()->json($result, 200);
     }
+
+    public function lookupBarang(Request $request)
+    {
+        if($request->kategori == 'IP')
+            $barang = Barang::item()->filtered()->get();
+        else
+            $barang = Barang::equipment()->filtered()->get();
+
+        $data = [];
+        foreach($barang as $c) :
+            $data [] = [
+                'data' => $c,
+                'value' => "$c->kode - $c->jenis - $c->harga",
+            ];
+        endforeach;
+
+        $result = ['suggestions' => $data];
+
+        return response()->json($result, 200);
+    }
 }

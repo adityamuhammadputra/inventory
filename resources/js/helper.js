@@ -111,7 +111,7 @@ const autoNumericRupiah = {
     digitGroupSeparator        : '.',
     decimalCharacter           : ',',
     floatPos                   : true,
-    currencySymbol             : 'Rp. ',
+    currencySymbol             : 'Rp.',
 };
 
 if ($(".card-body .rupiah")[0]){
@@ -130,6 +130,7 @@ if ($(".card-body .rupiahFilter")[0]) {
 $('.datepicker').datepicker({
     autoclose : true,
     format : 'dd MM yyyy',
+    todayHighlight: true
 });
 
 

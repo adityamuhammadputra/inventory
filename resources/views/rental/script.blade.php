@@ -62,17 +62,17 @@
 
         if(val.length == 1 && val == 'I' || val.length < 1)
             $(this).val('IP')
-
     })
 
+    var id
     $("#addEquipment").on('click', function(){
         let countRow =  $(this).closest('table').find('tr').length
         let html = '<tr id="'+countRow+'">\
                         <td>' + countRow + '</td>\
-                        <td><input type="text" class="form-control" name="equpment[' + countRow + ']"></td>\
+                        <td><input type="text" class="form-control autoCompleteEquipment equipment' + countRow + '" dataid="' + countRow + '" name="equpment[' + countRow + ']"></td>\
                         <td>\
                             <div class="input-group">\
-                                <input type="text" class="form-control" name="item[' + countRow + '][' + countRow + ']">\
+                                <input type="text" class="form-control autoCompleteItem item' + countRow + '" dataid="' + countRow + '" name="item[' + countRow + '][' + countRow + ']">\
                                 <div class="input-group-prepend">\
                                     <div class="input-group-text">\
                                         <a class="addItem" data-id="' + countRow + '"><span class="fa fa-plus"></span></a>\
@@ -84,6 +84,7 @@
                         <td class="text-right"><a class="removeEquipment"><i class="fa fa-trash"></i></a></td>\
                     </tr>'
         $(this).closest('table').append(html);
+        setAutoCompleteEquipment()
     })
 
     $(document).on('click', '.removeEquipment', function(){
@@ -94,8 +95,9 @@
     $(document).on('click', '.addItem', function(){
         countRow++
         let idRow = $(this).data('id');
-        let html = '<input type="text" class="form-control" name="item['+idRow+']['+countRow+']"></a>';
+        let html = '<input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRow+']"></a>';
         $(this).closest('td').append(html);
+        setAutoCompleteItem()
     })
 
 
@@ -117,8 +119,88 @@
             $('#kontak').val(data.kontak)
             $('#alamat').val(data.alamat)
         },
-        minChars : 3,
+        minChars : 2,
     });
+
+    let setAutoCompleteEquipment = () => {
+        $('.autoCompleteEquipment').autocomplete({
+            lookup: function (query, done) {
+                $.ajax({
+                    url: '/api/v1/lookup-barang',
+                    dataType: "json",
+                    data: {
+                        q : query,
+                        kategori : 'EP'
+                    },
+                    success: function(data) {
+                        done(data);
+                    }
+                });
+            },
+            onSelect: function (suggestion, that) {
+                let $this = that.element.attributes;
+                let id = $this.dataid.value;
+                let data = suggestion.data;
+                setPrice(id);
+            },
+            onInvalidateSelection: function() {
+                $('.autoCompleteEquipment').html('You selected: none');
+            },
+            minChars : 2,
+            lookupLimit : 10,
+            noSuggestionNotice: 'Sorry, no matching results',
+        });
+    };
+
+    setAutoCompleteEquipment()
+
+    let setAutoCompleteItem = () => {
+        $('.autoCompleteItem').autocomplete({
+            lookup: function (query, done) {
+                $.ajax({
+                    url: '/api/v1/lookup-barang',
+                    dataType: "json",
+                    data: {
+                        q : query,
+                        kategori : 'IP'
+                    },
+                    success: function(data) {
+                        done(data);
+                    }
+                });
+            },
+            onSelect: function (suggestion, that) {
+                let $this = that.element.attributes;
+                let id = $this.dataid.value;
+                let data = suggestion.data;
+                setPrice(id);
+            },
+            onInvalidateSelection: function() {
+                $('.autoCompleteItem').html('You selected: none');
+            },
+            minChars : 2,
+            lookupLimit : 10,
+            noSuggestionNotice: 'Sorry, no matching results',
+        });
+    }
+
+    setAutoCompleteItem()
+
+    let outputRupiah = (val) => {
+        if(val)
+            return parseInt(val.split('Rp.')[1].replace('.', '').replace('.', '').replace('.', '').split(',')[0]);
+    }
+
+    let setPrice = (id) => {
+        let totalItemRow = 0;
+        $(".item" + id).each(function(){
+            totalItemRow += outputRupiah($(this).val());
+        });
+        $(".equipment" + id).each(function(){
+            totalItemRow += outputRupiah($(this).val());
+        });
+        $('.price' + id).val(totalItemRow)
+    }
 
     $('#checkMaster').on('change', function(){
         if ($(this).is(':checked')) {
@@ -131,6 +213,8 @@
             $('#alamat').removeAttr('readonly')
         }
     })
+
+
 
 
     $("#form-submit").validate({

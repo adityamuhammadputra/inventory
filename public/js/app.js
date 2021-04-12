@@ -37584,7 +37584,7 @@ var autoNumericRupiah = {
   digitGroupSeparator: '.',
   decimalCharacter: ',',
   floatPos: true,
-  currencySymbol: 'Rp. '
+  currencySymbol: 'Rp.'
 };
 
 if ($(".card-body .rupiah")[0]) {
@@ -37601,7 +37601,8 @@ if ($(".card-body .rupiahFilter")[0]) {
 
 $('.datepicker').datepicker({
   autoclose: true,
-  format: 'dd MM yyyy'
+  format: 'dd MM yyyy',
+  todayHighlight: true
 });
 
 /***/ }),
@@ -38518,7 +38519,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       that.selection = suggestion;
 
       if ($.isFunction(onSelectCallback)) {
-        onSelectCallback.call(that.element, suggestion);
+        onSelectCallback.call(that.element, suggestion, that);
+      }
+    },
+    onThat: function onThat() {
+      var that = this;
+      that.currentValue = that.getValue(suggestion.value);
+
+      if ($.isFunction(onThatCallback)) {
+        onThatCallback.call(that);
       }
     },
     getValue: function getValue(value) {

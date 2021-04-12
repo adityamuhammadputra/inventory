@@ -776,7 +776,7 @@
             var that = this,
                 onHintCallback = that.options.onHint,
                 hintValue = '';
-            
+
             if (suggestion) {
                 hintValue = that.currentValue + suggestion.value.substr(that.currentValue.length);
             }
@@ -786,7 +786,7 @@
                 if ($.isFunction(onHintCallback)) {
                     onHintCallback.call(that.element, hintValue);
                 }
-            }  
+            }
         },
 
         verifySuggestionsFormat: function (suggestions) {
@@ -946,7 +946,17 @@
             that.selection = suggestion;
 
             if ($.isFunction(onSelectCallback)) {
-                onSelectCallback.call(that.element, suggestion);
+                onSelectCallback.call(that.element, suggestion, that);
+            }
+        },
+
+        onThat: function () {
+            var that = this;
+
+            that.currentValue = that.getValue(suggestion.value);
+
+            if ($.isFunction(onThatCallback)) {
+                onThatCallback.call(that);
             }
         },
 
