@@ -1,11 +1,12 @@
 @extends('layouts.master')
 @section('level1', 'Transaksi')
-@section('title', 'Rental')
+@section('level2', 'Rental')
+@section('title', 'Rental Equipment & Item')
 
 @section('content')
 <div class="row">
     <div class="col-12">
-        @include('rental.filter')
+        {{-- @include('rental.filter') --}}
         @include('rental.form')
     </div>
 </div>

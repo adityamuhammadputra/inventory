@@ -8,8 +8,8 @@
     <div class="card-body card-form"
         {{-- style="display: none;" --}}
         >
-        <div class="row">
-            <form method="POST" action="/rental" class="form form-horizontal" id="form-submit">
+        <form method="POST" action="/rental" class="form form-horizontal" id="form-submit">
+            <div class="row">
                 <div class="col-md-3">
                     <img src="/img/operator.jpg" class="img img-reponsive" style="width: 100%">
                 </div>
@@ -60,26 +60,34 @@
                             <label for="end">Rental Date End</label>
                         </div>
                     </div>
-                    <hr>
+                </div>
+                <div class="col-12 pt-2">
                     <div class="form-row row-multiple">
-                        <table>
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Equipment Name</th>
                                     <th>Item Name</th>
                                     <th>Price</th>
+                                    <th class="text-right text-primary"><a id="addEquipment"><span class="fa fa-plus"></span></a></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr id="1">
                                     <td>1</td>
+                                    <td><input type="text" class="form-control" name="equpment[1]"></td>
                                     <td>
-                                        <input type="text" class="form-control" name="equpment[]">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="item[1][1]">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <a class="addItem" data-id="1"><span class="fa fa-plus"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="item[]">
-                                    </td>
+                                    <td><input type="text" class="form-control rupiah" name="price[1]"></td>
                                     <td></td>
                                 </tr>
                             </tbody>
@@ -88,7 +96,8 @@
                     <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
                     <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/rental"> Batal</a>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
+
     </div>
 </div>

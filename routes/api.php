@@ -31,5 +31,6 @@ Route::prefix('v1')->group(function () {
 
     Route::get('generate-barcode/{kode}', 'Api\Controller@generateBarcode');
     Route::get('check-visible-barang', 'Api\Controller@checkVisibleBarang');
+    Route::get('check-visible-noreg', 'Api\Controller@checkVisibleNoreg');
 
 });

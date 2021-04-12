@@ -55,17 +55,51 @@
     })
 
 
-    $('#kode').on('keyup', function(){
+    $('#noreg').on('keyup', function(){
         let val = $(this).val();
         if(val.length > 4){
-            checkVisibleBarang('kode', val)
-            generateBarcodeTemp(val)
+            checkVisibleNoreg('noreg', val)
         }
 
         if(val.length == 1 && val == 'I' || val.length < 1)
             $(this).val('IP')
 
     })
+
+    $("#addEquipment").on('click', function(){
+        let countRow =  $(this).closest('table').find('tr').length
+        let html = '<tr id="'+countRow+'">\
+                        <td>' + countRow + '</td>\
+                        <td><input type="text" class="form-control" name="equpment[' + countRow + ']"></td>\
+                        <td>\
+                            <div class="input-group">\
+                                <input type="text" class="form-control" name="item[' + countRow + '][' + countRow + ']">\
+                                <div class="input-group-prepend">\
+                                    <div class="input-group-text">\
+                                        <a class="addItem" data-id="' + countRow + '"><span class="fa fa-plus"></span></a>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </td>\
+                        <td><input type="text" class="form-control rupiah" name="price[' + countRow + ']"></td>\
+                        <td class="text-right"><a class="removeEquipment"><i class="fa fa-trash"></i></a></td>\
+                    </tr>'
+        $(this).closest('table').append(html);
+    })
+
+    $(document).on('click', '.removeEquipment', function(){
+        $(this).closest('tr').remove();
+    })
+
+    var countRow = 1;
+    $(document).on('click', '.addItem', function(){
+        countRow++
+        let idRow = $(this).data('id');
+        let html = '<input type="text" class="form-control" name="item['+idRow+']['+countRow+']"></a>';
+        $(this).closest('td').append(html);
+    })
+
+
 
     $("#form-submit").validate({
         submitHandler: function(form) {
@@ -79,10 +113,8 @@
                 success: function(res) {
                     table.api().ajax.reload()
                     loadingIconButton($('#submit'), reset = true)
-                    toastr.info(res.barang.merk + ' Berhasil disimpan')
-                    generateBarcodeTemp(res.maxKode)
+                    // toastr.info(res.barang.merk + ' Berhasil disimpan')
                     $('#form-submit')[0].reset()
-                    $('#kode').val(res.maxKode)
                     $('.card-form').slideUp();
                 },
                 error: function(res) {
@@ -93,32 +125,9 @@
         }
     });
 
-    let generateBarcode = (kode) => {
+    let checkVisibleNoreg = (column, value) => {
         $.ajax({
-            url: "/api/v1/generate-barcode/" + kode,
-            method : 'GET',
-            beforeSend: function() {
-            },
-            success: function(data) {
-                setTimeout(function(){
-                    $('#wrap-barcode').html('<img src= "' + data.path +'" style="width:100%;">')
-                }, 1000);
-            },
-            error: function(error) {
-                console.log(error)
-            }
-        })
-    }
-
-    let generateBarcodeTemp = (kode) => {
-        setTimeout(function(){
-            $('#label-barcode').html(kode)
-        }, 500);
-    }
-
-    let checkVisibleBarang = (column, value) => {
-        $.ajax({
-            url: "/api/v1/check-visible-barang",
+            url: "/api/v1/check-visible-noreg",
             method : 'GET',
             data: {
                 'column' : column,
@@ -143,17 +152,6 @@
         })
     }
 
-
-    var loadingIconText = (that, reset = false) => {
-        if(reset == true) {
-            that.closest('div').find('.loading-icon').remove();
-            return false;
-        }
-        let html = '<div class="spinner-border spinner-border-sm text-secondary loading-icon" role="status">\
-                    </div>';
-        that.before(html);
-    }
-
     var loadingIconButton = (that, reset = false) => {
         that.attr('disabled', 'disabled')
         if(reset == true) {
@@ -163,12 +161,6 @@
         }
         that.find('span').removeClass('fa-check-circle').addClass('spinner-border spinner-border-sm')
     }
-
-
-    // jQuery(function($) {
-    //     $('.rupiah').autoNumeric('init');
-    // });
-
 
 </script>
 @endpush

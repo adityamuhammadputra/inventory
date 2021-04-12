@@ -12142,11 +12142,30 @@ text {
   top: 3px;
 }
 
-select {
+select,
+.form-control {
   border-top: none !important;
   border-left: none !important;
   border-radius: 0 !important;
   border-right: none !important;
+}
+
+table tbody {
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+table tr td > input.form-control:focus,
+table tr td div > input.form-control:focus {
+  box-shadow: 0 4px 2px -2px rgba(59, 125, 221, 0.25) !important;
+}
+
+.row-multiple table tr td {
+  padding: 0px !important;
+  vertical-align: text-top !important;
+}
+
+.row-multiple table tr td input {
+  height: 35px !important;
 }
 
 @media (min-width: 992px) {

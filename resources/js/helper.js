@@ -118,6 +118,10 @@ if ($(".card-body .rupiah")[0]){
     new autoNumeric('.rupiah', autoNumericRupiah);
 }
 
+if ($(".card-body .rupiah2")[0]){
+    new autoNumeric('.rupiah2', autoNumericRupiah);
+}
+
 if ($(".card-body .rupiahFilter")[0]) {
     new autoNumeric('.rupiahFilter', autoNumericRupiah);
 }

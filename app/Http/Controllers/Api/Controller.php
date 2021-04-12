@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Barang;
+use App\Rental;
 use Exception;
 use GuzzleHttp\RetryMiddleware;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -36,5 +37,10 @@ class Controller extends BaseController
     {
         $barang = Barang::checkBarang()->first();
         return response($barang);
+    }
+
+    public function checkVisibleNoreg()
+    {
+        return response(Rental::checkNoreg()->first());
     }
 }
