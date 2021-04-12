@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Barang;
+use App\Client;
 use App\Rental;
 use Exception;
 use GuzzleHttp\RetryMiddleware;
@@ -42,5 +43,22 @@ class Controller extends BaseController
     public function checkVisibleNoreg()
     {
         return response(Rental::checkNoreg()->first());
+    }
+
+    public function lookupClient(Request $request)
+    {
+        $client = Client::filtered()->get();
+        $data = [];
+        foreach($client as $c) :
+            $data [] = [
+
+                'data' => $c->id,
+                'value' => "$c->nama - $c->kontak",
+            ];
+        endforeach;
+
+        $result = ['suggestions' => $data];
+
+        return response()->json($result, 200);
     }
 }

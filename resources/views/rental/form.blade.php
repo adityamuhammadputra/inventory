@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama" required>
+                            <input type="text" id="nama" name="nama" class="form-control autocomplete" placeholder="Nama" required>
                             <label for="nama">Nama </label>
                         </div>
                         <div class="form-label-group col-6">

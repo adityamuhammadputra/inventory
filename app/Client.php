@@ -17,4 +17,14 @@ class Client extends Model
             return dateTimeOutput($val);
         return '-';
     }
+
+
+    public function scopeFiltered($query)
+    {
+        $query->when(request('q'), function ($query) {
+            $param = '%' . request('q') . '%';
+            $query->where('nama', 'like', $param)
+                ->orWhere('keterangan', 'like', $param);
+        });
+    }
 }

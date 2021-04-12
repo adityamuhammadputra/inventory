@@ -100,6 +100,35 @@
     })
 
 
+    $('.autocomplete').autocomplete({
+        lookup: function (query, done) {
+            $.ajax({
+                url: '/api/v1/lookup-client',
+                dataType: "json",
+                data: {
+                    q : query
+                },
+                success: function(data) {
+                    // console.log(data);
+                    // var result = {
+                    //     suggestions: [
+                    //         { "value": "United Arab Emirates", "data": "AE" },
+                    //         { "value": "United Kingdom",       "data": "UK" },
+                    //         { "value": "United States",        "data": "US" }
+                    //     ]
+                    // };
+                    done(data);
+                }
+            });
+        // Do Ajax call or lookup locally, when done,
+        // call the callback and pass your results:
+        },
+        onSelect: function (suggestion) {
+            console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
+        },
+        minChars : 3,
+    });
+
 
     $("#form-submit").validate({
         submitHandler: function(form) {
