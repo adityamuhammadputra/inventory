@@ -25,38 +25,38 @@
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <input type="text" id="nama" name="nama" class="form-control autocomplete" placeholder="Nama" required>
+                            <input type="text" id="nama" name="nama" class="form-control autocompleteNama" placeholder="Nama" required>
                             <label for="nama">Nama </label>
                         </div>
                         <div class="form-label-group col-6">
                             <div class="custom-control custom-switch" style="top: 22px;">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                <label class="custom-control-label" for="customSwitch1">Ambil Dari Master</label>
+                                <input type="checkbox" class="custom-control-input" id="checkMaster" checked>
+                                <label class="custom-control-label" for="checkMaster">Ambil Dari Master</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <input type="text" id="kontak" name="kontak" class="form-control" placeholder="kontak" required>
+                            <input type="number" id="kontak" name="kontak" class="form-control" placeholder="kontak" required readonly>
                             <label for="kontak">Kontak</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <textarea id="alamat" name="alamat" class="form-control" placeholder="Alamat Client" required></textarea>
+                            <textarea id="alamat" name="alamat" class="form-control" placeholder="Alamat Client" required readonly></textarea>
                             <label for="alamat">Alamat</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-5">
-                            <input type="text" id="start" name="start" class="form-control" placeholder="Rental Start" required>
+                            <input type="text" id="start" name="start" class="form-control datepicker" placeholder="Rental Start" value="{{ $data->dateNow }}" required>
                             <label for="start">Rental Date Start</label>
                         </div>
                         <div class="col-2 text-center">
                             <label class="">s/d</label>
                         </div>
                         <div class="form-label-group col-md-5">
-                            <input type="text" id="end" name="end" class="form-control" placeholder="Rental End" required>
+                            <input type="text" id="end" name="end" class="form-control datepicker" placeholder="Rental End" required>
                             <label for="end">Rental Date End</label>
                         </div>
                     </div>

@@ -52,8 +52,8 @@ class Controller extends BaseController
         foreach($client as $c) :
             $data [] = [
 
-                'data' => $c->id,
-                'value' => "$c->nama - $c->kontak",
+                'data' => $c,
+                'value' => "$c->nama",
             ];
         endforeach;
 

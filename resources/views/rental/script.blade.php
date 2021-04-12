@@ -1,5 +1,4 @@
 @push('scripts')
-
 <script>
     var table;
     var urlTable = "{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize();
@@ -100,7 +99,7 @@
     })
 
 
-    $('.autocomplete').autocomplete({
+    $('.autocompleteNama').autocomplete({
         lookup: function (query, done) {
             $.ajax({
                 url: '/api/v1/lookup-client',
@@ -109,25 +108,29 @@
                     q : query
                 },
                 success: function(data) {
-                    // console.log(data);
-                    // var result = {
-                    //     suggestions: [
-                    //         { "value": "United Arab Emirates", "data": "AE" },
-                    //         { "value": "United Kingdom",       "data": "UK" },
-                    //         { "value": "United States",        "data": "US" }
-                    //     ]
-                    // };
                     done(data);
                 }
             });
-        // Do Ajax call or lookup locally, when done,
-        // call the callback and pass your results:
         },
         onSelect: function (suggestion) {
-            console.log('You selected: ' + suggestion.value + ', ' + suggestion.data);
+            let data = suggestion.data;
+            $('#kontak').val(data.kontak)
+            $('#alamat').val(data.alamat)
         },
         minChars : 3,
     });
+
+    $('#checkMaster').on('change', function(){
+        if ($(this).is(':checked')) {
+            $('#nama').addClass('autocompleteNama')
+            $('#kontak').attr('readonly', true)
+            $('#alamat').attr('readonly', true)
+        } else {
+            $('#nama').removeClass('autocompleteNama')
+            $('#kontak').removeAttr('readonly')
+            $('#alamat').removeAttr('readonly')
+        }
+    })
 
 
     $("#form-submit").validate({

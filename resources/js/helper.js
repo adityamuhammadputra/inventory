@@ -127,4 +127,10 @@ if ($(".card-body .rupiahFilter")[0]) {
 }
 
 
+$('.datepicker').datepicker({
+    autoclose : true,
+    format : 'dd MM yyyy',
+});
+
+
 
