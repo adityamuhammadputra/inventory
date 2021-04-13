@@ -73,7 +73,8 @@ class Controller extends BaseController
         foreach($barang as $c) :
             $data [] = [
                 'data' => $c,
-                'value' => "$c->kode - $c->jenis - $c->harga",
+                // 'value' => "$c->kode - $c->jenis - $c->harga",
+                'value' => "$c->kode",
             ];
         endforeach;
 

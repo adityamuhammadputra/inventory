@@ -76,7 +76,9 @@
                             <tbody>
                                 <tr id="1">
                                     <td>1</td>
-                                    <td><input type="text" class="form-control autoCompleteEquipment equipment1" dataid="1" name="equpment[1]"></td>
+                                    <td>
+                                        <input type="text" class="form-control autoCompleteEquipment equipment1" dataid="1" name="equpment[1]">
+                                    </td>
                                     <td>
                                         <div class="input-group">
                                             <input type="text" class="form-control autoCompleteItem item1" dataid="1" name="item[1][1]">
@@ -87,7 +89,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td><input type="text" class="form-control rupiah price1" name="price[1]"></td>
+                                    <td><input type="text" class="form-control rupiah price1 text-right" name="price[1]" tabindex="2000"></td>
                                     <td></td>
                                 </tr>
                             </tbody>

@@ -80,11 +80,12 @@
                                 </div>\
                             </div>\
                         </td>\
-                        <td><input type="text" class="form-control rupiah" name="price[' + countRow + ']"></td>\
+                        <td><input type="text" class="form-control price' + countRow + ' rupiah text-right" name="price[' + countRow + ']" tabindex="2001"></td>\
                         <td class="text-right"><a class="removeEquipment"><i class="fa fa-trash"></i></a></td>\
                     </tr>'
         $(this).closest('table').append(html);
         setAutoCompleteEquipment()
+        setAutoCompleteItem()
     })
 
     $(document).on('click', '.removeEquipment', function(){
@@ -138,13 +139,11 @@
                 });
             },
             onSelect: function (suggestion, that) {
+                let data = suggestion.data;
+                $(that.element).val(data.kode + ' - ' + data.jenis + ' - ' + data.harga);
                 let $this = that.element.attributes;
                 let id = $this.dataid.value;
-                let data = suggestion.data;
                 setPrice(id);
-            },
-            onInvalidateSelection: function() {
-                $('.autoCompleteEquipment').html('You selected: none');
             },
             minChars : 2,
             lookupLimit : 10,
@@ -170,13 +169,12 @@
                 });
             },
             onSelect: function (suggestion, that) {
+                let data = suggestion.data;
+                $(that.element).val(data.kode + ' - ' + data.jenis + ' - ' + data.harga);
+
                 let $this = that.element.attributes;
                 let id = $this.dataid.value;
-                let data = suggestion.data;
                 setPrice(id);
-            },
-            onInvalidateSelection: function() {
-                $('.autoCompleteItem').html('You selected: none');
             },
             minChars : 2,
             lookupLimit : 10,
@@ -192,6 +190,7 @@
     }
 
     let setPrice = (id) => {
+        console.log(id);
         let totalItemRow = 0;
         $(".item" + id).each(function(){
             totalItemRow += outputRupiah($(this).val());
