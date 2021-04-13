@@ -203,6 +203,7 @@
     let setPrice = (id) => {
         let totalItemRow = 0;
         let subtotal = 0;
+        let total = 0;
         $(".item" + id).each(function(){
             totalItemRow += inputRupiah($(this).val());
         });
@@ -213,11 +214,28 @@
 
         $(".price").each(function(){
             subtotal += inputRupiah($(this).val());
+            total += inputRupiah($(this).val());
         });
 
         if(subtotal && subtotal !== NaN)
             $('.subtotal').val(outputRupiah(subtotal))
+
+        if($('.diskon').val()){
+            let diskonTemp = subtotal * $('.diskon').val() / 100;
+            total = total - diskonTemp;
+        }
+
+        if(total && total !== NaN)
+            $('.total').val(outputRupiah(total))
     }
+
+    $('.diskon').on('keyup', function(){
+        let diskonTemp = inputRupiah($('.subtotal').val()) * $(this).val() / 100;
+        let total = inputRupiah($('.subtotal').val()) - diskonTemp;
+        console.log(total);
+        if(total && total !== NaN)
+            $('.total').val(outputRupiah(total))
+    })
 
     $('#checkMaster').on('change', function(){
         if ($(this).is(':checked')) {
