@@ -65,8 +65,9 @@
     })
 
     var id
+    var countRow = 1;
     $("#addEquipment").on('click', function(){
-        let countRow =  $(this).closest('table').find('tr').length
+        countRow++
         let html = '<tr id="'+countRow+'">\
                         <td>' + countRow + '</td>\
                         <td><input type="text" class="form-control autoCompleteEquipment equipment' + countRow + '" dataid="' + countRow + '" name="equpment[' + countRow + ']"></td>\
@@ -80,8 +81,8 @@
                                 </div>\
                             </div>\
                         </td>\
-                        <td><input type="text" class="form-control price' + countRow + ' rupiah text-right" name="price[' + countRow + ']" tabindex="2001"></td>\
-                        <td class="text-right"><a class="removeEquipment"><i class="fa fa-trash"></i></a></td>\
+                        <td><input type="text" class="form-control price price' + countRow + ' rupiah text-right" name="price[' + countRow + ']" tabindex="2001"></td>\
+                        <td class="text-center"><a class="removeEquipment"><i class="fa fa-trash"></i></a></td>\
                     </tr>'
         $(this).closest('table').append(html);
         setAutoCompleteEquipment()
@@ -184,21 +185,38 @@
 
     setAutoCompleteItem()
 
-    let outputRupiah = (val) => {
+    let inputRupiah = (val) => {
         if(val)
             return parseInt(val.split('Rp.')[1].replace('.', '').replace('.', '').replace('.', '').split(',')[0]);
     }
 
+    let outputRupiah = (val) => {
+        if(val && val !== NaN) {
+            var 	bilangan = val;
+            var	reverse = bilangan.toString().split('').reverse().join(''),
+                ribuan 	= reverse.match(/\d{1,3}/g);
+                ribuan	= ribuan.join('.').split('').reverse().join('');
+            return 'Rp.' + ribuan;
+        }
+    }
+
     let setPrice = (id) => {
-        console.log(id);
         let totalItemRow = 0;
+        let subtotal = 0;
         $(".item" + id).each(function(){
-            totalItemRow += outputRupiah($(this).val());
+            totalItemRow += inputRupiah($(this).val());
         });
         $(".equipment" + id).each(function(){
-            totalItemRow += outputRupiah($(this).val());
+            totalItemRow += inputRupiah($(this).val());
         });
-        $('.price' + id).val(totalItemRow)
+        $('.price' + id).val(outputRupiah(totalItemRow))
+
+        $(".price").each(function(){
+            subtotal += inputRupiah($(this).val());
+        });
+
+        if(subtotal && subtotal !== NaN)
+            $('.subtotal').val(outputRupiah(subtotal))
     }
 
     $('#checkMaster').on('change', function(){
@@ -212,9 +230,6 @@
             $('#alamat').removeAttr('readonly')
         }
     })
-
-
-
 
     $("#form-submit").validate({
         submitHandler: function(form) {
@@ -276,6 +291,8 @@
         }
         that.find('span').removeClass('fa-check-circle').addClass('spinner-border spinner-border-sm')
     }
+
+
 
 </script>
 @endpush

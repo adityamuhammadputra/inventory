@@ -37578,7 +37578,33 @@ var getMaxKode = function getMaxKode(kode) {
       console.log(res);
     }
   });
-};
+}; // var rupiah = document.getElementsByClassName('rupiah');
+// rupiah.addEventListener('keyup', function(e){
+//     rupiah.value = formatRupiah(this.value, 'Rp. ');
+// });
+
+
+if ($(".card-body .rupiah")[0]) {
+  $('.rupiah').on('keyup', function () {
+    $(this).val(formatRupiah(this.value, 'Rp.'));
+  });
+}
+
+function formatRupiah(angka, prefix) {
+  var number_string = angka.replace(/[^,\d]/g, '').toString(),
+      split = number_string.split(','),
+      sisa = split[0].length % 3,
+      rupiah = split[0].substr(0, sisa),
+      ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+  if (ribuan) {
+    separator = sisa ? '.' : '';
+    rupiah += separator + ribuan.join('.');
+  }
+
+  rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+  return prefix == undefined ? rupiah : rupiah ? 'Rp.' + rupiah : '';
+}
 
 var autoNumericRupiah = {
   digitGroupSeparator: '.',
@@ -37586,14 +37612,6 @@ var autoNumericRupiah = {
   floatPos: true,
   currencySymbol: 'Rp.'
 };
-
-if ($(".card-body .rupiah")[0]) {
-  new autoNumeric('.rupiah', autoNumericRupiah);
-}
-
-if ($(".card-body .rupiah2")[0]) {
-  new autoNumeric('.rupiah2', autoNumericRupiah);
-}
 
 if ($(".card-body .rupiahFilter")[0]) {
   new autoNumeric('.rupiahFilter', autoNumericRupiah);

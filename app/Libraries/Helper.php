@@ -42,12 +42,13 @@ function dateTimeOutput($date)
 function inputRupiah($input)
 {
     // Rp.123.123.123,00
-    return str_replace(['Rp.', 'Rp.', '.'] , '', explode(",", $input)[0]);
+    // return str_replace(['Rp.', 'Rp.', '.'] , '', explode(",", $input)[0]);
+    return str_replace(['Rp.', 'Rp.', '.'] , '', $input);
 }
 
 function outputRupiah($input)
 {
-    return "Rp." . number_format($input,2,',','.');
+    return "Rp." . number_format($input,0,'','.');
 }
 
 function dateTimeOutputId($dateTime, $printDay = false, $printTime = true) //Carbon::setLocale('id') doesnt work
