@@ -19,8 +19,8 @@ function userId()
 
 function dateInput($date)
 {
-    //ex: 03 Oct 2020
-    $d =  Carbon::createFromFormat('d M Y', $date);
+    //ex: 03 October 2020
+    $d =  Carbon::createFromFormat('d F Y', $date);
     return Carbon::parse($d)->format('Y-m-d');
 }
 
@@ -43,7 +43,7 @@ function inputRupiah($input)
 {
     // Rp.123.123.123,00
     // return str_replace(['Rp.', 'Rp.', '.'] , '', explode(",", $input)[0]);
-    return str_replace(['Rp.', 'Rp.', '.'] , '', $input);
+    return str_replace(['Rp. ', 'Rp.', '.'] , '', $input);
 }
 
 function outputRupiah($input)

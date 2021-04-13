@@ -103,7 +103,7 @@
                                     <td colspan="3" class="">
                                         <b>Sub Total </b>
                                     </td>
-                                    <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="subtotal"></td>
+                                    <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="sub_total" required></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="">
@@ -115,7 +115,7 @@
                                     <td colspan="3" class="">
                                         <b>TOTAL </b>
                                     </td>
-                                    <td colspan="2"><input type="text" class="form-control rupiah total text-right" name="total" readonly></td>
+                                    <td colspan="2"><input type="text" class="form-control rupiah total text-right" name="total" readonly required></td>
                                 </tr>
                             </tfoot>
                         </table>

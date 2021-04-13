@@ -20,6 +20,7 @@ class CreateRentalBarangsTable extends Migration
             $table->uuid('barang_name')->nullable();
             $table->string('barang_temp')->nullable();
             $table->string('barang_harga')->nullable();
+            $table->string('barang_total')->nullable();
             $table->timestamps();
         });
     }
