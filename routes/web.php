@@ -34,4 +34,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/rental', 'RentalController')->except('create');
     Route::post('rental/datatable', 'RentalController@dataTable');
+
+
+    Route::resource('/event', 'EventController')->except('create');
+    Route::post('event/datatable', 'EventController@dataTable');
 });

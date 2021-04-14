@@ -1,6 +1,7 @@
 <?php
 
 use App\Barang;
+use App\Event;
 use App\Rental;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -115,6 +116,20 @@ function getMaxRental()
     $noReg = 'RE00001';
     if(Rental::count() > 0) :
         $max = Rental::max('noreg');
+        $maxDigit = substr($max, 2) + 1;
+        $maxKode = substr($max, 0, 2);
+        $noReg = $maxKode . '0000' . $maxDigit;
+    endif;
+
+    return $noReg;
+}
+
+
+function getMaxEvent()
+{
+    $noReg = 'EV00001';
+    if(Event::count() > 0) :
+        $max = Event::max('noreg');
         $maxDigit = substr($max, 2) + 1;
         $maxKode = substr($max, 0, 2);
         $noReg = $maxKode . '0000' . $maxDigit;

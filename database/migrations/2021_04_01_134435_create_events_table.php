@@ -23,9 +23,6 @@ class CreateEventsTable extends Migration
             $table->date('date');
             $table->time('time');
             $table->string('location')->nullable();
-            $table->string('barang_id')->nullable();
-            $table->string('barang_nama')->nullable();
-            $table->string('barang_harga')->nullable();
             $table->string('sub_total')->nullable();
             $table->string('diskon')->nullable();
             $table->string('total')->nullable();
