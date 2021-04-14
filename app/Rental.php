@@ -39,6 +39,16 @@ class Rental extends Model
 
     }
 
+    public function getTotalAttribute($val)
+    {
+        return outputRupiah($val);
+    }
+
+    public function getSubTotalAttribute($val)
+    {
+        return outputRupiah($val);
+    }
+
     public function getCreatedAtAttribute($val)
     {
         if($val)
