@@ -1,14 +1,14 @@
-<div class="card">
-    <div class="card-header">
-        Form Input
-        <a class="card-header-down float-right">
-            <span data-feather="chevron-down"></span>
-        </a>
-    </div>
-    <div class="card-body card-form"
-        {{-- style="display: none;" --}}
-        >
-        <form method="POST" action="/rental" class="form form-horizontal" id="form-submit">
+<form method="POST" action="/rental" class="form form-horizontal" id="form-submit">
+    <div class="card">
+        <div class="card-header">
+            Form Input
+            <a class="card-header-down float-right">
+                <span data-feather="chevron-down"></span>
+            </a>
+        </div>
+        <div class="card-body card-form"
+            {{-- style="display: none;" --}}
+            >
             <div class="row">
                 <div class="col-md-3">
                     <img src="/img/operator.jpg" class="img img-reponsive" style="width: 100%">
@@ -58,6 +58,19 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            Equipment Item Input
+            <a class="card-header-down float-right">
+                <span data-feather="chevron-down"></span>
+            </a>
+        </div>
+        <div class="card-body card-form">
+            <div class="row">
                 <div class="col-12 pt-2">
                     <div class="form-row row-multiple">
                         <table class="table">
@@ -121,7 +134,6 @@
                     <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/rental"> Batal</a>
                 </div>
             </div>
-        </form>
-
+        </div>
     </div>
-</div>
+</form>
