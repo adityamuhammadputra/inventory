@@ -1,6 +1,7 @@
 <?php
 
 use App\Barang;
+use App\Rental;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -106,4 +107,18 @@ function generateBarcode($name)
     // generateBarcode('test123');
     Storage::disk('public_barcode')->put($name.'.svg', DNS1D::getBarcodeSVG("$name", "C128", 2, 100));
     return '/img/barcode/'.$name . '.svg';
+}
+
+
+function getMaxRental()
+{
+    $noReg = 'RE00001';
+    if(Rental::count() > 0) :
+        $max = Rental::max('noreg');
+        $maxDigit = substr($max, 2) + 1;
+        $maxKode = substr($max, 0, 2);
+        $noReg = $maxKode . '0000' . $maxDigit;
+    endif;
+
+    return $noReg;
 }

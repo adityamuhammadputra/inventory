@@ -1,7 +1,7 @@
 @push('scripts')
 <script>
     var table;
-    var urlTable = "{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize();
+    var urlTable = "{{ url('rental/datatable') }}?" + $('#wrap-filter').serialize();
     $(function() {
         $.ajaxSetup({
             headers: {
@@ -24,17 +24,41 @@
                     }
                 },
                 {
-                    data: 'barcode',
-                    orderable:false,
-                    searchable:false,
+                    data: 'noreg',
+                    render: function (data, type, row, meta) {
+                        return '#' + data;
+                    }
                 },
-                { data: 'kode'},
-                { data: 'jenis'},
-                { data: 'merk'},
-                { data: 'type'},
-                { data: 'serial_number'},
-                { data: 'harga'},
-                { data: 'status_label'},
+                {
+                    data: 'nama',
+                    render: function (data, type, row, meta) {
+                        return data + '<br><span class="text-detail">' + row.kontak + '</span>';
+                    }
+                },
+                {
+                    data: 'start',
+                    render: function (data, type, row, meta) {
+                        return data + ' s/d ' + row.end;
+                    },
+
+                },
+                {
+                    data: 'count_equipment',
+                    className: 'text-center'
+                },
+                {
+                    data: 'count_item',
+                    className: 'text-center'
+                },
+                { data: 'sub_total'},
+                {
+                    data: 'diskon',
+                    render: function (data, type, row, meta) {
+                        return '<code>' + data + '%</code>';
+                    },
+                    className: 'text-center'
+                },
+                { data: 'total'},
                 { data: 'created_at', searchable:false },
                 {
                     data: 'action',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Barang;
+use App\Client;
 use App\Rental;
 use App\RentalBarang;
 use App\RentalBarangItem;
@@ -10,23 +11,21 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 
 class RentalController extends Controller
 {
 
-    protected $noReg;
     public function index(Request $request)
     {
-        $this->noReg = 'RE00001';
 
         $data = (object) [
-            'noReg' => $this->noReg,
+            'noReg' => getMaxRental(),
             'dateNow' => Carbon::now()->format('d F Y')
         ];
 
         return view('rental.index', compact('data'));
     }
-
 
     public function store(Request $request)
     {
@@ -101,7 +100,6 @@ class RentalController extends Controller
                         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                         cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-            // $section->addImage("https://ilmucoding.com/wp-content/uploads/2020/01/Tutorial-Belajar-Framework-Laravel.jpg");
             $section->addText($description);
             $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
             try {
@@ -112,5 +110,42 @@ class RentalController extends Controller
             // return response()->download(storage_path("app/inv/{$rentalDb->id}.docx"));
         DB::commit();
 
+        $data = [
+            'noReg' => getMaxRental(),
+            'status' => 200,
+        ];
+
+        return response()->json($data, 200);
+    }
+
+
+    public function dataTable(Request $request)
+    {
+        $rental = Rental::with('rentalBarangs')->filtered();
+
+        return DataTables::of($rental)
+            ->addColumn('action', function ($data) {
+                return '<a href="'.$data->barcode.'" target="_blank"
+                            class="text-info"><i class="fa fa-print"></i>
+                        </a>
+                        <a data-id="' . $data->id . '"
+                            data-title="' . $data->kode . '"
+                            data-url="/api/v1/barang/' . $data->id . '"
+                            class="text-warning editData"><i class="fa fa-edit"></i>
+                        </a>
+                        <a data-id="' . $data->id . '"
+                            data-title="' . $data->kode . '"
+                            data-url="/api/v1/barang/'.$data->id.'"
+                            class="text-danger deleteData"><i class="fa fa-trash"></i>
+                        </a>';
+            })
+            ->addColumn('count_equipment', function ($data) {
+                return $data->rentalBarangs->count();
+            })
+            ->addColumn('count_item', function ($data) {
+                return $data->rentalBarangs->sum('count_item');
+            })
+            ->rawColumns(['action', 'count_equipment', 'count_item'])
+            ->make(true);
     }
 }

@@ -33,4 +33,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/client', 'ClientController')->only('create', 'index');
 
     Route::resource('/rental', 'RentalController')->except('create');
+    Route::post('rental/datatable', 'RentalController@dataTable');
 });

@@ -8,6 +8,7 @@
 	<meta name="description" content="Responsive Web UI Kit &amp; Dashboard Template based on Bootstrap">
 	<meta name="author" content="AdminKit">
 	<meta name="keywords" content="adminkit, bootstrap, web ui kit, dashboard template, admin template">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="shortcut icon" href="/img/icons/icon-48x48.png" />
 
     <title>@hasSection('level2') @yield('level2') | @endif Panorama</title>

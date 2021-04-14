@@ -25,14 +25,14 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Barcode</th>
-                            <th>Kode</th>
-                            <th>Jenis</th>
-                            <th>Merk</th>
-                            <th>Type</th>
-                            <th>Serial Number</th>
-                            <th>Harga</th>
-                            <th>Status</th>
+                            <th>Noreg</th>
+                            <th>Client</th>
+                            <th>Tanggal Rental</th>
+                            <th>Jumlah Equipment</th>
+                            <th>Jumlah Item</th>
+                            <th>Subtotal</th>
+                            <th>Diskon</th>
+                            <th>Total</th>
                             <th>created at</th>
                             <th></th>
                         </tr>
