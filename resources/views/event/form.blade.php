@@ -1,4 +1,6 @@
-<form method="POST" action="/rental" class="form form-horizontal" id="form-submit">
+<form method="POST" action="/event" class="form form-horizontal" id="form-submit">
+    @csrf
+    @method('POST')
     <div class="card">
         <div class="card-header">
             Form Input
@@ -14,8 +16,6 @@
                     <img src="/img/operator.jpg" class="img img-reponsive" style="width: 100%">
                 </div>
                 <div class="col-md-8 offset-md-1 pt-1">
-                    @csrf
-                    @method('POST')
                     <div class="form-row">
                         <div class="form-label-group col-6">
                             <input type="text" id="noreg" name="noreg" class="form-control" placeholder="Noreg Rental" value="{{ $data->noReg }}" required>
@@ -213,6 +213,10 @@
                                         <b>Sub Total Equipment Item</b>
                                     </td>
                                     <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="sub_total" required></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right"><br>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="">

@@ -21,4 +21,13 @@ class Vendor extends Model
     {
         return outputRupiah($this->attributes['harga']);
     }
+
+    public function scopeFiltered($query)
+    {
+        $query->when(request('q'), function ($query) {
+            $param = '%' . request('q') . '%';
+            $query->where('nama', 'like', $param)
+                ->orWhere('keterangan', 'like', $param);
+        });
+    }
 }

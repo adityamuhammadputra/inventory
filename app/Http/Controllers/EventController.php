@@ -29,16 +29,44 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        return $request;
-        DB::beginTransaction();
-            $rental = $request->only('noreg', 'nama', 'kontak', 'alamat', 'diskon');
-            $rental['id'] = uuid();
-            $rental['start'] = dateInput($request->start);
-            $rental['end'] = dateInput($request->end);
-            $rental['sub_total'] = inputRupiah($request->sub_total);
-            $rental['total'] = inputRupiah($request->total);
-            $rental['user_id'] = userId();
-            $rentalDb = Event::create($rental);
+        // DB::beginTransaction();
+            $event = $request->only('noreg', 'vendor_name', 'client_name', 'name', 'location', 'diskon', 'time');
+            $event['id'] = uuid();
+            $event['date'] = dateInput($request->date);
+            $event['sub_total_op'] = inputRupiah($request->sub_total_op);
+            $event['sub_total'] = inputRupiah($request->sub_total);
+            $event['total'] = inputRupiah($request->total);
+            $event['user_id'] = userId();
+
+            $eventDb = Event::create($event);
+            return $eventDb;
+
+
+            // $idEventOper = [];
+            if($request->equpment) :
+                $barangs = [];
+                foreach($request->equpment as $key => $barang) :
+                    $barangDb = Barang::where('kode', explode(' - ', $barang)[0])->first();
+                    $barang_id = $barangDb->id;
+                    $barang_name = $barangDb->merk;
+                    $barang_temp = inputRupiah($barangDb->harga);
+                    $barang_harga = inputRupiah(explode(' - ', $barang)[2]);
+                    $uuid = uuid();
+                    $barangs [] = [
+                        'id' => $uuid,
+                        'rental_id' => $eventDb->id,
+                        'barang_id' => $barang_id,
+                        'barang_name' => $barang_name,
+                        'barang_temp' => $barang_temp,
+                        'barang_harga' => $barang_harga,
+                        'barang_total' => inputRupiah($request->price[$key]),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ];
+                endforeach;
+                EventBarang::insert($barangs);
+            endif;
+
 
             $idRentalBarang = [];
             if($request->equpment) :
@@ -53,7 +81,7 @@ class EventController extends Controller
                     $idRentalBarang [$key] = [$key => $uuid];
                     $barangs [] = [
                         'id' => $uuid,
-                        'rental_id' => $rentalDb->id,
+                        'rental_id' => $eventDb->id,
                         'barang_id' => $barang_id,
                         'barang_name' => $barang_name,
                         'barang_temp' => $barang_temp,
@@ -103,12 +131,12 @@ class EventController extends Controller
             $section->addText($description);
             $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
             try {
-                $objWriter->save(storage_path("app/inv/{$rentalDb->id}.docx"));
+                $objWriter->save(storage_path("app/inv/{$eventDb->id}.docx"));
             } catch (Exception $e) {
                 dd($e);
             }
-            // return response()->download(storage_path("app/inv/{$rentalDb->id}.docx"));
-        DB::commit();
+            // return response()->download(storage_path("app/inv/{$eventDb->id}.docx"));
+        // DB::commit();
 
         $data = [
             'noReg' => getMaxRental(),

@@ -35,6 +35,7 @@ Route::prefix('v1')->group(function () {
     Route::get('check-visible-noreg', 'Api\Controller@checkVisibleNoreg');
 
     Route::get('lookup-client', 'Api\Controller@lookupClient');
+    Route::get('lookup-vendor', 'Api\Controller@lookupVendor');
     Route::get('lookup-barang', 'Api\Controller@lookupBarang');
     Route::get('lookup-operator', 'Api\Controller@lookupOperator');
 

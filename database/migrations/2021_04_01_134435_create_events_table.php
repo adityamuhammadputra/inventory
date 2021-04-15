@@ -17,12 +17,14 @@ class CreateEventsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('noreg')->unique();
             $table->uuid('vendor_id')->nullable();
+            $table->uuid('vendor_name')->nullable();
             $table->uuid('client_id')->nullable();
-            $table->string('client_nama')->nullable();
+            $table->string('client_name')->nullable();
             $table->string('name')->nullable();
             $table->date('date');
-            $table->time('time');
+            $table->string('time');
             $table->string('location')->nullable();
+            $table->string('sub_total_op')->nullable();
             $table->string('sub_total')->nullable();
             $table->string('diskon')->nullable();
             $table->string('total')->nullable();

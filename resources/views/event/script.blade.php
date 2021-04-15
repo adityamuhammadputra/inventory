@@ -180,6 +180,26 @@
         minChars : 2,
     });
 
+
+    $('.autocompleteVendor').autocomplete({
+        lookup: function (query, done) {
+            $.ajax({
+                url: '/api/v1/lookup-vendor',
+                dataType: "json",
+                data: {
+                    q : query
+                },
+                success: function(data) {
+                    done(data);
+                }
+            });
+        },
+        onSelect: function (suggestion) {
+            let data = suggestion.data;
+        },
+        minChars : 2,
+    });
+
     let setAutoCompleteOp = () => {
         $('.autoCompleteOp').autocomplete({
             lookup: function (query, done) {
@@ -305,8 +325,10 @@
         $('.priceOp' + id).val(outputRupiah(totalOpRow))
 
         $(".price").each(function(){
-            subtotal += inputRupiah($(this).val());
-            total += inputRupiah($(this).val());
+            $(this).val()
+                subtotal += inputRupiah($(this).val());
+            $(this).val()
+                total += inputRupiah($(this).val());
         });
 
         $(".priceOp").each(function(){
@@ -342,17 +364,6 @@
             $('.total').val(outputRupiah(total))
     })
 
-    $('#checkMaster').on('change', function(){
-        if ($(this).is(':checked')) {
-            $('#nama').addClass('autocompleteNama')
-            $('#kontak').attr('readonly', true)
-            $('#alamat').attr('readonly', true)
-        } else {
-            $('#nama').removeClass('autocompleteNama')
-            $('#kontak').removeAttr('readonly')
-            $('#alamat').removeAttr('readonly')
-        }
-    })
 
     $("#form-submit").validate({
         submitHandler: function(form) {

@@ -6,6 +6,7 @@ use App\Barang;
 use App\Client;
 use App\Operator;
 use App\Rental;
+use App\Vendor;
 use Exception;
 use GuzzleHttp\RetryMiddleware;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -55,6 +56,23 @@ class Controller extends BaseController
 
                 'data' => $c,
                 'value' => "$c->nama",
+            ];
+        endforeach;
+
+        $result = ['suggestions' => $data];
+
+        return response()->json($result, 200);
+    }
+
+    public function lookupVendor(Request $request)
+    {
+        $vendor = Vendor::filtered()->get();
+        $data = [];
+        foreach($vendor as $v) :
+            $data [] = [
+
+                'data' => $v,
+                'value' => "$v->nama",
             ];
         endforeach;
 
