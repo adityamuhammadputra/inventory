@@ -37,7 +37,7 @@ class EventController extends Controller
             $event['sub_total'] = inputRupiah($request->sub_total);
             $event['total'] = inputRupiah($request->total);
             $event['user_id'] = userId();
-
+            return $request;
             $eventDb = Event::create($event);
             return $eventDb;
 
@@ -167,11 +167,14 @@ class EventController extends Controller
                             class="text-danger deleteData"><i class="fa fa-trash"></i>
                         </a>';
             })
+            ->addColumn('count_op', function ($data) {
+                return $data->eventOperator->count();
+            })
             ->addColumn('count_equipment', function ($data) {
-                return $data->rentalBarangs->count();
+                return $data->eventBarangs->count();
             })
             ->addColumn('count_item', function ($data) {
-                return $data->rentalBarangs->sum('count_item');
+                return $data->eventBarangs->sum('count_item');
             })
             ->rawColumns(['action', 'count_equipment', 'count_item'])
             ->make(true);

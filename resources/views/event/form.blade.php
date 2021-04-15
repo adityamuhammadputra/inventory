@@ -86,7 +86,7 @@
                                     <td>1. Camerament</td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteOp op1" dataid="1" name="item[1][1]">
+                                            <input type="text" class="form-control autoCompleteOp op1" dataid="1" name="op[1][1]">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <a class="addOp" data-id="1"><span class="fa fa-plus"></span></a>
@@ -100,7 +100,7 @@
                                     <td>2. Crew</td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteOp op2" dataid="2" name="item[2][1]">
+                                            <input type="text" class="form-control autoCompleteOp op2" dataid="2" name="op[2][1]">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <a class="addOp" data-id="2"><span class="fa fa-plus"></span></a>
@@ -114,7 +114,7 @@
                                     <td>3. SDE</td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteOp op3" dataid="3" name="item[3][1]">
+                                            <input type="text" class="form-control autoCompleteOp op3" dataid="3" name="op[3][1]">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <a class="addOp" data-id="3"><span class="fa fa-plus"></span></a>
@@ -128,7 +128,7 @@
                                     <td>4. Editor</td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteOp op4" dataid="4" name="item[4][1]">
+                                            <input type="text" class="form-control autoCompleteOp op4" dataid="4" name="op[4][1]">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <a class="addOp" data-id="4"><span class="fa fa-plus"></span></a>

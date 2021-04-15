@@ -28,9 +28,11 @@
                             <th>Noreg</th>
                             <th>Vendor</th>
                             <th>Client</th>
-                            <th>Tanggal Rental</th>
-                            <th>Jumlah Equipment</th>
-                            <th>Jumlah Item</th>
+                            <th>Event Detail</th>
+                            <th>Tanggal Event</th>
+                            <th>Operator</th>
+                            <th>Equipment</th>
+                            <th>Item</th>
                             <th>Subtotal</th>
                             <th>Diskon</th>
                             <th>Total</th>

@@ -10,6 +10,8 @@ class Event extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
+    protected $appends = ['sub_total_all'];
+
 
     public function eventOperator()
     {
@@ -33,10 +35,45 @@ class Event extends Model
         //for custom datatable
         $query->when(request('search'), function ($query) {
             $param = '%' . request('search')['value'] . '%';
-            $query->where('vendor_nama', 'like', $param)
-                ->orWhere('client_nama', 'like', $param)
+            $query->where('vendor_name', 'like', $param)
+                ->orWhere('client_name', 'like', $param)
                 ->orWhere('location', 'like', $param);
         });
 
+    }
+
+    public function getSubTotalAllAttribute()
+    {
+        $subTotal = $this->attributes['sub_total'] + $this->attributes['sub_total_op'];
+        return outputRupiah($subTotal);
+    }
+
+    public function getTotalAttribute($val)
+    {
+        return outputRupiah($val);
+    }
+
+    public function getSubTotalOpAttribute($val)
+    {
+        return outputRupiah($val);
+    }
+
+    public function getSubTotalAttribute($val)
+    {
+        return outputRupiah($val);
+    }
+
+    public function getCreatedAtAttribute($val)
+    {
+        if($val)
+            return dateTimeOutput($val);
+        return '-';
+    }
+
+    public function getDateAttribute($val)
+    {
+        if($val)
+            return dateOutput($val);
+        return '-';
     }
 }

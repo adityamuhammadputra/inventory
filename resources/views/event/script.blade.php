@@ -31,23 +31,27 @@
                     }
                 },
                 {
-                    data: 'vendor_nama',
+                    data: 'vendor_name',
+                },
+                {
+                    data: 'client_name',
+                },
+                {
+                    data: 'name',
                     render: function (data, type, row, meta) {
-                        return '#' + data;
+                        return data + '<br><i class="fa fa-map-pin"></i> ' + row.location;
                     }
                 },
                 {
-                    data: 'nama',
+                    data: 'date',
                     render: function (data, type, row, meta) {
-                        return data + '<br><span class="text-detail">' + row.kontak + '</span>';
-                    }
-                },
-                {
-                    data: 'start',
-                    render: function (data, type, row, meta) {
-                        return data + ' s/d ' + row.end;
+                        return data + ' ' + row.time;
                     },
 
+                },
+                {
+                    data: 'count_op',
+                    className: 'text-center'
                 },
                 {
                     data: 'count_equipment',
@@ -57,7 +61,9 @@
                     data: 'count_item',
                     className: 'text-center'
                 },
-                { data: 'sub_total'},
+                {
+                    data: 'sub_total_all',
+                },
                 {
                     data: 'diskon',
                     render: function (data, type, row, meta) {
@@ -73,7 +79,7 @@
                     searchable:false,
                 },
             ],
-            order:[[9, 'desc']],
+            order:[[12, 'desc']],
         });
     });
 
