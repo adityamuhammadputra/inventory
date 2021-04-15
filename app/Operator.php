@@ -25,4 +25,9 @@ class Operator extends Model
             return dateTimeOutput($val);
         return '-';
     }
+
+    public function getHargaAttribute()
+    {
+        return outputRupiah($this->attributes['harga']);
+    }
 }

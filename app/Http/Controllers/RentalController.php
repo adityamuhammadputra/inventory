@@ -130,12 +130,12 @@ class RentalController extends Controller
                         </a>
                         <a data-id="' . $data->id . '"
                             data-title="' . $data->kode . '"
-                            data-url="/api/v1/barang/' . $data->id . '"
-                            class="text-warning editData"><i class="fa fa-edit"></i>
+                            data-url="/rental/' . $data->id . '/edit"
+                            class="text-warning editTransaksi"><i class="fa fa-edit"></i>
                         </a>
                         <a data-id="' . $data->id . '"
                             data-title="' . $data->kode . '"
-                            data-url="/api/v1/barang/'.$data->id.'"
+                            data-url="/rental/'.$data->id.'"
                             class="text-danger deleteData"><i class="fa fa-trash"></i>
                         </a>';
             })
@@ -147,5 +147,20 @@ class RentalController extends Controller
             })
             ->rawColumns(['action', 'count_equipment', 'count_item'])
             ->make(true);
+    }
+
+    public function edit($id)
+    {
+        $rental = Rental::with('rentalBarangs')->findOrFail($id);
+        $result = [
+            'data' => $rental,
+            'action' => "/event/{$rental->id}"
+        ];
+        return response()->json($result);
+    }
+
+    public function destroy(Rental $rental)
+    {
+        return $rental;
     }
 }

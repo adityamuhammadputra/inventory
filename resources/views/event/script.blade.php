@@ -119,19 +119,31 @@
         setAutoCompleteItem()
     })
 
-    $(document).on('click', '.removeEquipment', function(){
-        $(this).closest('tr').remove();
-    })
-
     var countRow = 1;
     $(document).on('click', '.addItem', function(){
         countRow++
         let idRow = $(this).data('id');
-        let html = '<input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRow+']"></a>';
+        let html = '<div class="input-group">\
+                        <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item[' + idRow + '][' + countRow + ']">\
+                        <div class="input-group-prepend">\
+                            <div class="input-group-text">\
+                                <a class="removeItem" data-id="' + idRow + '"><span class="fa fa-trash"></span></a>\
+                            </div>\
+                        </div>\
+                    </div>';
+        // let html = '<input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRow+']"></a>';
         $(this).closest('td').append(html);
         setAutoCompleteItem()
     })
 
+    $(document).on('click', '.removeEquipment', function(){
+        $(this).closest('tr').remove();
+        setPrice($(this).data('id'));
+    })
+    $(document).on('click', '.removeItem', function(){
+        $(this).closest('.input-group').remove();
+        setPrice($(this).data('id'));
+    })
 
     $('.autocompleteNama').autocomplete({
         lookup: function (query, done) {

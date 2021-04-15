@@ -114,8 +114,6 @@
         setAutoCompleteItem()
     })
 
-
-
     var countRow = 1;
     $(document).on('click', '.addItem', function(){
         countRow++
@@ -299,7 +297,7 @@
                 success: function(res) {
                     table.api().ajax.reload()
                     loadingIconButton($('#submit'), reset = true)
-                    // toastr.info(res.barang.merk + ' Berhasil disimpan')
+                    toastr.info('Rental Berhasil disimpan')
                     $('#form-submit')[0].reset()
                     $('.card-form').slideUp();
                 },
@@ -310,6 +308,34 @@
             return false;
         }
     });
+
+    $(document).on('click', '.editTransaksi', function(){
+    let url =  $(this).data('url');
+    $.ajax({
+        url: url,
+        method : 'GET',
+        success: function(res) {
+            $('.card-form').slideDown();
+            for (var key in res.data)  {
+                if (!res.data.hasOwnProperty(key)){
+                    continue;
+                }
+                $("#" + key).val(res.data[key])
+
+                if($(".card-form select")[0])
+                    $("#" + key).val(res.data[key]).trigger('change')
+            };
+
+
+            $('.card-form').find('form').attr('action', res.action)
+            $('.card-form').find('form [name="_method"]').val('PATCH')
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    })
+})
 
     let checkVisibleNoreg = (column, value) => {
         $.ajax({

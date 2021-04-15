@@ -64,6 +64,75 @@
 
     <div class="card">
         <div class="card-header">
+            Operator Input
+            <a class="card-header-down float-right">
+                <span data-feather="chevron-down"></span>
+            </a>
+        </div>
+        <div class="card-body card-form">
+            <div class="row">
+                <div class="col-12 pt-2">
+                    <div class="form-row row-multiple">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="1">
+                                    <td>1. Camerament</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control autoCompleteItem item1" dataid="1" name="item[1][1]">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <a class="addItem" data-id="1"><span class="fa fa-plus"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><input type="text" class="form-control rupiah price price1 text-right" name="price[1]" tabindex="20054"></td>
+                                </tr>
+                                <tr id="2">
+                                    <td>1. Camerament</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control autoCompleteItem item1" dataid="2" name="item[2][1]">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <a class="addItem" data-id="1"><span class="fa fa-plus"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><input type="text" class="form-control rupiah price price1 text-right" name="price[2]" tabindex="20055"></td>
+                                </tr>
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-right"><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="">
+                                        <b>Sub Total Operator</b>
+                                    </td>
+                                    <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="sub_total" required></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
             Equipment Item Input
             <a class="card-header-down float-right">
                 <span data-feather="chevron-down"></span>
@@ -111,7 +180,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="">
-                                        <b>Sub Total </b>
+                                        <b>Sub Total Equipment Item</b>
                                     </td>
                                     <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="sub_total" required></td>
                                 </tr>

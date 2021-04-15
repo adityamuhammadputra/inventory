@@ -47,6 +47,10 @@ class JasaController extends Controller
     {
         $input = $request->except('_token', '_method');
         $input['id'] = uuid();
+
+        if($request->harga)
+            $input['harga'] = inputRupiah($request->harga);
+
         try {
             if($request->model == 'OP') :
                 $table = 'tableOperator';
@@ -103,6 +107,9 @@ class JasaController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->except('_token', '_method');
+        if($request->harga)
+            $input['harga'] = inputRupiah($request->harga);
+
         if($request->model == 'OP')
             $data = Operator::findOrFail($id);
         else if($request->model == 'VE')
