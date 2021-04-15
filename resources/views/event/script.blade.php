@@ -136,6 +136,22 @@
         setAutoCompleteItem()
     })
 
+    var countRow = 1;
+    $(document).on('click', '.addOp', function(){
+        countRow++
+        let idRow = $(this).data('id');
+        let html = '<div class="input-group">\
+                        <input type="text" class="form-control autoCompleteOp op' + idRow + '" dataid="' + idRow + '" name="op[' + idRow + '][' + countRow + ']">\
+                        <div class="input-group-prepend">\
+                            <div class="input-group-text">\
+                                <a class="removeItem" data-id="' + idRow + '"><span class="fa fa-trash"></span></a>\
+                            </div>\
+                        </div>\
+                    </div>';
+        $(this).closest('td').append(html);
+        setAutoCompleteOp()
+    })
+
     $(document).on('click', '.removeEquipment', function(){
         $(this).closest('tr').remove();
         setPrice($(this).data('id'));
@@ -164,6 +180,34 @@
         minChars : 2,
     });
 
+    let setAutoCompleteOp = () => {
+        $('.autoCompleteOp').autocomplete({
+            lookup: function (query, done) {
+                $.ajax({
+                    url: '/api/v1/lookup-operator',
+                    dataType: "json",
+                    data: {
+                        q : query,
+                    },
+                    success: function(data) {
+                        done(data);
+                    }
+                });
+            },
+            onSelect: function (suggestion, that) {
+                let data = suggestion.data;
+                $(that.element).val(data.kode + ' - ' + data.nama + '(' + data.tugas + ') - ' + data.harga);
+                let $this = that.element.attributes;
+                let id = $this.dataid.value;
+                setPrice(id);
+            },
+            minChars : 2,
+            lookupLimit : 10,
+            noSuggestionNotice: 'Sorry, no matching results',
+        });
+    }
+    setAutoCompleteOp()
+
     let setAutoCompleteEquipment = () => {
         $('.autoCompleteEquipment').autocomplete({
             lookup: function (query, done) {
@@ -191,7 +235,6 @@
             noSuggestionNotice: 'Sorry, no matching results',
         });
     };
-
     setAutoCompleteEquipment()
 
     let setAutoCompleteItem = () => {
@@ -221,7 +264,6 @@
             noSuggestionNotice: 'Sorry, no matching results',
         });
     }
-
     setAutoCompleteItem()
 
     let inputRupiah = (val) => {
@@ -241,25 +283,49 @@
 
     let setPrice = (id) => {
         let totalItemRow = 0;
+        let totalOpRow = 0;
         let subtotal = 0;
+        let subtotalOp = 0;
         let total = 0;
         $(".item" + id).each(function(){
-            totalItemRow += inputRupiah($(this).val());
+            if($(this).val())
+                totalItemRow += inputRupiah($(this).val());
         });
         $(".equipment" + id).each(function(){
-            totalItemRow += inputRupiah($(this).val());
+            if($(this).val())
+                totalItemRow += inputRupiah($(this).val());
         });
+
+        $(".op" + id).each(function(){
+            if($(this).val())
+                totalOpRow += inputRupiah($(this).val());
+        });
+
         $('.price' + id).val(outputRupiah(totalItemRow))
+        $('.priceOp' + id).val(outputRupiah(totalOpRow))
 
         $(".price").each(function(){
             subtotal += inputRupiah($(this).val());
             total += inputRupiah($(this).val());
         });
 
+        $(".priceOp").each(function(){
+            if($(this).val())
+                subtotalOp += inputRupiah($(this).val());
+
+            if($(this).val())
+                total += inputRupiah($(this).val());
+        });
+
         if(subtotal && subtotal !== NaN)
             $('.subtotal').val(outputRupiah(subtotal))
 
+        if(subtotalOp && subtotalOp !== NaN) {
+            $('.subtotalOp').val(outputRupiah(subtotalOp))
+        }
+
         if($('.diskon').val()){
+            subtotal = subtotal + subtotalOp;
             let diskonTemp = subtotal * $('.diskon').val() / 100;
             total = total - diskonTemp;
         }
@@ -269,9 +335,9 @@
     }
 
     $('.diskon').on('keyup', function(){
-        let diskonTemp = inputRupiah($('.subtotal').val()) * $(this).val() / 100;
-        let total = inputRupiah($('.subtotal').val()) - diskonTemp;
-        console.log(total);
+        let subtotal = inputRupiah($('.subtotal').val()) + inputRupiah($('.subtotalOp').val())
+        let diskonTemp = subtotal * $(this).val() / 100;
+        let total = subtotal - diskonTemp;
         if(total && total !== NaN)
             $('.total').val(outputRupiah(total))
     })

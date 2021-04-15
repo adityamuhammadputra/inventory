@@ -188,7 +188,6 @@
             noSuggestionNotice: 'Sorry, no matching results',
         });
     };
-
     setAutoCompleteEquipment()
 
     let setAutoCompleteItem = () => {
@@ -218,7 +217,6 @@
             noSuggestionNotice: 'Sorry, no matching results',
         });
     }
-
     setAutoCompleteItem()
 
     let inputRupiah = (val) => {
@@ -241,16 +239,21 @@
         let subtotal = 0;
         let total = 0;
         $(".item" + id).each(function(){
-            totalItemRow += inputRupiah($(this).val());
+            if($(this).val())
+                totalItemRow += inputRupiah($(this).val());
         });
         $(".equipment" + id).each(function(){
-            totalItemRow += inputRupiah($(this).val());
+            if($(this).val())
+                totalItemRow += inputRupiah($(this).val());
         });
         $('.price' + id).val(outputRupiah(totalItemRow))
 
         $(".price").each(function(){
-            subtotal += inputRupiah($(this).val());
-            total += inputRupiah($(this).val());
+            if($(this).val())
+                subtotal += inputRupiah($(this).val());
+
+            if($(this).val())
+                total += inputRupiah($(this).val());
         });
 
         if(subtotal && subtotal !== NaN)
@@ -310,32 +313,32 @@
     });
 
     $(document).on('click', '.editTransaksi', function(){
-    let url =  $(this).data('url');
-    $.ajax({
-        url: url,
-        method : 'GET',
-        success: function(res) {
-            $('.card-form').slideDown();
-            for (var key in res.data)  {
-                if (!res.data.hasOwnProperty(key)){
-                    continue;
-                }
-                $("#" + key).val(res.data[key])
+        let url =  $(this).data('url');
+        $.ajax({
+            url: url,
+            method : 'GET',
+            success: function(res) {
+                $('.card-form').slideDown();
+                for (var key in res.data)  {
+                    if (!res.data.hasOwnProperty(key)){
+                        continue;
+                    }
+                    $("#" + key).val(res.data[key])
 
-                if($(".card-form select")[0])
-                    $("#" + key).val(res.data[key]).trigger('change')
-            };
+                    if($(".card-form select")[0])
+                        $("#" + key).val(res.data[key]).trigger('change')
+                };
 
 
-            $('.card-form').find('form').attr('action', res.action)
-            $('.card-form').find('form [name="_method"]').val('PATCH')
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-        },
-        error: function(error) {
-            console.log(error)
-        }
+                $('.card-form').find('form').attr('action', res.action)
+                $('.card-form').find('form [name="_method"]').val('PATCH')
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        })
     })
-})
 
     let checkVisibleNoreg = (column, value) => {
         $.ajax({

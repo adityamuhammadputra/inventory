@@ -46,8 +46,14 @@
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
-                            <textarea id="tugas" name="tugas" class="form-control" placeholder="Tugas Operator" required></textarea>
-                            <label for="tugas">Tugas</label>
+                            <select name="tugas" id="tugas" class="form-control select2" required>
+                                <option value="" selected disabled></option>
+                                <option value="Camerament">Camerament</option>
+                                <option value="Crew">Crew</option>
+                                <option value="SDE">SDE</option>
+                                <option value="Editor">Editor</option>
+                            </select>
+                            <label for="tugas">--Pilih Tugas--</label>
                         </div>
                         <div class="form-label-group col-md-6 mt-4">
                             <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>

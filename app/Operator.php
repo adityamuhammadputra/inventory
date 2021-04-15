@@ -13,6 +13,8 @@ class Operator extends Model
     /**
      * Get the user that owns the Operator
      *
+     * Camerament Crew SDE Editor
+     *
      */
     public function vendor()
     {
@@ -29,5 +31,15 @@ class Operator extends Model
     public function getHargaAttribute()
     {
         return outputRupiah($this->attributes['harga']);
+    }
+
+    public function scopeFiltered($query)
+    {
+        $query->when(request('q'), function ($query) {
+            $param = '%' . request('q') . '%';
+            $query->where('nama', 'like', $param)
+                ->orWhere('tugas', 'like', $param)
+                ->orWhere('vendor_nama', 'like', $param);
+        });
     }
 }

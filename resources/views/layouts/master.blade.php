@@ -59,21 +59,23 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="sidebar-item {{ (request()->is('operator') || request()->is('vendor') || request()->is('client')) ? 'active' : '' }}">
+                    <li class="sidebar-item {{ (request()->is('operator') || request()->is('vendor')) ? 'active' : '' }}">
                         <a href="#forms" data-toggle="collapse" class="sidebar-link collapsed">
                             <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Jasa</span>
                         </a>
-                        <ul id="forms" class="sidebar-dropdown list-unstyled collapse {{ (request()->is('operator') || request()->is('vendor') || request()->is('client')) ? 'show' : '' }}" data-parent="#sidebar">
+                        <ul id="forms" class="sidebar-dropdown list-unstyled collapse {{ (request()->is('operator') || request()->is('vendor')) ? 'show' : '' }}" data-parent="#sidebar">
                             <li class="sidebar-item {{ (request()->is('operator')) ? 'active' : '' }}">
                                 <a class="sidebar-link" href="/operator">Operator</a>
                             </li>
                             <li class="sidebar-item {{ (request()->is('vendor')) ? 'active' : '' }}">
                                 <a class="sidebar-link" href="/vendor">Vendor Event</a>
                             </li>
-                            <li class="sidebar-item {{ (request()->is('client')) ? 'active' : '' }}">
-                                <a class="sidebar-link" href="/client">Client Rental</a>
-                            </li>
                         </ul>
+                    </li>
+                    <li class="sidebar-item {{ (request()->is('client')) ? 'active' : '' }}">
+                        <a class="sidebar-link" href="/client">
+                            <i class="align-middle" data-feather="user-check"></i> <span class="align-middle">Client Rental</span>
+                        </a>
                     </li>
 
                     <li class="sidebar-header">

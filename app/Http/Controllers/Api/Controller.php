@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Barang;
 use App\Client;
+use App\Operator;
 use App\Rental;
 use Exception;
 use GuzzleHttp\RetryMiddleware;
@@ -75,6 +76,23 @@ class Controller extends BaseController
                 'data' => $c,
                 // 'value' => "$c->kode - $c->jenis - $c->harga",
                 'value' => "$c->kode",
+            ];
+        endforeach;
+
+        $result = ['suggestions' => $data];
+
+        return response()->json($result, 200);
+    }
+
+    public function lookupOperator(Request $request)
+    {
+        $operator = Operator::filtered()->get();
+
+        $data = [];
+        foreach($operator as $c) :
+            $data [] = [
+                'data' => $c,
+                'value' => "$c->nama - $c->tugas",
             ];
         endforeach;
 

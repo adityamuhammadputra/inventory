@@ -54,6 +54,8 @@ class JasaController extends Controller
         try {
             if($request->model == 'OP') :
                 $table = 'tableOperator';
+                $vendor = Vendor::find($request->vendor_id);
+                $input['vendor_nama'] = $vendor->nama ?? '';
                 $data = Operator::create($input);
             elseif($request->model == 'VE') :
                 $table = 'tableVendor';

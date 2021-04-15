@@ -86,29 +86,57 @@
                                     <td>1. Camerament</td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteItem item1" dataid="1" name="item[1][1]">
+                                            <input type="text" class="form-control autoCompleteOp op1" dataid="1" name="item[1][1]">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <a class="addItem" data-id="1"><span class="fa fa-plus"></span></a>
+                                                    <a class="addOp" data-id="1"><span class="fa fa-plus"></span></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td><input type="text" class="form-control rupiah price price1 text-right" name="price[1]" tabindex="20054"></td>
+                                    <td><input type="text" class="form-control rupiah priceOp priceOp1 text-right" name="priceOp[1]" tabindex="20054"></td>
                                 </tr>
                                 <tr id="2">
-                                    <td>1. Camerament</td>
+                                    <td>2. Crew</td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteItem item1" dataid="2" name="item[2][1]">
+                                            <input type="text" class="form-control autoCompleteOp op2" dataid="2" name="item[2][1]">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <a class="addItem" data-id="1"><span class="fa fa-plus"></span></a>
+                                                    <a class="addOp" data-id="2"><span class="fa fa-plus"></span></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td><input type="text" class="form-control rupiah price price1 text-right" name="price[2]" tabindex="20055"></td>
+                                    <td><input type="text" class="form-control rupiah priceOp priceOp2 text-right" name="priceOp[2]" tabindex="20055"></td>
+                                </tr>
+                                <tr id="3">
+                                    <td>3. SDE</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control autoCompleteOp op3" dataid="3" name="item[3][1]">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <a class="addOp" data-id="3"><span class="fa fa-plus"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><input type="text" class="form-control rupiah priceOp priceOp3 text-right" name="priceOp[3]" tabindex="20055"></td>
+                                </tr>
+                                <tr id="4">
+                                    <td>4. Editor</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control autoCompleteOp op4" dataid="4" name="item[4][1]">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <a class="addOp" data-id="4"><span class="fa fa-plus"></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><input type="text" class="form-control rupiah priceOp priceOp4 text-right" name="priceOp[4]" tabindex="20055"></td>
                                 </tr>
                             </tbody>
 
@@ -121,7 +149,9 @@
                                     <td colspan="2" class="">
                                         <b>Sub Total Operator</b>
                                     </td>
-                                    <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="sub_total" required></td>
+                                    <td colspan="2">
+                                        <input type="text" class="form-control rupiah subtotalOp text-right" name="sub_total_op">
+                                    </td>
                                 </tr>
                             </tfoot>
                         </table>
