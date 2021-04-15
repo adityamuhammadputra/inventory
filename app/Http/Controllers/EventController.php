@@ -37,6 +37,7 @@ class EventController extends Controller
             $event['sub_total'] = inputRupiah($request->sub_total);
             $event['total'] = inputRupiah($request->total);
             $event['user_id'] = userId();
+            $event['status'] = 1;
             return $request;
             $eventDb = Event::create($event);
             return $eventDb;

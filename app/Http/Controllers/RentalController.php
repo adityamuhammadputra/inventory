@@ -37,6 +37,7 @@ class RentalController extends Controller
             $rental['sub_total'] = inputRupiah($request->sub_total);
             $rental['total'] = inputRupiah($request->total);
             $rental['user_id'] = userId();
+            $rental['status'] = 1;
             $rentalDb = Rental::create($rental);
 
             $idRentalBarang = [];
