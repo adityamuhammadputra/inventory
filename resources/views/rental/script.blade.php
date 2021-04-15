@@ -107,26 +107,40 @@
                             </div>\
                         </td>\
                         <td><input type="text" class="form-control price price' + countRow + ' rupiah text-right" name="price[' + countRow + ']" tabindex="2001"></td>\
-                        <td class="text-center"><a class="removeEquipment"><i class="fa fa-trash"></i></a></td>\
+                        <td class="text-center"><a class="removeEquipment" data-id="' + countRow + '"><i class="fa fa-trash"></i></a></td>\
                     </tr>'
         $(this).closest('table').append(html);
         setAutoCompleteEquipment()
         setAutoCompleteItem()
     })
 
-    $(document).on('click', '.removeEquipment', function(){
-        $(this).closest('tr').remove();
-    })
+
 
     var countRow = 1;
     $(document).on('click', '.addItem', function(){
         countRow++
         let idRow = $(this).data('id');
-        let html = '<input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRow+']"></a>';
+        // <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRow+']">
+        let html = '<div class="input-group">\
+                        <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item[' + idRow + '][' + countRow + ']">\
+                        <div class="input-group-prepend">\
+                            <div class="input-group-text">\
+                                <a class="removeItem" data-id="' + idRow + '"><span class="fa fa-trash"></span></a>\
+                            </div>\
+                        </div>\
+                    </div>';
         $(this).closest('td').append(html);
         setAutoCompleteItem()
     })
 
+    $(document).on('click', '.removeEquipment', function(){
+        $(this).closest('tr').remove();
+        setPrice($(this).data('id'));
+    })
+    $(document).on('click', '.removeItem', function(){
+        $(this).closest('.input-group').remove();
+        setPrice($(this).data('id'));
+    })
 
     $('.autocompleteNama').autocomplete({
         lookup: function (query, done) {
