@@ -93,8 +93,9 @@
     var countRow = 1;
     $("#addEquipment").on('click', function(){
         countRow++
+        valueDay = $('.day1').val();
         let html = '<tr id="'+countRow+'">\
-                        <td>' + countRow + '</td>\
+                        <td class="text-center">' + countRow + '</td>\
                         <td><input type="text" class="form-control autoCompleteEquipment equipment' + countRow + '" dataid="' + countRow + '" name="equpment[' + countRow + ']"></td>\
                         <td>\
                             <div class="input-group">\
@@ -106,10 +107,14 @@
                                 </div>\
                             </div>\
                         </td>\
+                        <td>\
+                            <input type="number" class="form-control day day'+countRow+' text-center valid" name="day['+countRow+']" dataid="'+countRow+'" tabindex="2000" value="'+valueDay+'" aria-invalid="false">\
+                        </td>\
                         <td><input type="text" class="form-control price price' + countRow + ' rupiah text-right" name="price[' + countRow + ']" tabindex="2001"></td>\
                         <td class="text-center"><a class="removeEquipment" data-id="' + countRow + '"><i class="fa fa-trash"></i></a></td>\
                     </tr>'
         $(this).closest('table').append(html);
+        $('input[name="equpment[' + countRow + ']"]').focus();
         setAutoCompleteEquipment()
         setAutoCompleteItem()
     })
@@ -119,7 +124,7 @@
         countRow++
         let idRow = $(this).data('id');
         // <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRow+']">
-        let html = '<tr></t><div class="input-group">\
+        let html = '<div class="input-group">\
                         <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item[' + idRow + '][' + countRow + ']">\
                         <div class="input-group-prepend">\
                             <div class="input-group-text">\
@@ -128,6 +133,7 @@
                         </div>\
                     </div>';
         $(this).closest('td').append(html);
+        $('input[name="item[' + idRow + '][' + countRow + ']"]').focus();
         setAutoCompleteItem()
     })
 
@@ -178,7 +184,7 @@
             },
             onSelect: function (suggestion, that) {
                 let data = suggestion.data;
-                $(that.element).val(data.kode + ' - ' + data.jenis + ' - ' + data.harga);
+                $(that.element).val(data.kode + ' - ' + data.jenis + ' ' + data.merk + ' - ' + data.harga);
                 let $this = that.element.attributes;
                 let id = $this.dataid.value;
                 setPrice(id);
@@ -207,7 +213,7 @@
             },
             onSelect: function (suggestion, that) {
                 let data = suggestion.data;
-                $(that.element).val(data.kode + ' - ' + data.jenis + ' - ' + data.harga);
+                $(that.element).val(data.kode + ' - ' + data.jenis + ' ' + data.merk + ' - ' + data.harga);
                 let $this = that.element.attributes;
                 let id = $this.dataid.value;
                 setPrice(id);
@@ -246,6 +252,12 @@
             if($(this).val())
                 totalItemRow += inputRupiah($(this).val());
         });
+
+        $(".day" + id).each(function(){
+            if($(this).val())
+                totalItemRow = totalItemRow * $(this).val();
+        });
+
         $('.price' + id).val(outputRupiah(totalItemRow))
 
         $(".price").each(function(){
@@ -256,6 +268,7 @@
                 total += inputRupiah($(this).val());
         });
 
+
         if(subtotal && subtotal !== NaN)
             $('.subtotal').val(outputRupiah(subtotal))
 
@@ -263,6 +276,7 @@
             let diskonTemp = subtotal * $('.diskon').val() / 100;
             total = total - diskonTemp;
         }
+
 
         if(total && total !== NaN)
             $('.total').val(outputRupiah(total))
@@ -274,6 +288,12 @@
         console.log(total);
         if(total && total !== NaN)
             $('.total').val(outputRupiah(total))
+    })
+
+    $(document).on('keyup', '.day', function(){
+        let id = $(this).attr('dataid');
+        console.log(id);
+        setPrice(id)
     })
 
     $('#checkMaster').on('change', function(){
@@ -298,12 +318,16 @@
                     loadingIconButton($('#submit'))
                 },
                 success: function(res) {
-                    table.api().ajax.reload()
-                    loadingIconButton($('#submit'), reset = true)
-                    toastr.info('Rental Berhasil disimpan')
-                    $('#form-submit')[0].reset()
-                    $('.card-form').slideUp();
-                    $('#noreg').val(res.noReg);
+                    if(res.url !== null) {
+                        toastr.info('Rental Berhasil diperbaharui')
+                    } else {
+                        table.api().ajax.reload()
+                        loadingIconButton($('#submit'), reset = true)
+                        toastr.info('Rental Berhasil disimpan')
+                        $('#form-submit')[0].reset()
+                        $('.card-form').slideUp();
+                        $('#noreg').val(res.noReg);
+                    }
                 },
                 error: function(res) {
                     console.log(res);
@@ -313,33 +337,6 @@
         }
     });
 
-    $(document).on('click', '.editTransaksi', function(){
-        let url =  $(this).data('url');
-        $.ajax({
-            url: url,
-            method : 'GET',
-            success: function(res) {
-                $('.card-form').slideDown();
-                for (var key in res.data)  {
-                    if (!res.data.hasOwnProperty(key)){
-                        continue;
-                    }
-                    $("#" + key).val(res.data[key])
-
-                    if($(".card-form select")[0])
-                        $("#" + key).val(res.data[key]).trigger('change')
-                };
-
-
-                $('.card-form').find('form').attr('action', res.action)
-                $('.card-form').find('form [name="_method"]').val('PATCH')
-                $("html, body").animate({ scrollTop: 0 }, "slow");
-            },
-            error: function(error) {
-                console.log(error)
-            }
-        })
-    })
 
     let checkVisibleNoreg = (column, value) => {
         $.ajax({
@@ -378,6 +375,33 @@
         that.find('span').removeClass('fa-check-circle').addClass('spinner-border spinner-border-sm')
     }
 
+    // $(document).on('click', '.editTransaksi', function(){
+    //     let url =  $(this).data('url');
+    //     $.ajax({
+    //         url: url,
+    //         method : 'GET',
+    //         success: function(res) {
+    //             $('.card-form').slideDown();
+    //             for (var key in res.data)  {
+    //                 if (!res.data.hasOwnProperty(key)){
+    //                     continue;
+    //                 }
+    //                 $("#" + key).val(res.data[key])
+
+    //                 if($(".card-form select")[0])
+    //                     $("#" + key).val(res.data[key]).trigger('change')
+    //             };
+
+
+    //             $('.card-form').find('form').attr('action', res.action)
+    //             $('.card-form').find('form [name="_method"]').val('PATCH')
+    //             $("html, body").animate({ scrollTop: 0 }, "slow");
+    //         },
+    //         error: function(error) {
+    //             console.log(error)
+    //         }
+    //     })
+    // })
 
 
 </script>

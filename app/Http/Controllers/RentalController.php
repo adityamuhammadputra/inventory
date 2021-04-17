@@ -32,69 +32,20 @@ class RentalController extends Controller
 
     public function store(Request $request)
     {
+        $rental = $request->only('noreg', 'nama', 'kontak', 'alamat', 'diskon');
+        $rental['id'] = uuid();
+        $rental['diskon'] = $request->diskon ?? 0;
+        $rental['start'] = dateInput($request->start);
+        $rental['end'] = dateInput($request->end);
+        $rental['sub_total'] = inputRupiah($request->sub_total);
+        $rental['total'] = inputRupiah($request->total);
+        $rental['user_id'] = userId();
+        $rental['status'] = 1;
+
         DB::beginTransaction();
-            $rental = $request->only('noreg', 'nama', 'kontak', 'alamat', 'diskon');
-            $rental['id'] = uuid();
-            $rental['start'] = dateInput($request->start);
-            $rental['end'] = dateInput($request->end);
-            $rental['sub_total'] = inputRupiah($request->sub_total);
-            $rental['total'] = inputRupiah($request->total);
-            $rental['user_id'] = userId();
-            $rental['status'] = 1;
             $rentalDb = Rental::create($rental);
 
-            $idRentalBarang = [];
-            if($request->equpment) :
-                $barangs = [];
-                foreach($request->equpment as $key => $barang) :
-                    $barangDb = Barang::where('kode', explode(' - ', $barang)[0])->first();
-                    $barang_id = $barangDb->id;
-                    $barang_name = $barangDb->merk;
-                    $barang_temp = inputRupiah($barangDb->harga);
-                    $barang_harga = inputRupiah(explode(' - ', $barang)[2]);
-                    $uuid = uuid();
-                    $idRentalBarang [$key] = [$key => $uuid];
-                    $barangs [] = [
-                        'id' => $uuid,
-                        'rental_id' => $rentalDb->id,
-                        'barang_id' => $barang_id,
-                        'barang_name' => $barang_name,
-                        'barang_temp' => $barang_temp,
-                        'barang_harga' => $barang_harga,
-                        'barang_total' => inputRupiah($request->price[$key]),
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now()
-                    ];
-                endforeach;
-                RentalBarang::insert($barangs);
-            endif;
-
-            if($request->item) :
-                $items = [];
-                foreach($request->item as $key => $item) :
-                    foreach($item as $subKey => $subItem) :
-                        if(!$request->item[$key][$subKey] == null) :
-                            $barangDb = Barang::where('kode', explode(' - ', $subItem)[0])->first();
-                            $barang_id = $barangDb->id;
-                            $barang_name = $barangDb->merk;
-                            $barang_temp = inputRupiah($barangDb->harga);
-                            $barang_harga = inputRupiah(explode(' - ', $subItem)[2]);
-                            $items [] = [
-                                'id' => uuid(),
-                                'rental_barang_id' => $idRentalBarang[$key][$key],
-                                'barang_id' => $barang_id,
-                                'barang_name' => $barang_name,
-                                'barang_temp' => $barang_temp,
-                                'barang_harga' => $barang_harga,
-                                'created_at' => Carbon::now(),
-                                'updated_at' => Carbon::now()
-                            ];
-                        endif;
-                    endforeach;
-                endforeach;
-                RentalBarangItem::insert($items);
-            endif;
-
+            $this->inputBarang($request, $rental);
 
             $phpWord = new \PhpOffice\PhpWord\PhpWord();
             $section = $phpWord->addSection();
@@ -117,9 +68,96 @@ class RentalController extends Controller
         $data = [
             'noReg' => getMaxRental(),
             'status' => 200,
+            'url' => null,
         ];
 
         return response()->json($data, 200);
+    }
+
+    public function update(Request $request, Rental $rental)
+    {
+        $inputRental = $request->only('noreg', 'nama', 'kontak', 'alamat', 'diskon');
+        $inputRental['diskon'] = $request->diskon ?? 0;
+        $inputRental['start'] = dateInput($request->start);
+        $inputRental['end'] = dateInput($request->end);
+        $inputRental['sub_total'] = inputRupiah($request->sub_total);
+        $inputRental['total'] = inputRupiah($request->total);
+        $inputRental['user_id'] = userId();
+        $inputRental['status'] = 1;
+
+        DB::beginTransaction();
+            $rental->update($inputRental);
+            RentalBarang::where('rental_id', $rental->id)->delete();
+            RentalBarangItem::where('rental_barang_id', $rental->id)->delete();
+            $this->inputBarang($request, $rental);
+        DB::commit();
+
+        $data = [
+            'noReg' => getMaxRental(),
+            'status' => 200,
+            'url' => '/rental',
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function inputBarang($request, $rentalDb)
+    {
+        $idRentalBarang = [];
+        if($request->equpment) :
+            $barangs = [];
+            foreach($request->equpment as $key => $barang) :
+                $barangDb = Barang::where('kode', explode(' - ', $barang)[0])->first();
+                $barang_id = $barangDb->id;
+                $barang_name = $barangDb->merk . ' - ' .$barangDb->merk . ' - ' .$barangDb->merk;
+                $barang_temp = inputRupiah($barangDb->harga);
+                $barang_harga = inputRupiah(explode(' - ', $barang)[2]);
+                $uuid = uuid();
+                $idRentalBarang [$key] = [$key => $uuid];
+                $barangs [] = [
+                    'id' => $uuid,
+                    'rental_id' => $rentalDb->id,
+                    'barang_id' => $barang_id,
+                    'barang_name' => $barang_name,
+                    'barang_temp' => $barang_temp,
+                    'barang_harga' => $barang_harga,
+                    'barang_qty' => $request->day[$key],
+                    'barang_total' => $barang_harga * $request->day[$key],
+                    'barang_item_total' => inputRupiah($request->price[$key]),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ];
+            endforeach;
+            RentalBarang::insert($barangs);
+        endif;
+
+        if($request->item) :
+            $items = [];
+            foreach($request->item as $key => $item) :
+                foreach($item as $subKey => $subItem) :
+                    if(!$request->item[$key][$subKey] == null) :
+                        $barangDb = Barang::where('kode', explode(' - ', $subItem)[0])->first();
+                        $barang_id = $barangDb->id;
+                        $barang_name = $barangDb->merk . ' - ' .$barangDb->merk . ' - ' .$barangDb->merk;
+                        $barang_temp = inputRupiah($barangDb->harga);
+                        $barang_harga = inputRupiah(explode(' - ', $subItem)[2]);
+                        $items [] = [
+                            'id' => uuid(),
+                            'rental_barang_id' => $idRentalBarang[$key][$key],
+                            'barang_id' => $barang_id,
+                            'barang_name' => $barang_name,
+                            'barang_temp' => $barang_temp,
+                            'barang_harga' => $barang_harga,
+                            'barang_qty' => $request->day[$key],
+                            'barang_total' => $barang_harga * $request->day[$key],
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ];
+                    endif;
+                endforeach;
+            endforeach;
+            RentalBarangItem::insert($items);
+        endif;
     }
 
 
