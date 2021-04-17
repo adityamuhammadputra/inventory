@@ -21,7 +21,10 @@ class RentalController extends Controller
 
         $data = (object) [
             'noReg' => getMaxRental(),
-            'dateNow' => Carbon::now()->format('d F Y')
+            'dateNow' => Carbon::now()->format('d F Y'),
+            'method' => 'POST',
+            'action' => "/rental",
+            'event' => null,
         ];
 
         return view('rental.index', compact('data'));
@@ -70,24 +73,24 @@ class RentalController extends Controller
                 $items = [];
                 foreach($request->item as $key => $item) :
                     foreach($item as $subKey => $subItem) :
-                        $barangDb = Barang::where('kode', explode(' - ', $subItem)[0])->first();
-                        $barang_id = $barangDb->id;
-                        $barang_name = $barangDb->merk;
-                        $barang_temp = inputRupiah($barangDb->harga);
-                        $barang_harga = inputRupiah(explode(' - ', $subItem)[2]);
-                        $items [] = [
-                            'id' => uuid(),
-                            'rental_barang_id' => $idRentalBarang[$key][$key],
-                            'barang_id' => $barang_id,
-                            'barang_name' => $barang_name,
-                            'barang_temp' => $barang_temp,
-                            'barang_harga' => $barang_harga,
-                            'created_at' => Carbon::now(),
-                            'updated_at' => Carbon::now()
-                        ];
-
+                        if(!$request->item[$key][$subKey] == null) :
+                            $barangDb = Barang::where('kode', explode(' - ', $subItem)[0])->first();
+                            $barang_id = $barangDb->id;
+                            $barang_name = $barangDb->merk;
+                            $barang_temp = inputRupiah($barangDb->harga);
+                            $barang_harga = inputRupiah(explode(' - ', $subItem)[2]);
+                            $items [] = [
+                                'id' => uuid(),
+                                'rental_barang_id' => $idRentalBarang[$key][$key],
+                                'barang_id' => $barang_id,
+                                'barang_name' => $barang_name,
+                                'barang_temp' => $barang_temp,
+                                'barang_harga' => $barang_harga,
+                                'created_at' => Carbon::now(),
+                                'updated_at' => Carbon::now()
+                            ];
+                        endif;
                     endforeach;
-
                 endforeach;
                 RentalBarangItem::insert($items);
             endif;
@@ -126,13 +129,11 @@ class RentalController extends Controller
 
         return DataTables::of($rental)
             ->addColumn('action', function ($data) {
-                return '<a href="'.$data->barcode.'" target="_blank"
-                            class="text-info"><i class="fa fa-print"></i>
+                return '<a href="'.$data->id.'" target="_blank"
+                            class="text-primary"><i class="fa fa-print"></i>
                         </a>
-                        <a data-id="' . $data->id . '"
-                            data-title="' . $data->kode . '"
-                            data-url="/rental/' . $data->id . '/edit"
-                            class="text-warning editTransaksi"><i class="fa fa-edit"></i>
+                        <a href="/rental/'.$data->id.'/edit"
+                            class="text-info"><i class="fa fa-info-circle"></i>
                         </a>
                         <a data-id="' . $data->id . '"
                             data-title="' . $data->kode . '"
@@ -150,14 +151,27 @@ class RentalController extends Controller
             ->make(true);
     }
 
+    public function show($id)
+    {
+        $event = Rental::with('rentalBarangs')
+                        ->findOrFail($id);
+        return $event;
+    }
+
     public function edit($id)
     {
-        $rental = Rental::with('rentalBarangs')->findOrFail($id);
-        $result = [
-            'data' => $rental,
-            'action' => "/event/{$rental->id}"
+        $rental = Rental::with('rentalBarangs')
+                        ->findOrFail($id);
+
+        $data = (object) [
+            'noReg' => $rental->noreg,
+            'dateNow' => $rental->start,
+            'method' => 'PATCH',
+            'action' => "/rental/$rental->id",
+            'rental' => $rental,
         ];
-        return response()->json($result);
+
+        return view('rental.edit', compact('data'));
     }
 
     public function destroy(Rental $rental)

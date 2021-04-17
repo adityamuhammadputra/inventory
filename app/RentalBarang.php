@@ -9,7 +9,7 @@ class RentalBarang extends Model
     protected $guarded = [''];
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $appends = ['count_item'];
+    protected $appends = ['count_item', 'equpment'];
 
     public function rentalBarangItems()
     {
@@ -19,6 +19,16 @@ class RentalBarang extends Model
     public function getCountItemAttribute()
     {
         return $this->rentalBarangItems->count();
+    }
+
+    public function getEqupmentAttribute()
+    {
+        return $this->barang->kode . ' - ' . $this->barang->jenis . ' - ' .$this->barang->harga;
+    }
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class);
     }
 
 }

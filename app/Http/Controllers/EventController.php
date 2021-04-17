@@ -23,7 +23,10 @@ class EventController extends Controller
 
         $data = (object) [
             'noReg' => getMaxEvent(),
-            'dateNow' => Carbon::now()->format('d F Y')
+            'dateNow' => Carbon::now()->format('d F Y'),
+            'method' => 'POST',
+            'action' => "/event",
+            'event' => null,
         ];
 
         return view('event.index', compact('data'));
@@ -47,30 +50,30 @@ class EventController extends Controller
                 $ops = [];
                 foreach($request->op as $keyOp => $op) :
                     foreach($op as $subKeyOp => $subOp) :
-                        $opDb = Operator::where('kode', explode(' - ', $subOp)[0])->first();
-                        $op_id = $opDb->id;
-                        $op_name = $opDb->nama;
-                        $op_tugas = $opDb->tugas;
-                        $op_temp = inputRupiah($opDb->harga);
-                        $op_harga = inputRupiah(explode(' - ', $subOp)[2]);
-                        $uuid = uuid();
-                        $ops [] = [
-                            'id' => $uuid,
-                            'event_id' => $eventDb->id,
-                            'operator_id' => $op_id,
-                            'operator_nama' => $op_name,
-                            'operator_tugas' => $op_tugas,
-                            'operator_temp' => $op_temp,
-                            'operator_harga' => $op_harga,
-                            'created_at' => Carbon::now(),
-                            'updated_at' => Carbon::now()
-                        ];
-                        endforeach;
+                        if(!$request->op[$keyOp][$subKeyOp] == null) :
+                            $opDb = Operator::where('kode', explode(' - ', $subOp)[0])->first();
+                            $op_id = $opDb->id;
+                            $op_name = $opDb->nama;
+                            $op_tugas = $request->opTugas[$keyOp];
+                            $op_temp = inputRupiah($opDb->harga);
+                            $op_harga = inputRupiah($request->priceOp[$keyOp]);
+                            $uuid = uuid();
+                            $ops [] = [
+                                'id' => $uuid,
+                                'event_id' => $eventDb->id,
+                                'operator_id' => $op_id,
+                                'operator_nama' => $op_name,
+                                'operator_tugas' => $op_tugas,
+                                'operator_temp' => $op_temp,
+                                'operator_harga' => $op_harga,
+                                'created_at' => Carbon::now(),
+                                'updated_at' => Carbon::now()
+                            ];
+                        endif;
+                    endforeach;
                 endforeach;
                 EventOperator::insert($ops);
             endif;
-
-
 
             $idEventOperator = [];
             if($request->equpment) :
@@ -102,24 +105,24 @@ class EventController extends Controller
                 $items = [];
                 foreach($request->item as $key => $item) :
                     foreach($item as $subKey => $subItem) :
-                        $barangDb = Barang::where('kode', explode(' - ', $subItem)[0])->first();
-                        $barang_id = $barangDb->id;
-                        $barang_name = $barangDb->merk;
-                        $barang_temp = inputRupiah($barangDb->harga);
-                        $barang_harga = inputRupiah(explode(' - ', $subItem)[2]);
-                        $items [] = [
-                            'id' => uuid(),
-                            'event_barang_id' => $idEventOperator[$key][$key],
-                            'barang_id' => $barang_id,
-                            'barang_name' => $barang_name,
-                            'barang_temp' => $barang_temp,
-                            'barang_harga' => $barang_harga,
-                            'created_at' => Carbon::now(),
-                            'updated_at' => Carbon::now()
-                        ];
-
+                        if(!$request->item[$key][$subKey] == null) :
+                            $barangDb = Barang::where('kode', explode(' - ', $subItem)[0])->first();
+                            $barang_id = $barangDb->id;
+                            $barang_name = $barangDb->merk;
+                            $barang_temp = inputRupiah($barangDb->harga);
+                            $barang_harga = inputRupiah(explode(' - ', $subItem)[2]);
+                            $items [] = [
+                                'id' => uuid(),
+                                'event_barang_id' => $idEventOperator[$key][$key],
+                                'barang_id' => $barang_id,
+                                'barang_name' => $barang_name,
+                                'barang_temp' => $barang_temp,
+                                'barang_harga' => $barang_harga,
+                                'created_at' => Carbon::now(),
+                                'updated_at' => Carbon::now()
+                            ];
+                        endif;
                     endforeach;
-
                 endforeach;
                 EventBarangItem::insert($items);
             endif;
@@ -150,20 +153,41 @@ class EventController extends Controller
         return response()->json($data, 200);
     }
 
+    public function edit($id)
+    {
+        $event = Event::with('eventOperator', 'eventBarangs')
+                        ->findOrFail($id);
+
+        $data = (object) [
+            'noReg' => $event->noreg,
+            'dateNow' => $event->date,
+            'method' => 'PATCH',
+            'action' => "/event/$event->id",
+            'event' => $event,
+        ];
+
+        return view('event.edit', compact('data'));
+    }
+
+    public function show($id)
+    {
+        $event = Event::with('eventOperator', 'eventBarangs')
+                        ->findOrFail($id);
+        return $event;
+    }
+
 
     public function dataTable(Request $request)
     {
-        $rental = Event::with('eventBarangs')->filtered();
+        $event = Event::with('eventBarangs')->filtered();
 
-        return DataTables::of($rental)
+        return DataTables::of($event)
             ->addColumn('action', function ($data) {
-                return '<a href="'.$data->barcode.'" target="_blank"
-                            class="text-info"><i class="fa fa-print"></i>
+                return '<a href="'.$data->id.'" target="_blank"
+                            class="text-primary"><i class="fa fa-print"></i>
                         </a>
-                        <a data-id="' . $data->id . '"
-                            data-title="' . $data->kode . '"
-                            data-url="/api/v1/barang/' . $data->id . '"
-                            class="text-warning editData"><i class="fa fa-edit"></i>
+                        <a href="/event/'.$data->id.'/edit"
+                            class="text-info"><i class="fa fa-info-circle"></i>
                         </a>
                         <a data-id="' . $data->id . '"
                             data-title="' . $data->kode . '"

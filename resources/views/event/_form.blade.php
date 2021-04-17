@@ -1,6 +1,6 @@
-<form method="POST" action="/event" class="form form-horizontal" id="form-submit">
+<form method="POST" action="{{ $data->action }}" class="form form-horizontal" id="form-submit">
     @csrf
-    @method('POST')
+    @method($data->method)
     <div class="card">
         <div class="card-header">
             Form Input
@@ -25,25 +25,25 @@
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <input type="text" id="vendor_name" name="vendor_name" class="form-control autocompleteVendor" placeholder="vendor_name" required>
+                            <input type="text" id="vendor_name" name="vendor_name" class="form-control autocompleteVendor" placeholder="vendor_name" required value="{{ $data->event->vendor_name ?? '' }}">
                             <label for="vendor_name">Vendor Name</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <input type="text" id="client_name" name="client_name" class="form-control autocompleteNama" placeholder="Client Name" required>
+                            <input type="text" id="client_name" name="client_name" class="form-control autocompleteNama" placeholder="Client Name" required value="{{ $data->event->client_name ?? '' }}">
                             <label for="client_name">Client Name</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <textarea id="name" name="name" class="form-control" placeholder="Event Name" required></textarea>
+                            <textarea id="name" name="name" class="form-control" placeholder="Event Name" required>{{ $data->event->name ?? '' }}</textarea>
                             <label for="name">Event Name</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <textarea id="location" name="location" class="form-control" placeholder="Event Location" required></textarea>
+                            <textarea id="location" name="location" class="form-control" placeholder="Event Location" required>{{ $data->event->location ?? '' }}</textarea>
                             <label for="location">Event Location</label>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             <label for="date">Event Date</label>
                         </div>
                         <div class="form-label-group col-md-3">
-                            <input type="time" id="time" name="time" class="form-control" placeholder="Event Time" required>
+                            <input type="time" id="time" name="time" class="form-control" placeholder="Event Time" required value="{{ $data->event->time ?? '' }}">
                             <label for="time">Event Time</label>
                         </div>
                     </div>
@@ -82,8 +82,32 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {{-- @if (count($data->event->eventOperator) > 0 && $data->method == 'PATCH')
+                                    @foreach ($data->event->eventOperator as $key => $item)
+                                    <tr id="{{ $item->ids }}">
+                                        <td>
+                                            {{ $item->ids }}. {{ $item->operator_tugas }}
+                                            <input type="hidden" class="form-control" dataid="{{ $item->ids }}" name="opTugas[{{ $item->ids }}]" value="Camerament">
+                                        </td>
+                                        <td>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control autoCompleteOp op{{ $item->ids }}" dataid="{{ $item->ids }}" name="op[{{ $item->ids }}][{{ $key }}]">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <a class="addOp" data-id="{{ $item->ids }}"><span class="fa fa-plus"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><input type="text" class="form-control rupiah priceOp priceOp{{ $item->ids }} text-right" name="priceOp[{{ $item->ids }}]" tabindex="20054"></td>
+                                    </tr>
+                                    @endforeach
+                                @endif --}}
                                 <tr id="1">
-                                    <td>1. Camerament</td>
+                                    <td>
+                                        1. Camerament
+                                        <input type="hidden" class="form-control" dataid="1" name="opTugas[1]" value="Camerament">
+                                    </td>
                                     <td>
                                         <div class="input-group">
                                             <input type="text" class="form-control autoCompleteOp op1" dataid="1" name="op[1][1]">
@@ -97,7 +121,10 @@
                                     <td><input type="text" class="form-control rupiah priceOp priceOp1 text-right" name="priceOp[1]" tabindex="20054"></td>
                                 </tr>
                                 <tr id="2">
-                                    <td>2. Crew</td>
+                                    <td>
+                                        2. Crew
+                                        <input type="hidden" class="form-control" dataid="1" name="opTugas[2]" value="Crew">
+                                    </td>
                                     <td>
                                         <div class="input-group">
                                             <input type="text" class="form-control autoCompleteOp op2" dataid="2" name="op[2][1]">
@@ -111,7 +138,10 @@
                                     <td><input type="text" class="form-control rupiah priceOp priceOp2 text-right" name="priceOp[2]" tabindex="20055"></td>
                                 </tr>
                                 <tr id="3">
-                                    <td>3. SDE</td>
+                                    <td>
+                                        3. SDE
+                                        <input type="hidden" class="form-control" dataid="1" name="opTugas[3]" value="SDE">
+                                    </td>
                                     <td>
                                         <div class="input-group">
                                             <input type="text" class="form-control autoCompleteOp op3" dataid="3" name="op[3][1]">
@@ -125,7 +155,10 @@
                                     <td><input type="text" class="form-control rupiah priceOp priceOp3 text-right" name="priceOp[3]" tabindex="20055"></td>
                                 </tr>
                                 <tr id="4">
-                                    <td>4. Editor</td>
+                                    <td>
+                                        4. Editor
+                                        <input type="hidden" class="form-control" dataid="1" name="opTugas[4]" value="Editor">
+                                    </td>
                                     <td>
                                         <div class="input-group">
                                             <input type="text" class="form-control autoCompleteOp op4" dataid="4" name="op[4][1]">
@@ -183,6 +216,31 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (isset($data->event->eventBarangs) && count($data->event->eventBarangs) > 0 && $data->method == 'PATCH')
+                                @foreach ($data->event->eventBarangs as $key => $barang)
+                                @php $key = $key+1; @endphp
+                                <tr id="{{ $key }}">
+                                    <td>{{ $key }}</td>
+                                    <td>
+                                        <input type="text" class="form-control autoCompleteEquipment equipment{{ $key }}" dataid="{{ $key }}" name="equpment[{{ $key }}]" value="{{ $barang->equpment }}">
+                                    </td>
+                                    <td>
+                                        @foreach ($barang->eventBarangItems as $keyItem => $item)
+                                            <div class="input-group">
+                                                <input type="text" class="form-control autoCompleteItem item{{ $key }}" dataid="{{ $key }}" name="item[{{ $key }}][{{ $keyItem }}]" value="{{ $item->equpment }}">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <a class="addItem" data-id="{{ $key }}"><span class="fa fa-plus"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </td>
+                                    <td><input type="text" class="form-control rupiah price price1 text-right" name="price[{{ $key }}]" tabindex="2000" value="{{ $barang->barang_total }}"></td>
+                                    <td></td>
+                                </tr>
+                                @endforeach
+                                @else
                                 <tr id="1">
                                     <td>1</td>
                                     <td>
@@ -201,6 +259,7 @@
                                     <td><input type="text" class="form-control rupiah price price1 text-right" name="price[1]" tabindex="2000"></td>
                                     <td></td>
                                 </tr>
+                                @endif
                             </tbody>
 
                             <tfoot>
@@ -212,7 +271,7 @@
                                     <td colspan="3" class="">
                                         <b>Sub Total Equipment Item</b>
                                     </td>
-                                    <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="sub_total" required></td>
+                                    <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="sub_total" required value="{{ $data->event->sub_total ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td colspan="4" class="text-right"><br>
@@ -222,19 +281,24 @@
                                     <td colspan="3" class="">
                                         <b>Diskon(%)</b>
                                     </td>
-                                    <td colspan="2"><input type="text" class="form-control diskon text-right" name="diskon"></td>
+                                    <td colspan="2"><input type="text" class="form-control diskon text-right" name="diskon" value="{{ $data->event->diskon ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="">
                                         <b>TOTAL </b>
                                     </td>
-                                    <td colspan="2"><input type="text" class="form-control rupiah total text-right" name="total" readonly required></td>
+                                    <td colspan="2"><input type="text" class="form-control rupiah total text-right" name="total" readonly required value="{{ $data->event->total ?? '' }}"></td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
-                    <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/event"> Batal</a>
+                    @if ($data->method == 'PATCH')
+                        <button type="submit" class="btn btn-primary btn-square float-right" id="change"><span class="fa fa-check-circle"></span> Simpan Perubahan</button>
+                        <a class="btn btn-secondary btn-square float-right text-white mr-2" href="/event"> Batal</a>
+                    @else
+                        <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
+                        <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/event"> Batal</a>
+                    @endif
                 </div>
             </div>
         </div>

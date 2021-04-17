@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-12">
         {{-- @include('rental.filter') --}}
-        @include('event.form')
+        @include('event._form')
     </div>
 </div>
 

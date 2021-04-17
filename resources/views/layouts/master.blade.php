@@ -33,12 +33,12 @@
                     <li class="sidebar-header">
                         Transaksi
                     </li>
-                    <li class="sidebar-item {{ (request()->is('event')) ? 'active' : '' }}">
+                    <li class="sidebar-item {{ (request()->is('event*')) ? 'active' : '' }}">
                         <a class="sidebar-link" href="/event">
                             <i class="align-middle" data-feather="cast"></i> <span class="align-middle">Event</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{ (request()->is('rental')) ? 'active' : '' }}">
+                    <li class="sidebar-item {{ (request()->is('rental*')) ? 'active' : '' }}">
                         <a class="sidebar-link" href="/rental">
                             <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Rental</span>
                         </a>

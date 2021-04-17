@@ -6,16 +6,16 @@
         </a>
     </div>
     <div class="card-body card-form"
-        {{-- style="display: none;" --}}
+        style="{{ ($data->method == 'PATCH') ? '' : 'display: none;' }}"
         >
-        <form method="POST" action="/rental" class="form form-horizontal" id="form-submit">
+        <form method="POST" action="{{ $data->action }}" class="form form-horizontal" id="form-submit">
+            @csrf
+            @method($data->method)
             <div class="row">
                 <div class="col-md-3">
                     <img src="/img/operator.jpg" class="img img-reponsive" style="width: 100%">
                 </div>
                 <div class="col-md-8 offset-md-1 pt-1">
-                    @csrf
-                    @method('POST')
                     <div class="form-row">
                         <div class="form-label-group col-6">
                             <input type="text" id="noreg" name="noreg" class="form-control" placeholder="Noreg Rental" value="{{ $data->noReg }}" required>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <input type="text" id="nama" name="nama" class="form-control autocompleteNama" placeholder="Nama" required>
+                            <input type="text" id="nama" name="nama" class="form-control autocompleteNama" placeholder="Nama" required value="{{ $data->rental->nama ?? '' }}">
                             <label for="nama">Nama </label>
                         </div>
                         <div class="form-label-group col-6">
@@ -37,26 +37,26 @@
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <input type="number" id="kontak" name="kontak" class="form-control" placeholder="kontak" required readonly>
+                            <input type="number" id="kontak" name="kontak" class="form-control" placeholder="kontak" required readonly value="{{ $data->rental->kontak ?? '' }}">
                             <label for="kontak">Kontak</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <textarea id="alamat" name="alamat" class="form-control" placeholder="Alamat Client" required readonly></textarea>
+                            <textarea id="alamat" name="alamat" class="form-control" placeholder="Alamat Client" required readonly>{{ $data->rental->alamat ?? '' }}</textarea>
                             <label for="alamat">Alamat</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-5">
-                            <input type="text" id="start" name="start" class="form-control datepicker" placeholder="Rental Start" value="{{ $data->dateNow }}" required>
+                            <input type="text" id="start" name="start" class="form-control datepicker" placeholder="Rental Start" required value="{{ $data->dateNow }}">
                             <label for="start">Rental Date Start</label>
                         </div>
                         <div class="col-2 text-center">
                             <label class="">s/d</label>
                         </div>
                         <div class="form-label-group col-md-5">
-                            <input type="text" id="end" name="end" class="form-control datepicker" placeholder="Rental End" required>
+                            <input type="text" id="end" name="end" class="form-control datepicker" placeholder="Rental End" required value="{{ $data->rental->end ?? '' }}">
                             <label for="end">Rental Date End</label>
                         </div>
                     </div>
@@ -74,6 +74,31 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (isset($data->rental->rentalBarangs) && count($data->rental->rentalBarangs) > 0 && $data->method == 'PATCH')
+                                @foreach ($data->rental->rentalBarangs as $key => $barang)
+                                @php $key = $key+1; @endphp
+                                <tr id="{{ $key }}">
+                                    <td>{{ $key }}</td>
+                                    <td>
+                                        <input type="text" class="form-control autoCompleteEquipment equipment{{ $key }}" dataid="{{ $key }}" name="equpment[{{ $key }}]" value="{{ $barang->equpment }}">
+                                    </td>
+                                    <td>
+                                        @foreach ($barang->rentalBarangItems as $keyItem => $item)
+                                            <div class="input-group">
+                                                <input type="text" class="form-control autoCompleteItem item{{ $key }}" dataid="{{ $key }}" name="item[{{ $key }}][{{ $keyItem }}]" value="{{ $item->equpment }}">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <a class="addItem" data-id="{{ $key }}"><span class="fa fa-plus"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </td>
+                                    <td><input type="text" class="form-control rupiah price price1 text-right" name="price[{{ $key }}]" tabindex="2000" value="{{ $barang->barang_total }}"></td>
+                                    <td></td>
+                                </tr>
+                                @endforeach
+                                @else
                                 <tr id="1">
                                     <td>1</td>
                                     <td>
@@ -92,6 +117,7 @@
                                     <td><input type="text" class="form-control rupiah price price1 text-right" name="price[1]" tabindex="2000"></td>
                                     <td></td>
                                 </tr>
+                                @endif
                             </tbody>
 
                             <tfoot>
@@ -103,25 +129,30 @@
                                     <td colspan="3" class="">
                                         <b>Sub Total </b>
                                     </td>
-                                    <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="sub_total" required></td>
+                                    <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="sub_total" required value="{{ $data->rental->sub_total ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="">
                                         <b>Diskon(%)</b>
                                     </td>
-                                    <td colspan="2"><input type="text" class="form-control diskon text-right" name="diskon"></td>
+                                    <td colspan="2"><input type="text" class="form-control diskon text-right" name="diskon" value="{{ $data->rental->diskon ?? '' }}"></td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" class="">
                                         <b>TOTAL </b>
                                     </td>
-                                    <td colspan="2"><input type="text" class="form-control rupiah total text-right" name="total" readonly required></td>
+                                    <td colspan="2"><input type="text" class="form-control rupiah total text-right" name="total" readonly required value="{{ $data->rental->total ?? '' }}"></td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
+                    @if ($data->method == 'PATCH')
+                    <button type="submit" class="btn btn-primary btn-square float-right" id="change"><span class="fa fa-check-circle"></span> Simpan Perubahan</button>
+                    <a class="btn btn-secondary btn-square float-right text-white mr-2" href="/rental"> Batal</a>
+                    @else
                     <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
                     <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/rental"> Batal</a>
+                    @endif
                 </div>
             </div>
         </form>

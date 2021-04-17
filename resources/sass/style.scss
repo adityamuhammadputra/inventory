@@ -183,6 +183,9 @@ table tr td > input.form-control:focus, table tr td div > input.form-control:foc
     vertical-align: top !important;
 }
 
+.dataTable>tbody>tr>td>a>i{
+    font-size: 16px;
+}
 
 @media (min-width: 992px) {
     .content {

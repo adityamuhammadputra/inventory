@@ -20,7 +20,7 @@ class Event extends Model
 
     public function eventBarangs()
     {
-        return $this->hasMany(EventBarang::class)->with('eventBarangItems');
+        return $this->hasMany(EventBarang::class)->with('barang', 'eventBarangItems');
     }
 
     public function scopeNoreg($query, $kategori)
