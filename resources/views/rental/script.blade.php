@@ -71,11 +71,11 @@
         });
     });
 
-    $('#status-filter, #jenis-filter').on('change', function(){
-        table.api(urlTable).ajax.url("{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize()).load();
+    $('#aproved-filter').on('change', function(){
+        table.api(urlTable).ajax.url("{{ url('rental/datatable') }}?" + $('#wrap-filter').serialize()).load();
     })
-    $('#harga-filter').on('keyup', function(){
-        table.api(urlTable).ajax.url("{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize()).load();
+    $('#total-filter').on('keyup', function(){
+        table.api(urlTable).ajax.url("{{ url('rental/datatable') }}?" + $('#wrap-filter').serialize()).load();
     })
 
 

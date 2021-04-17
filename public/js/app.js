@@ -37547,6 +37547,10 @@ $('.card-header-down').on('click', function () {
 $('.filter-icon').on('click', function () {
   $('.card-filter').slideDown();
 });
+$('.filter-icon-transaksi').on('click', function () {
+  var cardBody = $(this).closest('.card').find('.card-filter');
+  if (cardBody.attr('style') != '') cardBody.slideDown();else cardBody.slideUp();
+});
 $('#btn-add').on('click', function () {
   $('.card-form').slideDown();
   $('.card-form').find('form [name="_method"]').val('POST');

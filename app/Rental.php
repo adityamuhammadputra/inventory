@@ -28,15 +28,26 @@ class Rental extends Model
 
     public function scopeFiltered($query)
     {
+
         //for custom datatable
         $query->when(request('search'), function ($query) {
             $param = '%' . request('search')['value'] . '%';
-            $query->where('noreg', 'like', $param)
+
+            $query->where(function ($query) use ($param){
+                $query->where('noreg', 'like', $param)
                 ->orWhere('nama', 'like', $param)
                 ->orWhere('kontak', 'like', $param)
                 ->orWhere('alamat', 'like', $param);
+            });
         });
 
+        $query->when(!request('aproved'), function ($query) {
+            $query->where('status', 1);
+        });
+
+        $query->when(request('aproved'), function ($query) {
+            $query->where('status', 2);
+        });
     }
 
     public function getTotalAttribute($val)

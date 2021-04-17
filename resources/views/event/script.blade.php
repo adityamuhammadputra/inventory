@@ -83,10 +83,11 @@
         });
     });
 
-    $('#status-filter, #jenis-filter').on('change', function(){
+    $('#aproved-filter').on('change', function(){
+        console.log('x')
         table.api(urlTable).ajax.url("{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize()).load();
     })
-    $('#harga-filter').on('keyup', function(){
+    $('#total-filter').on('keyup', function(){
         table.api(urlTable).ajax.url("{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize()).load();
     })
 

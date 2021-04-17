@@ -129,12 +129,15 @@ class RentalController extends Controller
 
         return DataTables::of($rental)
             ->addColumn('action', function ($data) {
-                return '<a data-id="'.$data->id.'"
-                            data-title="Rental #' . $data->noreg . '"
-                            data-url="/rental/'.$data->id.'/approve"
-                            class="text-primary approveData"><i class="fa fa-check"></i>
-                        </a>
-                        <a href="/rental/'.$data->id.'/edit"
+                $approve = '';
+                if($data->status == 1)
+                    $approve = '<a data-id="'.$data->id.'"
+                                data-title="Rental #' . $data->noreg . '"
+                                data-url="/rental/'.$data->id.'/approve"
+                                class="text-primary approveData"><i class="fa fa-check"></i>
+                            </a>';
+                return $approve .
+                        '<a href="/rental/'.$data->id.'/edit"
                             class="text-info"><i class="fa fa-info-circle"></i>
                         </a>
                         <a data-id="' . $data->id . '"

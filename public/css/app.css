@@ -12797,15 +12797,21 @@ input.error {
   margin-bottom: 0;
 }
 
-.filter-icon {
+.filter-icon,
+.filter-icon-transaksi {
   position: absolute;
   right: 210px;
   padding-top: 18px;
   z-index: 1111;
 }
 
-.filter-icon :hover {
+.filter-icon :hover,
+.filter-icon-transaksi:hover {
   cursor: pointer;
+}
+
+.card-filter {
+  background: #f3f8fd;
 }
 
 text {
