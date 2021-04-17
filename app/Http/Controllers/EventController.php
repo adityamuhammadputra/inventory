@@ -177,14 +177,34 @@ class EventController extends Controller
     }
 
 
+    public function approve(Request $request, Event $event)
+    {
+        try {
+            $event->status = 2;
+            $event->save();
+
+            $data = [
+                'status' => 200,
+                'event' => $event,
+            ];
+
+            return response()->json($data, 200);
+        } catch (\Exception $e) {
+            return response()->json($e, 401);
+        }
+    }
+
+
     public function dataTable(Request $request)
     {
         $event = Event::with('eventBarangs')->filtered();
 
         return DataTables::of($event)
             ->addColumn('action', function ($data) {
-                return '<a href="'.$data->id.'" target="_blank"
-                            class="text-primary"><i class="fa fa-print"></i>
+                return'<a data-id="'.$data->id.'"
+                            data-title="Event  #' . $data->noreg . '"
+                            data-url="/event/'.$data->id.'/approve"
+                            class="text-primary approveData"><i class="fa fa-check"></i>
                         </a>
                         <a href="/event/'.$data->id.'/edit"
                             class="text-info"><i class="fa fa-info-circle"></i>

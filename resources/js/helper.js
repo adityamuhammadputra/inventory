@@ -29,6 +29,37 @@ $(document).on('click','.deleteData', function(){
     });
 });
 
+$(document).on('click','.approveData', function(){
+    let url  = $(this).data('url');
+    let title = 'Anda yakin Approve data ' + $(this).data('title');
+    swal({
+        title: "Konfirmasi",
+        text: title,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                    '_token' : $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function(res){
+                    toastr.info('Data Berhasil Approve')
+                    table.api().ajax.reload()
+                },
+                error: function(){
+                }
+            })
+        }
+    });
+});
+
+
+
 
 $('.card-header-down').on('click', function(){
     let cardBody = $(this).closest('.card').find('.card-body');

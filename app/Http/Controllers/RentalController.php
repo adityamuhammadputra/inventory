@@ -129,8 +129,10 @@ class RentalController extends Controller
 
         return DataTables::of($rental)
             ->addColumn('action', function ($data) {
-                return '<a href="'.$data->id.'" target="_blank"
-                            class="text-primary"><i class="fa fa-print"></i>
+                return '<a data-id="'.$data->id.'"
+                            data-title="Rental #' . $data->noreg . '"
+                            data-url="/rental/'.$data->id.'/approve"
+                            class="text-primary approveData"><i class="fa fa-check"></i>
                         </a>
                         <a href="/rental/'.$data->id.'/edit"
                             class="text-info"><i class="fa fa-info-circle"></i>
@@ -177,5 +179,22 @@ class RentalController extends Controller
     public function destroy(Rental $rental)
     {
         return $rental;
+    }
+
+    public function approve(Request $request, Rental $rental)
+    {
+        try {
+            $rental->status = 2;
+            $rental->save();
+
+            $data = [
+                'status' => 200,
+                'rental' => $rental,
+            ];
+
+            return response()->json($data, 200);
+        } catch (\Exception $e) {
+            return response()->json($e, 401);
+        }
     }
 }
