@@ -12882,6 +12882,10 @@ table tr td div > input.form-control:focus {
   color: #a7a6a6;
 }
 
+.dataTable > tbody > tr > td {
+  vertical-align: top !important;
+}
+
 @media (min-width: 992px) {
   .content {
     padding: 1.8rem 1.8rem 0.5rem !important;

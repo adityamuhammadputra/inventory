@@ -303,6 +303,7 @@
                     toastr.info('Rental Berhasil disimpan')
                     $('#form-submit')[0].reset()
                     $('.card-form').slideUp();
+                    $('#noreg').val(res.noReg);
                 },
                 error: function(res) {
                     console.log(res);

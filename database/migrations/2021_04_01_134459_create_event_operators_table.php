@@ -17,7 +17,11 @@ class CreateEventOperatorsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('event_id')->nullable();
             $table->uuid('operator_id')->nullable();
+            $table->string('operator_nama')->nullable();
+            $table->string('operator_tugas')->nullable();
+            $table->string('operator_temp')->nullable();
             $table->string('operator_harga')->nullable();
+
             $table->timestamps();
         });
     }
