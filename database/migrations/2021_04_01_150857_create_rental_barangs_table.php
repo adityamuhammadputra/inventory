@@ -15,7 +15,7 @@ class CreateRentalBarangItemsTable extends Migration
     {
         Schema::create('rental_barang_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('rental_barang_id');
+            $table->uuid('rental_id');
             $table->uuid('barang_id')->nullable();
             $table->uuid('barang_name')->nullable();
             $table->string('barang_temp')->nullable();
