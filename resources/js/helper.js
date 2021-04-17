@@ -1,7 +1,7 @@
 $(document).on('click','.deleteData', function(){
     let id  = $(this).data('id');
     let url  = $(this).data('url');
-    let title = 'Anda yakin menghapus data ' + $(this).data('title');
+    let title = 'Yakin menghapus data ' + $(this).data('title');
     swal({
         title: "Konfirmasi",
         text: title,
@@ -31,7 +31,7 @@ $(document).on('click','.deleteData', function(){
 
 $(document).on('click','.approveData', function(){
     let url  = $(this).data('url');
-    let title = 'Anda yakin Approve data ' + $(this).data('title');
+    let title = 'Yakin Approve data ' + $(this).data('title');
     swal({
         title: "Konfirmasi",
         text: title,

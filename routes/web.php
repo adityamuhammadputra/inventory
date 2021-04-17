@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(url('/login'));
 });
 
 Auth::routes();
@@ -40,4 +40,20 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/event', 'EventController')->except('create');
     Route::post('event/datatable', 'EventController@dataTable');
     Route::post('event/{event}/approve', 'RentalController@approve');
+
+    Route::get('letter/{filename}', function ($filename) {
+        $path = storage_path('app/letter/' . $filename);
+
+        if (!File::exists($path)) {
+            abort(404);
+        }
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
+    });
 });

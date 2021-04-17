@@ -1,9 +1,14 @@
 <div class="card">
     <div class="card-header">
         Form Input
+        @if ($data->method == 'PATCH')
+            <a class="btn btn-outline-info float-right" href="/letter/{{ $data->rental->id }}.docx"><span class="fa fa-print"></span> Cetak Letter</a>
+        @else
         <a class="card-header-down float-right">
             <span data-feather="chevron-down"></span>
         </a>
+        @endif
+
     </div>
     <div class="card-body card-form"
         style="{{ ($data->method == 'PATCH') ? '' : 'display: none;' }}"
@@ -169,6 +174,5 @@
                 </div>
             </div>
         </form>
-
     </div>
 </div>

@@ -37489,7 +37489,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 $(document).on('click', '.deleteData', function () {
   var id = $(this).data('id');
   var url = $(this).data('url');
-  var title = 'Anda yakin menghapus data ' + $(this).data('title');
+  var title = 'Yakin menghapus data ' + $(this).data('title');
   swal({
     title: "Konfirmasi",
     text: title,
@@ -37516,7 +37516,7 @@ $(document).on('click', '.deleteData', function () {
 });
 $(document).on('click', '.approveData', function () {
   var url = $(this).data('url');
-  var title = 'Anda yakin Approve data ' + $(this).data('title');
+  var title = 'Yakin Approve data ' + $(this).data('title');
   swal({
     title: "Konfirmasi",
     text: title,
