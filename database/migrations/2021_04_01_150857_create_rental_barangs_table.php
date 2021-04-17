@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRentalBarangItemsTable extends Migration
+class CreateRentalBarangsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRentalBarangItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rental_barang_items', function (Blueprint $table) {
+        Schema::create('rental_barangs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('rental_id');
             $table->uuid('barang_id')->nullable();
@@ -33,6 +33,6 @@ class CreateRentalBarangItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rental_barang_items');
+        Schema::dropIfExists('rental_barangs');
     }
 }

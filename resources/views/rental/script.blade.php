@@ -119,7 +119,7 @@
         countRow++
         let idRow = $(this).data('id');
         // <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRow+']">
-        let html = '<div class="input-group">\
+        let html = '<tr></t><div class="input-group">\
                         <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item[' + idRow + '][' + countRow + ']">\
                         <div class="input-group-prepend">\
                             <div class="input-group-text">\

@@ -6,7 +6,7 @@
         </a>
     </div>
     <div class="card-body card-form"
-        style="{{ ($data->method == 'PATCH') ? '' : 'display: none;' }}"
+        {{-- style="{{ ($data->method == 'PATCH') ? '' : 'display: none;' }}" --}}
         >
         <form method="POST" action="{{ $data->action }}" class="form form-horizontal" id="form-submit">
             @csrf
@@ -69,6 +69,7 @@
                                     <th>No</th>
                                     <th>Equipment Name</th>
                                     <th>Item Name</th>
+                                    <th style="width: 80px">Day</th>
                                     <th>Price</th>
                                     <th class="text-right text-primary" style="width: 1%;"><a id="addEquipment"><span class="fa fa-plus"></span></a></th>
                                 </tr>
@@ -105,8 +106,12 @@
                                         <input type="text" class="form-control autoCompleteEquipment equipment1" dataid="1" name="equpment[1]">
                                     </td>
                                     <td>
+                                        <input type="text" class="form-control autoCompleteItem item1" dataid="1" name="item[1][1]">
+                                    </td>
+                                    <td><input type="number" class="form-control day day1 text-center" name="day[1]" tabindex="2000" value="1"></td>
+                                    <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteItem item1" dataid="1" name="item[1][1]">
+                                        <input type="text" class="form-control rupiah price price1 text-right" name="price[1]" tabindex="2000">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <a class="addItem" data-id="1"><span class="fa fa-plus"></span></a>
@@ -114,7 +119,6 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td><input type="text" class="form-control rupiah price price1 text-right" name="price[1]" tabindex="2000"></td>
                                     <td></td>
                                 </tr>
                                 @endif
