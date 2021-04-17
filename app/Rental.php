@@ -48,6 +48,11 @@ class Rental extends Model
         $query->when(request('aproved'), function ($query) {
             $query->where('status', 2);
         });
+
+        $query->when(request('total'), function ($query) {
+            if(inputRupiah(request('total')))
+                $query->where('total','>=', inputRupiah(request('total')));
+        });
     }
 
     public function getTotalAttribute($val)
