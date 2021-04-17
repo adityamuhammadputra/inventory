@@ -234,7 +234,7 @@
                         </table>
                     </div>
                     <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
-                    <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/rental"> Batal</a>
+                    <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/event"> Batal</a>
                 </div>
             </div>
         </div>

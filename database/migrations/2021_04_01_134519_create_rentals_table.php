@@ -25,7 +25,7 @@ class CreateRentalsTable extends Migration
             $table->string('sub_total')->nullable();
             $table->string('diskon')->nullable();
             $table->string('total')->nullable();
-            $table->string('status')->default(1);
+            $table->integer('status')->default(1);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
