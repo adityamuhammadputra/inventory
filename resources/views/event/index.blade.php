@@ -16,7 +16,7 @@
         <div class="card">
             <div class="card-header pt-4 pb-0">
                 <h6 class="card-subtitle text-muted">Daftar Rental
-                    <button class="btn btn-square btn-primary float-right" id="btn-add" data-action="/rental"><i class="fa fa-plus"></i> Tambah</button>
+                    <button class="btn btn-square btn-primary float-right" id="btn-add" data-action="/event"><i class="fa fa-plus"></i> Tambah</button>
                 </h6>
             </div>
             <div class="card-body pt-0">
