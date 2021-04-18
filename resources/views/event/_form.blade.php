@@ -78,6 +78,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Day</th>
                                     <th>Price</th>
                                 </tr>
                             </thead>
@@ -211,6 +212,7 @@
                                     <th>No</th>
                                     <th>Equipment Name</th>
                                     <th>Item Name</th>
+                                    <th>Day</th>
                                     <th>Price</th>
                                     <th class="text-right text-primary" style="width: 1%;"><a id="addEquipment"><span class="fa fa-plus"></span></a></th>
                                 </tr>

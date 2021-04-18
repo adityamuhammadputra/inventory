@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpWord\TemplateProcessor;
 use Yajra\DataTables\DataTables;
 
 class RentalController extends Controller
@@ -44,20 +45,7 @@ class RentalController extends Controller
 
         DB::beginTransaction();
             $rentalDb = Rental::create($rental);
-
-            $this->inputBarang($request, $rental);
-
-            $phpWord = new \PhpOffice\PhpWord\PhpWord();
-            $section = $phpWord->addSection();
-            $description = "Test 1234";
-            $section->addText($description);
-            $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-            try {
-                $objWriter->save(storage_path("app/letter/{$rentalDb->id}.docx"));
-            } catch (Exception $e) {
-                dd($e);
-            }
-            // return response()->download(storage_path("app/inv/{$rentalDb->id}.docx"));
+            $this->inputBarang($request, $rentalDb);
         DB::commit();
 
         $data = [
@@ -104,7 +92,7 @@ class RentalController extends Controller
             foreach($request->equpment as $key => $barang) :
                 $barangDb = Barang::where('kode', explode(' - ', $barang)[0])->first();
                 $barang_id = $barangDb->id;
-                $barang_name = $barangDb->merk . ' - ' .$barangDb->merk . ' - ' .$barangDb->merk;
+                $barang_name = $barangDb->jenis . ' - ' .$barangDb->merk . ' - ' .$barangDb->type;
                 $barang_temp = inputRupiah($barangDb->harga);
                 $barang_harga = inputRupiah(explode(' - ', $barang)[2]);
                 $uuid = uuid();
@@ -133,7 +121,7 @@ class RentalController extends Controller
                     if(!$request->item[$key][$subKey] == null) :
                         $barangDb = Barang::where('kode', explode(' - ', $subItem)[0])->first();
                         $barang_id = $barangDb->id;
-                        $barang_name = $barangDb->merk . ' - ' .$barangDb->merk . ' - ' .$barangDb->merk;
+                        $barang_name = $barangDb->jenis . ' - ' .$barangDb->merk . ' - ' .$barangDb->type;
                         $barang_temp = inputRupiah($barangDb->harga);
                         $barang_harga = inputRupiah(explode(' - ', $subItem)[2]);
                         $items [] = [
@@ -232,5 +220,69 @@ class RentalController extends Controller
         } catch (\Exception $e) {
             return response()->json($e, 401);
         }
+    }
+
+    public function letter(Rental $rental)
+    {
+        $templateProcessor = new TemplateProcessor('word/rental-letter.docx');
+        $templateProcessor->setValues([
+            'name' => "$rental->nama",
+            'no_hp' => "$rental->kontak",
+            'alamat' => "$rental->alamat",
+            'start' => "$rental->start",
+            'end' => "$rental->end",
+        ]);
+
+        $values = [];
+        $no = 1;
+        foreach($rental->rentalBarangs as $key => $val) :
+            $values [] = [
+                    'no' => $no++,
+                    'equipmentName' => $val->barang_name,
+                    'equipmentSn' => $val->barang->serial_number,
+            ];
+        endforeach;
+
+        $templateProcessor->cloneRowAndSetValues('no', $values);
+
+        header("Content-Disposition: attachment; filename=letter$rental->noreg-$rental->id.docx");
+
+        $templateProcessor->saveAs('php://output');
+    }
+
+
+    public function invoice(Rental $rental)
+    {
+        $templateProcessor = new TemplateProcessor('word/rental-inv.docx');
+        $templateProcessor->setValues([
+            'invNo' => "#$rental->noreg",
+            'date' => "$rental->created_at",
+            'name' => "$rental->nama",
+            'no_hp' => "$rental->kontak",
+            'alamat' => "$rental->alamat",
+            'start' => "$rental->start",
+            'end' => "$rental->end",
+            'sub_total' => "$rental->sub_total",
+            'diskon' => "$rental->diskon %",
+            'total' => "$rental->total",
+        ]);
+
+        $values = [];
+        $no = 1;
+        foreach($rental->rentalBarangs as $key => $val) :
+            $values [] = [
+                    'no' => $no++,
+                    'equipmentName' => $val->barang_name,
+                    'equipmentPrice' => outputRupiah($val->barang_harga),
+                    'equipmentDay' => $val->barang_qty,
+                    'equipmentTotal' => outputRupiah($val->barang_total),
+            ];
+        endforeach;
+
+        $templateProcessor->cloneRowAndSetValues('no', $values);
+
+        header("Content-Disposition: attachment; filename=inv$rental->noreg-$rental->id.docx");
+
+        $templateProcessor->saveAs('php://output');
     }
 }

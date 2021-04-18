@@ -35,25 +35,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/rental', 'RentalController')->except('create');
     Route::post('rental/datatable', 'RentalController@dataTable');
     Route::post('rental/{rental}/approve', 'RentalController@approve');
-
+    Route::get('rental/{rental}/letter-docx', 'RentalController@letter');
+    Route::get('rental/{rental}/inv-docx', 'RentalController@invoice');
 
     Route::resource('/event', 'EventController')->except('create');
     Route::post('event/datatable', 'EventController@dataTable');
     Route::post('event/{event}/approve', 'RentalController@approve');
-
-    Route::get('letter/{filename}', function ($filename) {
-        $path = storage_path('app/letter/' . $filename);
-
-        if (!File::exists($path)) {
-            abort(404);
-        }
-
-        $file = File::get($path);
-        $type = File::mimeType($path);
-
-        $response = Response::make($file, 200);
-        $response->header("Content-Type", $type);
-
-        return $response;
-    });
 });

@@ -2,7 +2,10 @@
     <div class="card-header">
         Form Input
         @if ($data->method == 'PATCH')
-            <a class="btn btn-outline-info float-right" href="/letter/{{ $data->rental->id }}.docx"><span class="fa fa-print"></span> Cetak Letter</a>
+            @if ($data->rental->status == 2)
+                <a class="btn btn-outline-primary float-right ml-2" href="/rental/{{ $data->rental->id }}/inv-docx"><span class="fa fa-print"></span> Cetak Invoice</a>
+            @endif
+            <a class="btn btn-outline-info float-right" href="/rental/{{ $data->rental->id }}/letter-docx"><span class="fa fa-print"></span> Cetak Letter</a>
         @else
         <a class="card-header-down float-right">
             <span data-feather="chevron-down"></span>

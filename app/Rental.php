@@ -9,6 +9,7 @@ class Rental extends Model
     protected $guarded = [''];
     protected $keyType = 'string';
     public $incrementing = false;
+    protected $with = ['rentalBarangs'];
 
 
     public function rentalBarangs()
