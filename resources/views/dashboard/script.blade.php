@@ -118,6 +118,8 @@
 $(function() {
 
     $('#calendar').fullCalendar({
+        height: 450,
+        // aspectRatio: 2,
     // put your options and callbacks here
     })
 });
