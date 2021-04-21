@@ -49,12 +49,22 @@
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-md-3">
-                            <input type="text" id="date" name="date" class="form-control datepicker" placeholder="Event Date" value="{{ $data->dateNow }}" required>
-                            <label for="date">Event Date</label>
+                            <input type="text" id="date_start" name="date_start" class="form-control datepicker" placeholder="Event Date" value="{{ $data->dateNow }}" required>
+                            <label for="date_start">Event Date Start</label>
                         </div>
                         <div class="form-label-group col-md-3">
-                            <input type="time" id="time" name="time" class="form-control" placeholder="Event Time" required value="{{ $data->event->time ?? '' }}">
-                            <label for="time">Event Time</label>
+                            <input type="time" id="time_start" name="time_start" class="form-control" placeholder="Event Time" required value="{{ $data->event->time ?? '' }}">
+                            <label for="time_start">Event Time Start</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label-group col-md-3">
+                            <input type="text" id="date_end" name="date_end" class="form-control datepicker" placeholder="Event Date" value="{{ $data->dateTom }}" required>
+                            <label for="date_end">Event Date End</label>
+                        </div>
+                        <div class="form-label-group col-md-3">
+                            <input type="time" id="time_end" name="time_end" class="form-control" placeholder="Event Time" required value="{{ $data->event->time ?? '' }}">
+                            <label for="time_end">Event Time End</label>
                         </div>
                     </div>
                 </div>
@@ -76,10 +86,14 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th style="width: 5px;">#</th>
                                     <th>Name</th>
-                                    <th>Day</th>
-                                    <th>Price</th>
+                                    <th style="width: 100px;">Day</th>
+                                    <th>
+                                        Price
+                                        <a class="addOp float-right"><span class="fa fa-plus"></span></a>
+                                    </th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,72 +119,23 @@
                                     @endforeach
                                 @endif --}}
                                 <tr id="1">
+                                    <td class="text-center">1</td>
                                     <td>
-                                        1. Camerament
-                                        <input type="hidden" class="form-control" dataid="1" name="opTugas[1]" value="Camerament">
+                                        <input type="text" class="form-control autoCompleteOp op1" dataid="1" name="op[1][1]" tabindex="1">
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control dayOp dayOp1 text-ceneter" name="dayOp[1]" dataid="1" tabindex="100" value="1">
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteOp op1" dataid="1" name="op[1][1]">
+                                            <input type="text" class="form-control rupiah priceOp priceOp1 text-right" name="priceOp[1]" dataid="1" tabindex="101">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <a class="addOp" data-id="1"><span class="fa fa-plus"></span></a>
+                                                    <a class="removeOp" data-id="1"><span class="fa fa-trash"></span></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td><input type="text" class="form-control rupiah priceOp priceOp1 text-right" name="priceOp[1]" tabindex="20054"></td>
-                                </tr>
-                                <tr id="2">
-                                    <td>
-                                        2. Crew
-                                        <input type="hidden" class="form-control" dataid="1" name="opTugas[2]" value="Crew">
-                                    </td>
-                                    <td>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteOp op2" dataid="2" name="op[2][1]">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <a class="addOp" data-id="2"><span class="fa fa-plus"></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><input type="text" class="form-control rupiah priceOp priceOp2 text-right" name="priceOp[2]" tabindex="20055"></td>
-                                </tr>
-                                <tr id="3">
-                                    <td>
-                                        3. SDE
-                                        <input type="hidden" class="form-control" dataid="1" name="opTugas[3]" value="SDE">
-                                    </td>
-                                    <td>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteOp op3" dataid="3" name="op[3][1]">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <a class="addOp" data-id="3"><span class="fa fa-plus"></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><input type="text" class="form-control rupiah priceOp priceOp3 text-right" name="priceOp[3]" tabindex="20055"></td>
-                                </tr>
-                                <tr id="4">
-                                    <td>
-                                        4. Editor
-                                        <input type="hidden" class="form-control" dataid="1" name="opTugas[4]" value="Editor">
-                                    </td>
-                                    <td>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control autoCompleteOp op4" dataid="4" name="op[4][1]">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <a class="addOp" data-id="4"><span class="fa fa-plus"></span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><input type="text" class="form-control rupiah priceOp priceOp4 text-right" name="priceOp[4]" tabindex="20055"></td>
                                 </tr>
                             </tbody>
 
@@ -209,7 +174,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th style="width: 5px;">#</th>
                                     <th>Equipment Name</th>
                                     <th>Item Name</th>
                                     <th>Day</th>
@@ -244,7 +209,7 @@
                                 @endforeach
                                 @else
                                 <tr id="1">
-                                    <td>1</td>
+                                    <td class="text-center">1</td>
                                     <td>
                                         <input type="text" class="form-control autoCompleteEquipment equipment1" dataid="1" name="equpment[1]">
                                     </td>

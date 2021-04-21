@@ -24,6 +24,7 @@ class EventController extends Controller
         $data = (object) [
             'noReg' => getMaxEvent(),
             'dateNow' => Carbon::now()->format('d F Y'),
+            'dateTom' => Carbon::now()->addDays(1)->format('d F Y'),
             'method' => 'POST',
             'action' => "/event",
             'event' => null,
@@ -35,9 +36,10 @@ class EventController extends Controller
     public function store(Request $request)
     {
         DB::beginTransaction();
-            $event = $request->only('noreg', 'vendor_name', 'client_name', 'name', 'location', 'diskon', 'time');
+            $event = $request->only('noreg', 'vendor_name', 'client_name', 'name', 'location', 'diskon', 'time_start', 'time_end');
             $event['id'] = uuid();
-            $event['date'] = dateInput($request->date);
+            $event['date_start'] = dateInput($request->date_start);
+            $event['date_end'] = dateInput($request->date_end);
             $event['sub_total_op'] = inputRupiah($request->sub_total_op);
             $event['sub_total'] = inputRupiah($request->sub_total);
             $event['total'] = inputRupiah($request->total);

@@ -21,8 +21,10 @@ class CreateEventsTable extends Migration
             $table->uuid('client_id')->nullable();
             $table->string('client_name')->nullable();
             $table->string('name')->nullable();
-            $table->date('date');
-            $table->string('time');
+            $table->date('date_start');
+            $table->date('date_end');
+            $table->string('time_start');
+            $table->string('time_end');
             $table->string('location')->nullable();
             $table->string('sub_total_op')->nullable();
             $table->string('sub_total')->nullable();

@@ -106,7 +106,7 @@
     $("#addEquipment").on('click', function(){
         countRow++
         let html = '<tr id="'+countRow+'">\
-                        <td>' + countRow + '</td>\
+                        <td class="text-center">' + countRow + '</td>\
                         <td><input type="text" class="form-control autoCompleteEquipment equipment' + countRow + '" dataid="' + countRow + '" name="equpment[' + countRow + ']"></td>\
                         <td>\
                             <div class="input-group">\
@@ -143,29 +143,32 @@
         setAutoCompleteItem()
     })
 
-    var countRow = 1;
+    var idRow = 1;
     $(document).on('click', '.addOp', function(){
-        countRow++
-        let idRow = $(this).data('id');
-        let html = '<div class="input-group">\
-                        <input type="text" class="form-control autoCompleteOp op' + idRow + '" dataid="' + idRow + '" name="op[' + idRow + '][' + countRow + ']">\
-                        <div class="input-group-prepend">\
-                            <div class="input-group-text">\
-                                <a class="removeItem" data-id="' + idRow + '"><span class="fa fa-trash"></span></a>\
+        idRow++
+        let html = '<tr id="1">\
+                        <td class="text-center">' + idRow + '</td>\
+                        <td>\
+                            <input type="text" class="form-control autoCompleteOp op' + idRow + '" dataid="' + idRow + '" name="op[' + idRow + ']" tabindex="[' + idRow + ']">\
+                        </td>\
+                        <td>\
+                            <input type="number" class="form-control dayOp dayOp' + idRow + ' text-ceneter" name="dayOp[' + idRow + ']" tabindex="[' + idRow + ']00" dataid="' + idRow + '" value="1">\
+                        </td>\
+                        <td>\
+                            <div class="input-group">\
+                                <input type="text" class="form-control rupiah priceOp priceOp' + idRow + ' text-right" name="priceOp[' + idRow + ']" tabindex="[' + idRow + ']01">\
+                                <div class="input-group-prepend">\
+                                    <div class="input-group-text">\
+                                        <a class="removeOp" data-id="' + idRow + '"><span class="fa fa-trash"></span></a>\
+                                    </div>\
+                                </div>\
                             </div>\
-                        </div>\
-                    </div>';
-        $(this).closest('td').append(html);
-        setAutoCompleteOp()
-    })
+                        </td>\
+                    </tr>';
+        $(this).closest('table').append(html);
+        $('input[name="op[' + idRow + ']"]').focus();
 
-    $(document).on('click', '.removeEquipment', function(){
-        $(this).closest('tr').remove();
-        setPrice($(this).data('id'));
-    })
-    $(document).on('click', '.removeItem', function(){
-        $(this).closest('.input-group').remove();
-        setPrice($(this).data('id'));
+        setAutoCompleteOp()
     })
 
     $('.autocompleteNama').autocomplete({
@@ -186,7 +189,6 @@
         },
         minChars : 2,
     });
-
 
     $('.autocompleteVendor').autocomplete({
         lookup: function (query, done) {
@@ -223,7 +225,7 @@
             },
             onSelect: function (suggestion, that) {
                 let data = suggestion.data;
-                $(that.element).val(data.kode + ' - ' + data.nama + '(' + data.tugas + ') - ' + data.harga);
+                $(that.element).val(data.tugas + ' - ' + data.kode + ' - ' + data.nama + ' - ' + data.harga);
                 let $this = that.element.attributes;
                 let id = $this.dataid.value;
                 setPrice(id);
@@ -328,6 +330,11 @@
                 totalOpRow += inputRupiah($(this).val());
         });
 
+        $(".dayOp" + id).each(function(){
+            if($(this).val())
+                totalOpRow = totalOpRow * $(this).val();
+        });
+
         $('.price' + id).val(outputRupiah(totalItemRow))
         $('.priceOp' + id).val(outputRupiah(totalOpRow))
 
@@ -371,6 +378,12 @@
             $('.total').val(outputRupiah(total))
     })
 
+    $(document).on('keyup', '.dayOp', function(){
+        let id = $(this).attr('dataid');
+        console.log(id);
+        setPrice(id)
+    })
+
 
     $("#form-submit").validate({
         submitHandler: function(form) {
@@ -397,32 +410,18 @@
         }
     });
 
-    let checkVisibleNoreg = (column, value) => {
-        $.ajax({
-            url: "/api/v1/check-visible-noreg",
-            method : 'GET',
-            data: {
-                'column' : column,
-                'value' : value,
-            },
-            beforeSend: function() {
-                loadingIconText($('#' + column))
-            },
-            success: function(data) {
-                loadingIconText($('#' + column), reset = true);
-                if(data) {
-                    $('#' + column).css('border-color', '#bd2130')
-                    $('#' + column +'-has-value').html(column + ' already available').show()
-                } else {
-                    $('#' + column).removeAttr('style')
-                    $('#' + column +'-has-value').hide()
-                }
-            },
-            error: function(error) {
-                console.log(error)
-            }
-        })
-    }
+    $(document).on('click', '.removeEquipment', function(){
+        $(this).closest('tr').remove();
+        setPrice($(this).data('id'));
+    })
+    $(document).on('click', '.removeItem', function(){
+        $(this).closest('tr').remove();
+        setPrice($(this).data('id'));
+    })
+    $(document).on('click', '.removeOp', function(){
+        $(this).closest('tr').remove();
+        setPrice($(this).data('id'));
+    })
 
     var loadingIconButton = (that, reset = false) => {
         that.attr('disabled', 'disabled')
@@ -434,7 +433,32 @@
         that.find('span').removeClass('fa-check-circle').addClass('spinner-border spinner-border-sm')
     }
 
-
+    // let checkVisibleNoreg = (column, value) => {
+    //     $.ajax({
+    //         url: "/api/v1/check-visible-noreg",
+    //         method : 'GET',
+    //         data: {
+    //             'column' : column,
+    //             'value' : value,
+    //         },
+    //         beforeSend: function() {
+    //             loadingIconText($('#' + column))
+    //         },
+    //         success: function(data) {
+    //             loadingIconText($('#' + column), reset = true);
+    //             if(data) {
+    //                 $('#' + column).css('border-color', '#bd2130')
+    //                 $('#' + column +'-has-value').html(column + ' already available').show()
+    //             } else {
+    //                 $('#' + column).removeAttr('style')
+    //                 $('#' + column +'-has-value').hide()
+    //             }
+    //         },
+    //         error: function(error) {
+    //             console.log(error)
+    //         }
+    //     })
+    // }
 
 </script>
 @endpush
