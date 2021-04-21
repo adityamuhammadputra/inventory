@@ -89,7 +89,7 @@
                                     <th style="width: 5px;">#</th>
                                     <th>Name</th>
                                     <th style="width: 100px;">Day</th>
-                                    <th>
+                                    <th style="width: 190px">
                                         Price
                                         <a class="addOp float-right"><span class="fa fa-plus"></span></a>
                                     </th>
@@ -177,8 +177,8 @@
                                     <th style="width: 5px;">#</th>
                                     <th>Equipment Name</th>
                                     <th>Item Name</th>
-                                    <th>Day</th>
-                                    <th>Price</th>
+                                    <th style="width: 80px">Day</th>
+                                    <th style="width: 190px">Price</th>
                                     <th class="text-right text-primary" style="width: 1%;"><a id="addEquipment"><span class="fa fa-plus"></span></a></th>
                                 </tr>
                             </thead>
@@ -187,23 +187,30 @@
                                 @foreach ($data->event->eventBarangs as $key => $barang)
                                 @php $key = $key+1; @endphp
                                 <tr id="{{ $key }}">
-                                    <td>{{ $key }}</td>
+                                    <td class="text-center">{{ $key }}</td>
                                     <td>
                                         <input type="text" class="form-control autoCompleteEquipment equipment{{ $key }}" dataid="{{ $key }}" name="equpment[{{ $key }}]" value="{{ $barang->equpment }}">
                                     </td>
                                     <td>
-                                        @foreach ($barang->eventBarangItems as $keyItem => $item)
+                                        @foreach ($barang->rentalBarangItems as $keyItem => $item)
                                             <div class="input-group">
                                                 <input type="text" class="form-control autoCompleteItem item{{ $key }}" dataid="{{ $key }}" name="item[{{ $key }}][{{ $keyItem }}]" value="{{ $item->equpment }}">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
+                                                        @if ($keyItem == 0)
                                                         <a class="addItem" data-id="{{ $key }}"><span class="fa fa-plus"></span></a>
+                                                        @else
+                                                        <a class="removeItem" data-id="{{ $key }}"><span class="fa fa-trash"></span></a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
                                         @endforeach
                                     </td>
-                                    <td><input type="text" class="form-control rupiah price price1 text-right" name="price[{{ $key }}]" tabindex="2000" value="{{ $barang->barang_total }}"></td>
+                                    <td>
+                                        <input type="number" class="form-control day day{{ $key }} text-center" name="day[{{ $key }}]" dataid="{{ $key }}" tabindex="2000" value="{{ $barang->barang_qty }}">
+                                    </td>
+                                    <td><input type="text" class="form-control rupiah price price{{ $key }} text-right" name="price[{{ $key }}]" tabindex="2000" value="{{ outputRupiah($barang->barang_item_total) }}"></td>
                                     <td></td>
                                 </tr>
                                 @endforeach
@@ -223,7 +230,12 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td><input type="text" class="form-control rupiah price price1 text-right" name="price[1]" tabindex="2000"></td>
+                                    <td>
+                                        <input type="number" class="form-control day day1 text-center" name="day[1]" dataid="1" tabindex="2000" value="1">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control rupiah price price1 text-right" name="price[1]" tabindex="2001">
+                                    </td>
                                     <td></td>
                                 </tr>
                                 @endif
@@ -231,27 +243,27 @@
 
                             <tfoot>
                                 <tr>
-                                    <td colspan="4" class="text-right"><br>
+                                    <td colspan="5" class="text-right"><br>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" class="">
+                                    <td colspan="4" class="">
                                         <b>Sub Total Equipment Item</b>
                                     </td>
                                     <td colspan="2"><input type="text" class="form-control rupiah subtotal text-right" name="sub_total" required value="{{ $data->event->sub_total ?? '' }}"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" class="text-right"><br>
+                                    <td colspan="5" class="text-right"><br>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" class="">
+                                    <td colspan="4" class="">
                                         <b>Diskon(%)</b>
                                     </td>
                                     <td colspan="2"><input type="text" class="form-control diskon text-right" name="diskon" value="{{ $data->event->diskon ?? '' }}"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" class="">
+                                    <td colspan="4" class="">
                                         <b>TOTAL </b>
                                     </td>
                                     <td colspan="2"><input type="text" class="form-control rupiah total text-right" name="total" readonly required value="{{ $data->event->total ?? '' }}"></td>

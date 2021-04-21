@@ -105,6 +105,7 @@
     var countRow = 1;
     $("#addEquipment").on('click', function(){
         countRow++
+        valueDay = $('.day1').val();
         let html = '<tr id="'+countRow+'">\
                         <td class="text-center">' + countRow + '</td>\
                         <td><input type="text" class="form-control autoCompleteEquipment equipment' + countRow + '" dataid="' + countRow + '" name="equpment[' + countRow + ']"></td>\
@@ -118,10 +119,14 @@
                                 </div>\
                             </div>\
                         </td>\
+                        <td>\
+                            <input type="number" class="form-control day day'+countRow+' text-center valid" name="day['+countRow+']" dataid="'+countRow+'" tabindex="2000" value="'+valueDay+'" aria-invalid="false">\
+                        </td>\
                         <td><input type="text" class="form-control price price' + countRow + ' rupiah text-right" name="price[' + countRow + ']" tabindex="2001"></td>\
-                        <td class="text-center"><a class="removeEquipment"><i class="fa fa-trash"></i></a></td>\
+                        <td class="text-center"><a class="removeEquipment" data-id="' + countRow + '"><i class="fa fa-trash"></i></a></td>\
                     </tr>'
         $(this).closest('table').append(html);
+        $('input[name="equpment[' + countRow + ']"]').focus();
         setAutoCompleteEquipment()
         setAutoCompleteItem()
     })
@@ -130,6 +135,7 @@
     $(document).on('click', '.addItem', function(){
         countRow++
         let idRow = $(this).data('id');
+        // <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRow+']">
         let html = '<div class="input-group">\
                         <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item[' + idRow + '][' + countRow + ']">\
                         <div class="input-group-prepend">\
@@ -138,8 +144,8 @@
                             </div>\
                         </div>\
                     </div>';
-        // let html = '<input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRow+']"></a>';
         $(this).closest('td').append(html);
+        $('input[name="item[' + idRow + '][' + countRow + ']"]').focus();
         setAutoCompleteItem()
     })
 
@@ -330,6 +336,11 @@
                 totalOpRow += inputRupiah($(this).val());
         });
 
+        $(".day" + id).each(function(){
+            if($(this).val())
+                totalItemRow = totalItemRow * $(this).val();
+        });
+
         $(".dayOp" + id).each(function(){
             if($(this).val())
                 totalOpRow = totalOpRow * $(this).val();
@@ -384,6 +395,11 @@
         setPrice(id)
     })
 
+    $(document).on('keyup', '.day', function(){
+        let id = $(this).attr('dataid');
+        console.log(id);
+        setPrice(id)
+    })
 
     $("#form-submit").validate({
         submitHandler: function(form) {
@@ -415,7 +431,7 @@
         setPrice($(this).data('id'));
     })
     $(document).on('click', '.removeItem', function(){
-        $(this).closest('tr').remove();
+        $(this).closest('.input-group').remove();
         setPrice($(this).data('id'));
     })
     $(document).on('click', '.removeOp', function(){
