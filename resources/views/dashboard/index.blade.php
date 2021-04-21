@@ -1,8 +1,19 @@
 @extends('layouts.master')
 @section('level2', 'Dashboard')
-@section('title', 'Dashboard')
+@section('title', 'Dashboard & Analitic')
 
 @section('content')
+
+<div class="row">
+    <div class="col-xl-6 col-xxl-5 d-flex">
+        <div class="card flex-fill w-100">
+            <div class="card-body">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-xl-6 col-xxl-5 d-flex">
         <div class="w-100">

@@ -23,9 +23,11 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@fullcalendar/core": "^5.6.0",
         "autonumeric": "^4.6.0",
         "datatables.net": "^1.10.24",
         "datatables.net-bs4": "^1.10.24",
+        "fullcalendar": "^5.6.0",
         "mdi-icons": "^1.0.1",
         "select2": "^4.1.0-rc.0",
         "sweetalert": "^2.1.2",
