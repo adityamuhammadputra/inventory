@@ -9,7 +9,7 @@ class EventBarang extends Model
     protected $guarded = [''];
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $appends = ['count_item', 'equpment'];
+    protected $appends = ['count_item', 'equpment', 'items'];
 
     public function eventBarangItems()
     {
@@ -19,6 +19,10 @@ class EventBarang extends Model
     public function getCountItemAttribute()
     {
         return $this->eventBarangItems->count();
+    }
+    public function getItemsAttribute()
+    {
+        return $this->eventBarangItems->pluck('barang_name')->implode('                                         ');
     }
 
     public function getEqupmentAttribute()

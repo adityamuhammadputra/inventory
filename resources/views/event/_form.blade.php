@@ -101,11 +101,10 @@
                                         Price
                                         <a class="addOp float-right text-primary"><span class="fa fa-plus"></span></a>
                                     </th>
-
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($data->event->eventOperator) > 0 && $data->method == 'PATCH')
+                                @if (isset($data->event->eventOperator) && count($data->event->eventOperator) > 0 && $data->method == 'PATCH')
                                     @foreach ($data->event->eventOperator as $key => $item)
                                      <tr id="{{ $item->ids }}">
                                         <td class="text-center">{{ $item->ids }}</td>

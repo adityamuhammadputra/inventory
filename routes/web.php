@@ -41,4 +41,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/event', 'EventController')->except('create');
     Route::post('event/datatable', 'EventController@dataTable');
     Route::post('event/{event}/approve', 'RentalController@approve');
+    Route::get('event/{event}/letter-docx', 'EventController@letter');
+    Route::get('event/{event}/inv-docx', 'EventController@invoice');
 });

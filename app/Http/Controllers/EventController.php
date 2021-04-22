@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Barang;
-use App\Client;
 use App\Event;
 use App\EventBarang;
 use App\EventBarangItem;
 use App\EventOperator;
 use App\Operator;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use PhpOffice\PhpWord\TemplateProcessor;
+
 
 class EventController extends Controller
 {
@@ -238,6 +238,92 @@ class EventController extends Controller
     }
 
 
+    public function letter(Event $event)
+    {
+        $templateProcessor = new TemplateProcessor('word/event-letter.docx');
+        $templateProcessor->setValues([
+            'vendor' => "$event->vendor_name",
+            'client' => "$event->client_name",
+            'eventName' => "$event->name",
+            'eventLocation' => "$event->location",
+            'start' => "$event->date_start $event->time_start",
+            'end' => "$event->date_end $event->time_end",
+        ]);
+
+        $noOp = 1;
+        $templateProcessor->cloneRow('noOp', count($event->eventOperator));
+        foreach($event->eventOperator as $valOp) :
+            $templateProcessor->setValue("noOp#$noOp", $noOp);
+            $templateProcessor->setValue("operatorJobs#$noOp", $valOp->operator_tugas);
+            $templateProcessor->setValue("operatorName#$noOp", $valOp->operator_nama);
+            $noOp++;
+        endforeach;
+
+        $no = 1;
+        $templateProcessor->cloneRow('no', count($event->eventBarangs));
+        foreach($event->eventBarangs as $val) :
+            $templateProcessor->setValue("no#$no", $no);
+            $templateProcessor->setValue("equipmentName#$no", $val->barang_name);
+            $templateProcessor->setValue("equipmentSn#$no", $val->barang->serial_number);
+            $templateProcessor->setValue("items#$no", $val->items);
+            $no++;
+        endforeach;
+
+        header("Content-Disposition: attachment; filename=letter-$event->noreg.docx");
+
+        $templateProcessor->saveAs('php://output');
+    }
+
+
+    public function invoice(Event $event)
+    {
+        $templateProcessor = new TemplateProcessor('word/event-inv.docx');
+        $templateProcessor->setValues([
+            'invNo' => "#$event->noreg",
+            'date' => "$event->created_at",
+            'name' => "$event->nama",
+            'no_hp' => "$event->kontak",
+            'alamat' => "$event->alamat",
+            'start' => "$event->start",
+            'end' => "$event->end",
+            'sub_total' => "$event->sub_total",
+            'diskon' => "$event->diskon %",
+            'total' => "$event->total",
+        ]);
+
+        $values = [];
+        $no = 1;
+        foreach($event->eventBarangs as $key => $val) :
+            $values [] = [
+                    'no' => $no++,
+                    'equipmentName' => $val->barang_name,
+                    'equipmentPrice' => outputRupiah($val->barang_harga),
+                    'equipmentDay' => $val->barang_qty,
+                    'equipmentTotal' => outputRupiah($val->barang_total),
+            ];
+
+            foreach($val->eventBarangItems as $barang) :
+                $barang = [
+                    'no' => $no++,
+                    'equipmentName' => $barang->barang_name,
+                    'equipmentPrice' => outputRupiah($barang->barang_harga),
+                    'equipmentDay' => $barang->barang_qty,
+                    'equipmentTotal' => outputRupiah($barang->barang_total),
+                ];
+                array_push($values, $barang);
+            endforeach;
+        endforeach;
+
+
+        $templateProcessor->cloneRowAndSetValues('no', $values);
+
+        header("Content-Disposition: attachment; filename=inv-$event->noreg.docx");
+
+        $templateProcessor->saveAs('php://output');
+    }
+
+
+
     public function dataTable(Request $request)
     {
         $event = Event::with('eventBarangs')->filtered();
@@ -270,4 +356,7 @@ class EventController extends Controller
             ->rawColumns(['action', 'count_equipment', 'count_item'])
             ->make(true);
     }
+
+
+
 }

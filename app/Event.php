@@ -11,7 +11,7 @@ class Event extends Model
     public $incrementing = false;
 
     protected $appends = ['sub_total_all'];
-
+    protected $with = ['eventBarangs', 'eventOperator'];
 
     public function eventOperator()
     {
