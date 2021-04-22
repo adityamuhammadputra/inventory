@@ -235,17 +235,28 @@ class RentalController extends Controller
 
         $values = [];
         $no = 1;
-        foreach($rental->rentalBarangs as $key => $val) :
-            $values [] = [
-                    'no' => $no++,
-                    'equipmentName' => $val->barang_name,
-                    'equipmentSn' => $val->barang->serial_number,
-            ];
+        $templateProcessor->cloneRow('no', count($rental->rentalBarangs));
+        foreach($rental->rentalBarangs as $val) :
+
+            $templateProcessor->setValue("no#$no", $no);
+            $templateProcessor->setValue("equipmentName#$no", $val->barang_name);
+            $templateProcessor->setValue("equipmentSn#$no", $val->barang->serial_number);
+            $templateProcessor->setValue("items#$no", $val->items);
+            $no++;
         endforeach;
 
-        $templateProcessor->cloneRowAndSetValues('no', $values);
+        // foreach($rental->rentalBarangs as $key => $val) :
+        //     $values [] = [
+        //             'no' => $no++,
+        //             'equipmentName' => $val->barang_name,
+        //             'equipmentSn' => $val->barang->serial_number,
+        //             'items#1' => 'x',
+        //         ];
+        // endforeach;
 
-        header("Content-Disposition: attachment; filename=letter$rental->noreg-$rental->id.docx");
+        // $templateProcessor->cloneRowAndSetValues('no', $values);
+
+        header("Content-Disposition: attachment; filename=letter-$rental->noreg.docx");
 
         $templateProcessor->saveAs('php://output');
     }
@@ -277,11 +288,23 @@ class RentalController extends Controller
                     'equipmentDay' => $val->barang_qty,
                     'equipmentTotal' => outputRupiah($val->barang_total),
             ];
+
+            foreach($val->rentalBarangItems as $barang) :
+                $barang = [
+                    'no' => $no++,
+                    'equipmentName' => $barang->barang_name,
+                    'equipmentPrice' => outputRupiah($barang->barang_harga),
+                    'equipmentDay' => $barang->barang_qty,
+                    'equipmentTotal' => outputRupiah($barang->barang_total),
+                ];
+                array_push($values, $barang);
+            endforeach;
         endforeach;
+
 
         $templateProcessor->cloneRowAndSetValues('no', $values);
 
-        header("Content-Disposition: attachment; filename=inv$rental->noreg-$rental->id.docx");
+        header("Content-Disposition: attachment; filename=inv-$rental->noreg.docx");
 
         $templateProcessor->saveAs('php://output');
     }

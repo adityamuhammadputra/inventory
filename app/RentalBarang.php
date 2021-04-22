@@ -9,7 +9,7 @@ class RentalBarang extends Model
     protected $guarded = [''];
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $appends = ['count_item', 'equpment'];
+    protected $appends = ['count_item', 'equpment', 'items'];
     protected $with = ['barang'];
 
     public function rentalBarangItems()
@@ -20,6 +20,11 @@ class RentalBarang extends Model
     public function getCountItemAttribute()
     {
         return $this->rentalBarangItems->count();
+    }
+
+    public function getItemsAttribute()
+    {
+        return $this->rentalBarangItems->pluck('barang_name')->implode('                                         ');
     }
 
     public function getEqupmentAttribute()
