@@ -21,7 +21,8 @@ class CreateEventOperatorsTable extends Migration
             $table->string('operator_tugas')->nullable();
             $table->string('operator_temp')->nullable();
             $table->string('operator_harga')->nullable();
-
+            $table->string('operator_qty')->nullable();
+            $table->string('operator_total')->nullable();
             $table->timestamps();
         });
     }

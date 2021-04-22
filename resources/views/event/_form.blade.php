@@ -87,11 +87,11 @@
                             <thead>
                                 <tr>
                                     <th style="width: 5px;">#</th>
-                                    <th>Name</th>
+                                    <th>Operator Name</th>
                                     <th style="width: 100px;">Day</th>
                                     <th style="width: 190px">
                                         Price
-                                        <a class="addOp float-right"><span class="fa fa-plus"></span></a>
+                                        <a class="addOp float-right text-primary"><span class="fa fa-plus"></span></a>
                                     </th>
 
                                 </tr>
@@ -127,14 +127,15 @@
                                         <input type="number" class="form-control dayOp dayOp1 text-ceneter" name="dayOp[1]" dataid="1" tabindex="100" value="1">
                                     </td>
                                     <td>
-                                        <div class="input-group">
+                                        <input type="text" class="form-control rupiah priceOp priceOp1 text-right" name="priceOp[1]" dataid="1" tabindex="101">
+                                        {{-- <div class="input-group">
                                             <input type="text" class="form-control rupiah priceOp priceOp1 text-right" name="priceOp[1]" dataid="1" tabindex="101">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <a class="removeOp" data-id="1"><span class="fa fa-trash"></span></a>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </td>
                                 </tr>
                             </tbody>
