@@ -127,15 +127,14 @@
                                         <input type="number" class="form-control dayOp dayOp1 text-ceneter" name="dayOp[1]" dataid="1" tabindex="100" value="1">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control rupiah priceOp priceOp1 text-right" name="priceOp[1]" dataid="1" tabindex="101">
-                                        {{-- <div class="input-group">
+                                        <div class="input-group">
                                             <input type="text" class="form-control rupiah priceOp priceOp1 text-right" name="priceOp[1]" dataid="1" tabindex="101">
                                             <div class="input-group-prepend">
-                                                <div class="input-group-text">
+                                                <div class="input-group-text" style="color: transparent; background: transparent; border: none;">
                                                     <a class="removeOp" data-id="1"><span class="fa fa-trash"></span></a>
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>

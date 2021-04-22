@@ -260,7 +260,7 @@
             },
             onSelect: function (suggestion, that) {
                 let data = suggestion.data;
-                $(that.element).val(data.kode + ' - ' + data.jenis + ' - ' + data.harga);
+                $(that.element).val(data.kode + ' - ' + data.jenis + ' ' + data.merk + ' - ' + data.harga);
                 let $this = that.element.attributes;
                 let id = $this.dataid.value;
                 setPrice(id);
@@ -289,7 +289,7 @@
             },
             onSelect: function (suggestion, that) {
                 let data = suggestion.data;
-                $(that.element).val(data.kode + ' - ' + data.jenis + ' - ' + data.harga);
+                $(that.element).val(data.kode + ' - ' + data.jenis + ' ' + data.merk + ' - ' + data.harga);
                 let $this = that.element.attributes;
                 let id = $this.dataid.value;
                 setPrice(id);
