@@ -110,8 +110,9 @@
                                     <td>
                                         <input type="number" class="form-control day day{{ $key }} text-center" name="day[{{ $key }}]" dataid="{{ $key }}" tabindex="2000" value="{{ $barang->barang_qty }}">
                                     </td>
-                                    <td><input type="text" class="form-control rupiah price price{{ $key }} text-right" name="price[{{ $key }}]" tabindex="2000" value="{{ outputRupiah($barang->barang_item_total) }}"></td>
-                                    <td></td>
+                                    <td><input type="text" class="form-control rupiah price price{{ $key }} text-right" name="price[{{ $key }}]" tabindex="2000"
+                                        value="{{ outputRupiah($barang->barang_item_total) }}"></td>
+                                    <td class="text-center"><a class="removeEquipment" data-id="{{ $key }}"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                 @endforeach
                                 @else

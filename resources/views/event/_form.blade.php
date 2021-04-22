@@ -115,7 +115,7 @@
                                                     tabindex="101"
                                                     value="{{ $item->operator_total }}">
                                                 <div class="input-group-prepend">
-                                                    <div class="input-group-text" style="color: transparent; background: transparent; border: none;">
+                                                    <div class="input-group-text">
                                                         <a class="removeOp" data-id="{{ $item->ids }}"><span class="fa fa-trash"></span></a>
                                                     </div>
                                                 </div>
@@ -156,7 +156,7 @@
                                         <b>Sub Total Operator</b>
                                     </td>
                                     <td colspan="2">
-                                        <input type="text" class="form-control rupiah subtotalOp text-right" name="sub_total_op">
+                                        <input type="text" class="form-control rupiah subtotalOp text-right" name="sub_total_op" value="{{ $data->event->sub_total_op ?? '' }}">
                                     </td>
                                 </tr>
                             </tfoot>
@@ -218,7 +218,7 @@
                                         <input type="number" class="form-control day day{{ $key }} text-center" name="day[{{ $key }}]" dataid="{{ $key }}" tabindex="2000" value="{{ $barang->barang_qty }}">
                                     </td>
                                     <td><input type="text" class="form-control rupiah price price{{ $key }} text-right" name="price[{{ $key }}]" tabindex="2000" value="{{ outputRupiah($barang->barang_item_total) }}"></td>
-                                    <td></td>
+                                    <td class="text-center"><a class="removeEquipment" data-id="{{ $key }}"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                 @endforeach
                                 @else

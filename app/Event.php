@@ -70,7 +70,14 @@ class Event extends Model
         return '-';
     }
 
-    public function getDateAttribute($val)
+    public function getDateStartAttribute($val)
+    {
+        if($val)
+            return dateOutput($val);
+        return '-';
+    }
+
+    public function getDateEndAttribute($val)
     {
         if($val)
             return dateOutput($val);

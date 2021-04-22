@@ -115,7 +115,7 @@ class EventController extends Controller
                         'operator_temp' => $op_temp,
                         'operator_harga' => $op_harga,
                         'operator_qty' => $request->dayOp[$subKeyOp],
-                        'operator_total' => $op_harga * $request->dayOp[$subKeyOp],
+                        'operator_total' => inputRupiah($request->priceOp[$subKeyOp]),
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ];
@@ -173,6 +173,43 @@ class EventController extends Controller
         ];
 
         return view('event.edit', compact('data'));
+    }
+
+    public function update(Request $request, Event $event)
+    {
+        $inputEvent = $request->only('noreg', 'vendor_name', 'client_name', 'name', 'location', 'diskon', 'time_start', 'time_end');
+        $inputEvent['date_start'] = dateInput($request->date_start);
+        $inputEvent['date_end'] = dateInput($request->date_end);
+        $inputEvent['sub_total_op'] = inputRupiah($request->sub_total_op);
+        $inputEvent['sub_total'] = inputRupiah($request->sub_total);
+        $inputEvent['diskon'] = $request->diskon ?? 0;
+        $inputEvent['total'] = inputRupiah($request->total);
+        $inputEvent['user_id'] = userId();
+        $inputEvent['status'] = 1;
+
+        try {
+            DB::beginTransaction();
+                $event->update($inputEvent);
+                EventBarang::where('event_id', $event->id)->delete();
+                EventBarangItem::where('event_barang_id', $event->id)->delete();
+                EventOperator::where('event_id', $event->id)->delete();
+                $this->inputBarang($request, $event);
+                $this->inputOperator($request, $event);
+            DB::commit();
+            $status = 200;
+        } catch (\Throwable $th) {
+            report($th);
+            $status = 401;
+        }
+
+        $data = [
+            'noReg' => getMaxEvent(),
+            'status' => $status,
+            'url' => '/event',
+        ];
+
+        return response()->json($data, $status);
+
     }
 
     public function show($id)

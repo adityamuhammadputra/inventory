@@ -411,12 +411,17 @@
                     loadingIconButton($('#submit'))
                 },
                 success: function(res) {
-                    table.api().ajax.reload()
-                    loadingIconButton($('#submit'), reset = true)
-                    toastr.info('Event Berhasil disimpan')
-                    $('#form-submit')[0].reset()
-                    $('.card-form').slideUp();
-                    $('#noreg').val(res.noReg);
+                    if(res.url !== null) {
+                        toastr.info('Event Berhasil diperbaharui')
+                    } else {
+                        table.api().ajax.reload()
+                        loadingIconButton($('#submit'), reset = true)
+                        toastr.info('Event Berhasil disimpan')
+                        $('#form-submit')[0].reset()
+                        $('.card-form').slideUp();
+                        $('#noreg').val(res.noReg);
+                    }
+
                 },
                 error: function(res) {
                     console.log(res);
