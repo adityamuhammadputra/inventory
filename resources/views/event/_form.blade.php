@@ -17,7 +17,7 @@
             @endif
         </div>
         <div class="card-body card-form"
-            {{-- style="display: none;" --}}
+            style="{{ ($data->method == 'PATCH') ? '' : 'display: none;' }}"
             >
             <div class="row">
                 <div class="col-md-3">
@@ -80,7 +80,9 @@
         </div>
     </div>
 
-    <div class="card">
+    <div class="card"
+        style="{{ ($data->method == 'PATCH') ? '' : 'display: none;' }}"
+        >
         <div class="card-header">
             Operator Input
             <a class="card-header-down float-right">
@@ -174,7 +176,9 @@
         </div>
     </div>
 
-    <div class="card">
+    <div class="card"
+        style="{{ ($data->method == 'PATCH') ? '' : 'display: none;' }}"
+        >
         <div class="card-header">
             Equipment Item Input
             <a class="card-header-down float-right">

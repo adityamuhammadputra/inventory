@@ -330,14 +330,15 @@ class EventController extends Controller
 
         return DataTables::of($event)
             ->addColumn('action', function ($data) {
-                return'<a data-id="'.$data->id.'"
+                return'<a href="/event/'.$data->id.'/edit"
+                            class="text-primary"><i class="fa fa-info-circle"></i>
+                        </a>
+                        <a data-id="'.$data->id.'"
                             data-title="Event  #' . $data->noreg . '"
                             data-url="/event/'.$data->id.'/approve"
-                            class="text-primary approveData"><i class="fa fa-check"></i>
+                            class="text-warning approveData"><i class="fa fa-check"></i>
                         </a>
-                        <a href="/event/'.$data->id.'/edit"
-                            class="text-info"><i class="fa fa-info-circle"></i>
-                        </a>
+
                         <a data-id="' . $data->id . '"
                             data-title="' . $data->kode . '"
                             data-url="/api/v1/barang/'.$data->id.'"

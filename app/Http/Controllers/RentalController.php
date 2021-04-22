@@ -155,13 +155,13 @@ class RentalController extends Controller
                     $approve = '<a data-id="'.$data->id.'"
                                 data-title="Rental #' . $data->noreg . '"
                                 data-url="/rental/'.$data->id.'/approve"
-                                class="text-primary approveData"><i class="fa fa-check"></i>
+                                class="text-warning approveData"><i class="fa fa-check"></i>
                             </a>';
-                return $approve .
-                        '<a href="/rental/'.$data->id.'/edit"
-                            class="text-info"><i class="fa fa-info-circle"></i>
-                        </a>
-                        <a data-id="' . $data->id . '"
+                return '<a href="/rental/'.$data->id.'/edit"
+                            class="text-primary"><i class="fa fa-info-circle"></i>
+                        </a>'
+                        .$approve .
+                        '<a data-id="' . $data->id . '"
                             data-title="' . $data->kode . '"
                             data-url="/rental/'.$data->id.'"
                             class="text-danger deleteData"><i class="fa fa-trash"></i>

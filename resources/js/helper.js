@@ -85,12 +85,15 @@ $('.filter-icon-transaksi').on('click', function(){
 
 $('#btn-add').on('click', function(){
     $('.card-form').slideDown();
+    $('.card-form').closest('.card').slideDown();
     $('.card-form').find('form [name="_method"]').val('POST')
     $('.card-form').find('form').attr('action', $(this).data('action'))
 })
 
 $('#btn-cancel').on('click', function(){
     $('.card-form').slideUp();
+    $('.card-form').closest('.card').slideUp();
+
     if($(this).data('max-kode') == true)
         var kodeTemp = $(this).closest('form').find('#kode').val();
     $(this).closest('form')[0].reset();

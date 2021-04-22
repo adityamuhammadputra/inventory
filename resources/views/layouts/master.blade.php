@@ -22,7 +22,8 @@
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="/">
-                    <span class="align-middle">Panorama</span>
+                    <img src="/img/logo-removebg-preview.png" style="width: 100%; position: relative; left: -15px;
+                ">
                 </a>
                 <ul class="sidebar-nav">
                     <li class="sidebar-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
@@ -225,7 +226,7 @@
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
                                     @hasSection('level1')
-									<li class="breadcrumb-item"><a href="#">@yield('level1')</a></li>
+									<li class="breadcrumb-item"><a href="#" style="color: #e88507;">@yield('level1')</a></li>
                                     @endif
                                     @hasSection('level2')
 									<li class="breadcrumb-item active" aria-current="page">@yield('level2')</li>
