@@ -23,7 +23,7 @@ class EventBarang extends Model
 
     public function getEqupmentAttribute()
     {
-        return $this->barang->kode . ' - ' . $this->barang->jenis . ' - ' .$this->barang->harga;
+        return $this->barang->kode . ' - ' . $this->barang->jenis . ' ' . $this->barang->merk . ' - ' .$this->barang->harga;
     }
 
     public function barang()

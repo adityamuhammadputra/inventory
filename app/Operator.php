@@ -28,11 +28,6 @@ class Operator extends Model
         return '-';
     }
 
-    public function getHargaAttribute()
-    {
-        return outputRupiah($this->attributes['harga']);
-    }
-
     public function scopeFiltered($query)
     {
         $query->when(request('q'), function ($query) {
@@ -41,5 +36,10 @@ class Operator extends Model
                 ->orWhere('tugas', 'like', $param)
                 ->orWhere('vendor_nama', 'like', $param);
         });
+    }
+
+    public function getHargaAttribute()
+    {
+        return outputRupiah($this->attributes['harga']);
     }
 }

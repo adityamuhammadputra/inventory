@@ -15,7 +15,7 @@ class Event extends Model
 
     public function eventOperator()
     {
-        return $this->hasMany(EventOperator::class);
+        return $this->hasMany(EventOperator::class)->orderBy('operator_tugas');
     }
 
     public function eventBarangs()

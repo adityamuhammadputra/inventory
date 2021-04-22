@@ -53,7 +53,7 @@
                             <label for="date_start">Event Date Start</label>
                         </div>
                         <div class="form-label-group col-md-3">
-                            <input type="time" id="time_start" name="time_start" class="form-control" placeholder="Event Time" required value="{{ $data->event->time ?? '' }}">
+                            <input type="time" id="time_start" name="time_start" class="form-control" placeholder="Event Time" required value="{{ $data->event->time_start ?? '' }}">
                             <label for="time_start">Event Time Start</label>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             <label for="date_end">Event Date End</label>
                         </div>
                         <div class="form-label-group col-md-3">
-                            <input type="time" id="time_end" name="time_end" class="form-control" placeholder="Event Time" required value="{{ $data->event->time ?? '' }}">
+                            <input type="time" id="time_end" name="time_end" class="form-control" placeholder="Event Time" required value="{{ $data->event->time_end ?? '' }}">
                             <label for="time_end">Event Time End</label>
                         </div>
                     </div>
@@ -97,31 +97,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @if (count($data->event->eventOperator) > 0 && $data->method == 'PATCH')
+                                @if (count($data->event->eventOperator) > 0 && $data->method == 'PATCH')
                                     @foreach ($data->event->eventOperator as $key => $item)
-                                    <tr id="{{ $item->ids }}">
+                                     <tr id="{{ $item->ids }}">
+                                        <td class="text-center">{{ $item->ids }}</td>
                                         <td>
-                                            {{ $item->ids }}. {{ $item->operator_tugas }}
-                                            <input type="hidden" class="form-control" dataid="{{ $item->ids }}" name="opTugas[{{ $item->ids }}]" value="Camerament">
+                                            <input type="text" class="form-control autoCompleteOp op{{ $item->ids }}" dataid="{{ $item->ids }}" name="op[{{ $item->ids }}]" tabindex="{{ $item->ids }}"
+                                                value="{{ $item->op_name }}">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control dayOp dayOp{{ $item->ids }} text-ceneter" name="dayOp[{{ $item->ids }}]" dataid="{{ $item->ids }}" tabindex="100"
+                                                value="{{ $item->operator_qty }}">
                                         </td>
                                         <td>
                                             <div class="input-group">
-                                                <input type="text" class="form-control autoCompleteOp op{{ $item->ids }}" dataid="{{ $item->ids }}" name="op[{{ $item->ids }}][{{ $key }}]">
+                                                <input type="text" class="form-control rupiah priceOp priceOp{{ $item->ids }} text-right" name="priceOp[{{ $item->ids }}]" dataid="{{ $item->ids }}"
+                                                    tabindex="101"
+                                                    value="{{ $item->operator_total }}">
                                                 <div class="input-group-prepend">
-                                                    <div class="input-group-text">
-                                                        <a class="addOp" data-id="{{ $item->ids }}"><span class="fa fa-plus"></span></a>
+                                                    <div class="input-group-text" style="color: transparent; background: transparent; border: none;">
+                                                        <a class="removeOp" data-id="{{ $item->ids }}"><span class="fa fa-trash"></span></a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><input type="text" class="form-control rupiah priceOp priceOp{{ $item->ids }} text-right" name="priceOp[{{ $item->ids }}]" tabindex="20054"></td>
                                     </tr>
                                     @endforeach
-                                @endif --}}
+                                @else
                                 <tr id="1">
                                     <td class="text-center">1</td>
                                     <td>
-                                        <input type="text" class="form-control autoCompleteOp op1" dataid="1" name="op[1][1]" tabindex="1">
+                                        <input type="text" class="form-control autoCompleteOp op1" dataid="1" name="op[1]" tabindex="1">
                                     </td>
                                     <td>
                                         <input type="number" class="form-control dayOp dayOp1 text-ceneter" name="dayOp[1]" dataid="1" tabindex="100" value="1">
@@ -137,6 +143,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @endif
                             </tbody>
 
                             <tfoot>
@@ -192,7 +199,7 @@
                                         <input type="text" class="form-control autoCompleteEquipment equipment{{ $key }}" dataid="{{ $key }}" name="equpment[{{ $key }}]" value="{{ $barang->equpment }}">
                                     </td>
                                     <td>
-                                        @foreach ($barang->rentalBarangItems as $keyItem => $item)
+                                        @foreach ($barang->eventBarangItems as $keyItem => $item)
                                             <div class="input-group">
                                                 <input type="text" class="form-control autoCompleteItem item{{ $key }}" dataid="{{ $key }}" name="item[{{ $key }}][{{ $keyItem }}]" value="{{ $item->equpment }}">
                                                 <div class="input-group-prepend">

@@ -10,7 +10,13 @@ class EventOperator extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $appends = ['ids'];
+    protected $appends = ['ids', 'op_name'];
+    protected $with = ['operator'];
+
+    public function operator()
+    {
+        return $this->belongsTo(Operator::class);
+    }
 
     public function getIdsAttribute()
     {
@@ -22,5 +28,15 @@ class EventOperator extends Model
             return 3;
         else
             return 4;
+    }
+
+    public function getOpNameAttribute()
+    {
+        return $this->operator->tugas . ' - ' . $this->operator->kode . ' - ' . $this->operator->nama . ' - ' .$this->operator->harga;
+    }
+
+    public function getOperatorTotalAttribute($val)
+    {
+        return outputRupiah($val);
     }
 }
