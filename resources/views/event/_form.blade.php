@@ -115,7 +115,7 @@
                                                     tabindex="101"
                                                     value="{{ $item->operator_total }}">
                                                 <div class="input-group-prepend">
-                                                    <div class="input-group-text">
+                                                    <div class="input-group-text" style="background: transparent; border: none;">
                                                         <a class="removeOp" data-id="{{ $item->ids }}"><span class="fa fa-trash"></span></a>
                                                     </div>
                                                 </div>
