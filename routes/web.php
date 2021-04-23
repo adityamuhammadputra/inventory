@@ -43,4 +43,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('event/{event}/approve', 'RentalController@approve');
     Route::get('event/{event}/letter-docx', 'EventController@letter');
     Route::get('event/{event}/inv-docx', 'EventController@invoice');
+    Route::get('event/{event}/operator-docx', 'EventController@operatorDocx');
 });

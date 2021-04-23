@@ -104,7 +104,7 @@ class EventController extends Controller
                     $op_name = $opDb->nama;
                     $op_tugas = $opDb->tugas;
                     $op_temp = inputRupiah($opDb->harga);
-                    $op_harga = inputRupiah($request->priceOp[$subKeyOp]);
+                    $op_harga = inputRupiah($request->harga[$subKeyOp]);
                     $uuid = uuid();
                     $ops [] = [
                         'id' => $uuid,
@@ -270,6 +270,36 @@ class EventController extends Controller
         endforeach;
 
         header("Content-Disposition: attachment; filename=letter-$event->noreg.docx");
+
+        $templateProcessor->saveAs('php://output');
+    }
+
+    public function operatorDocx(Event $event)
+    {
+        $templateProcessor = new TemplateProcessor('word/event-operator-inv.docx');
+        $templateProcessor->setValues([
+            'vendor' => "$event->vendor_name",
+            'client' => "$event->client_name",
+            'eventName' => "$event->name",
+            'eventLocation' => "$event->location",
+            'start' => "$event->date_start $event->time_start",
+            'end' => "$event->date_end $event->time_end",
+            'total' => "$event->sub_total_op"
+        ]);
+
+        $noOp = 1;
+        $templateProcessor->cloneRow('no', count($event->eventOperator));
+        foreach($event->eventOperator as $valOp) :
+            $templateProcessor->setValue("no#$noOp", $noOp);
+            $templateProcessor->setValue("name#$noOp", $valOp->operator_nama);
+            $templateProcessor->setValue("job#$noOp", $valOp->operator_tugas);
+            $templateProcessor->setValue("price#$noOp", outputRupiah($valOp->operator_harga));
+            $templateProcessor->setValue("day#$noOp", $valOp->operator_qty);
+            $templateProcessor->setValue("amount#$noOp", $valOp->operator_total);
+            $noOp++;
+        endforeach;
+
+        header("Content-Disposition: attachment; filename=payment-receipt-operator-$event->noreg.docx");
 
         $templateProcessor->saveAs('php://output');
     }

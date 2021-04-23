@@ -9,7 +9,7 @@
                     <a class="btn btn-outline-primary float-right ml-2" href="/event/{{ $data->event->id }}/inv-docx"><span class="fa fa-print"></span> Cetak Invoice</a>
                 @endif
             <a class="btn btn-outline-info float-right ml-2" href="/event/{{ $data->event->id }}/letter-docx"><span class="fa fa-print"></span> Letter</a>
-            <a class="btn btn-outline-info float-right" href="/event/{{ $data->event->id }}/payment-operator-docx"><span class="fa fa-print"></span> Payment Operator</a>
+            <a class="btn btn-outline-info float-right" href="/event/{{ $data->event->id }}/operator-docx"><span class="fa fa-print"></span> Payment Operator</a>
             @else
             <a class="card-header-down float-right">
                 <span data-feather="chevron-down"></span>
