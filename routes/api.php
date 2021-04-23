@@ -38,5 +38,6 @@ Route::prefix('v1')->group(function () {
     Route::get('lookup-vendor', 'Api\Controller@lookupVendor');
     Route::get('lookup-barang', 'Api\Controller@lookupBarang');
     Route::get('lookup-operator', 'Api\Controller@lookupOperator');
+    Route::get('lookup-calendar', 'Api\Controller@lookupCalendar');
 
 });

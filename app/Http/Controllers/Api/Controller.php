@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Barang;
 use App\Client;
+use App\Event;
 use App\Operator;
 use App\Rental;
 use App\Vendor;
+use Carbon\CarbonPeriod;
+use DateTime;
 use Exception;
 use GuzzleHttp\RetryMiddleware;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -117,5 +120,58 @@ class Controller extends BaseController
         $result = ['suggestions' => $data];
 
         return response()->json($result, 200);
+    }
+
+    public function lookupCalendar(Request $request)
+    {
+        $start = $request->start ? new DateTime($request->start) : (new DateTime())->modify('first day of this month');
+        $end = $request->end ? new DateTime($request->end) : (new DateTime())->modify('last day of this month');
+        $event = Event::select('date_start as start', 'date_end as end', 'sub_total', 'sub_total_op')
+                    ->where('date_start', '>=', $start)
+                    ->where('date_end', '<=', $end)
+                    ->get()
+                    ->toArray();
+
+        $rental = Rental::select('start', 'end', 'sub_total as sub_total', 'total as sub_total_op')
+                    ->where('start', '>=', $start)
+                    ->where('end', '<=', $end)
+                    ->get()
+                    ->toArray();
+
+        $results = array_merge($event,$rental);
+
+        $bulan = collect([]);
+        foreach ($results as $k) {
+            $x = collect(CarbonPeriod::create($k['start'], $k['end']));
+            $x = $x->map(function ($item, $_) {
+                return [
+                    'date' => $item->format('Y-m-d'),
+                ];
+            });
+            $bulan = $bulan->merge($x);
+        }
+
+        $result = $bulan->groupBy('date')->map(function ($item,  $_) {
+            return [
+                'date' => $item[0]['date'],
+                'n' => count($item),
+            ];
+        });
+
+        $results = [];
+        foreach ($result as $d) {
+            // for ($i = 0; $i < $d['n']; $i++) {
+            $results[] = [
+                'title' => $d['n'],
+                'color' => 'danger',
+                'start' => $d['date'],
+                'end' => date('Y-m-d', strtotime($d['date'] . '+' . 1 . 'days')),
+                'backgroundColor' => '#ffe2bc',
+                'borderColor' => "#ffe2bc",
+            ];
+            // }
+        }
+        return json_encode($results);
+
     }
 }

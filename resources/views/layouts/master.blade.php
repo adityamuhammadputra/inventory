@@ -14,7 +14,7 @@
     <title>@hasSection('level2') @yield('level2') | @endif Panorama</title>
 	<link href="/css/app.css" rel="stylesheet">
 	<link href="/admin/css/app.css" rel="stylesheet">
-
+    @stack('css')
 </head>
 
 <body>

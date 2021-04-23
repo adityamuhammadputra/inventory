@@ -44,8 +44,10 @@ class Event extends Model
 
     public function getSubTotalAllAttribute()
     {
-        $subTotal = $this->attributes['sub_total'] + $this->attributes['sub_total_op'];
-        return outputRupiah($subTotal);
+        if($this->attributes['sub_total']){
+            $subTotal = $this->attributes['sub_total'] + $this->attributes['sub_total_op'];
+            return outputRupiah($subTotal);
+        }
     }
 
     public function getTotalAttribute($val)
@@ -83,4 +85,5 @@ class Event extends Model
             return dateOutput($val);
         return '-';
     }
+
 }
