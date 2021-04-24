@@ -414,20 +414,23 @@ class EventController extends Controller
 
         return DataTables::of($event)
             ->addColumn('action', function ($data) {
+                $action= '';
+                if($data->status == 1) {
+                    $action = '<a data-id="'.$data->id.'"
+                                    data-title="Event  #' . $data->noreg . '"
+                                    data-url="/event/'.$data->id.'/approve"
+                                    class="text-warning approveData"><i class="fa fa-check"></i>
+                                </a>
+
+                                <a data-id="' . $data->id . '"
+                                    data-title="' . $data->kode . '"
+                                    data-url="/event/'.$data->id.'"
+                                    class="text-danger deleteData"><i class="fa fa-trash"></i>
+                                </a>';
+                }
                 return'<a href="/event/'.$data->id.'/edit"
                             class="text-primary"><i class="fa fa-info-circle"></i>
-                        </a>
-                        <a data-id="'.$data->id.'"
-                            data-title="Event  #' . $data->noreg . '"
-                            data-url="/event/'.$data->id.'/approve"
-                            class="text-warning approveData"><i class="fa fa-check"></i>
-                        </a>
-
-                        <a data-id="' . $data->id . '"
-                            data-title="' . $data->kode . '"
-                            data-url="/event/'.$data->id.'"
-                            class="text-danger deleteData"><i class="fa fa-trash"></i>
-                        </a>';
+                        </a>' . $action;
             })
             ->addColumn('count_op', function ($data) {
                 return $data->eventOperator->count();

@@ -189,21 +189,25 @@ class RentalController extends Controller
         return DataTables::of($rental)
             ->addColumn('action', function ($data) {
                 $approve = '';
-                if($data->status == 1)
+                $deleted = '';
+                if($data->status == 1){
                     $approve = '<a data-id="'.$data->id.'"
-                                data-title="Rental #' . $data->noreg . '"
-                                data-url="/rental/'.$data->id.'/approve"
-                                class="text-warning approveData"><i class="fa fa-check"></i>
-                            </a>';
+                                    data-title="Rental #' . $data->noreg . '"
+                                    data-url="/rental/'.$data->id.'/approve"
+                                    class="text-warning approveData"><i class="fa fa-check"></i>
+                                </a>';
+
+                    $deleted =  '<a data-id="' . $data->id . '"
+                                    data-title="' . $data->kode . '"
+                                    data-url="/rental/'.$data->id.'"
+                                    class="text-danger deleteData"><i class="fa fa-trash"></i>
+                                </a>';
+                }
+
                 return '<a href="/rental/'.$data->id.'/edit"
                             class="text-primary"><i class="fa fa-info-circle"></i>
                         </a>'
-                        .$approve .
-                        '<a data-id="' . $data->id . '"
-                            data-title="' . $data->kode . '"
-                            data-url="/rental/'.$data->id.'"
-                            class="text-danger deleteData"><i class="fa fa-trash"></i>
-                        </a>';
+                        .$approve . $deleted;
             })
             ->addColumn('count_equipment', function ($data) {
                 return $data->rentalBarangs->count();

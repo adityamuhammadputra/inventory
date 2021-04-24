@@ -289,7 +289,13 @@
                         </table>
                     </div>
                     @if ($data->method == 'PATCH')
-                        <button type="submit" class="btn btn-primary btn-square float-right" id="change"><span class="fa fa-check-circle"></span> Simpan Perubahan</button>
+                        @if ($data->event->status == 1)
+                            <a class="btn btn-warning btn-square approveData"
+                                data-id="{{ $data->event->id }}" data-title="Event #{{ $data->event->title }}" data-url="/event/{{ $data->event->id }}/approve" >
+                                <i class="fa fa-check"></i> Approve
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-square float-right" id="change"><span class="fa fa-check-circle"></span> Simpan Perubahan</button>
+                        @endif
                         <a class="btn btn-secondary btn-square float-right text-white mr-2" href="/event"> Kembali</a>
                     @else
                         <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
