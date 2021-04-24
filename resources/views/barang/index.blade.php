@@ -17,6 +17,7 @@
             <div class="card-header pt-4 pb-0">
                 <h6 class="card-subtitle text-muted">Daftar {{ $data->title }}
                     <button class="btn btn-square btn-primary float-right" id="btn-add" data-action="/api/v1/barang"><i class="fa fa-plus"></i> Tambah</button>
+                    <a class="btn btn-square btn-info float-right mr-2" href="/api/v1/print-barcode?q={{ $data->kategori }}"><i class="mdi mdi-printer"></i> Print Barcode</a>
                 </h6>
             </div>
             <div class="card-body pt-0">

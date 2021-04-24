@@ -22,7 +22,7 @@ Route::prefix('v1')->group(function () {
     Route::resource('barang', 'Api\BarangController')->except('create', 'index');
     Route::post('barang/datatable', 'Api\BarangController@dataTable');
     Route::get('barang/max-kode/{kode}', 'Api\BarangController@maxKode');
-
+    Route::get('print-barcode', 'Api\BarangController@printBarcode');
 
     Route::resource('jasa', 'Api\JasaController')->except('create', 'index');
     Route::post('jasa/datatable', 'Api\JasaController@dataTable');
@@ -41,3 +41,4 @@ Route::prefix('v1')->group(function () {
     Route::get('lookup-calendar', 'Api\Controller@lookupCalendar');
 
 });
+

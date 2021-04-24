@@ -117,4 +117,15 @@ class BarangController extends Controller
         return $barang;
     }
 
+    public function printBarcode(Request $request)
+    {
+        if($request->q == 'IP') :
+            $barangs = Barang::item()->pluck('barcode', 'kode');
+        else :
+            $barangs = Barang::equipment()->pluck('barcode', 'kode');
+        endif;
+
+        return view('barang._barcode', compact('barangs'));
+    }
+
 }
