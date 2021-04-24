@@ -251,7 +251,9 @@
                     dataType: "json",
                     data: {
                         q : query,
-                        kategori : 'EP'
+                        kategori : 'EP',
+                        start: $('#date_start').val(),
+                        end: $('#date_start').val(),
                     },
                     success: function(data) {
                         done(data);
@@ -280,7 +282,9 @@
                     dataType: "json",
                     data: {
                         q : query,
-                        kategori : 'IP'
+                        kategori : 'IP',
+                        start: $('#date_start').val(),
+                        end: $('#date_start').val()
                     },
                     success: function(data) {
                         done(data);

@@ -175,7 +175,9 @@
                     dataType: "json",
                     data: {
                         q : query,
-                        kategori : 'EP'
+                        kategori : 'EP',
+                        start: $('#start').val(),
+                        end: $('#end').val(),
                     },
                     success: function(data) {
                         done(data);
@@ -204,7 +206,9 @@
                     dataType: "json",
                     data: {
                         q : query,
-                        kategori : 'IP'
+                        kategori : 'IP',
+                        start: $('#start').val(),
+                        end: $('#end').val(),
                     },
                     success: function(data) {
                         done(data);

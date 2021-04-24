@@ -11,6 +11,10 @@ class Barang extends Model
     public $incrementing = false;
     protected $appends = ['status_label'];
 
+    public function barangLogs()
+    {
+        return $this->hasMany(BarangLog::class, 'barang_kode', 'kode');
+    }
 
     public function getCreatedAtAttribute($val)
     {
@@ -99,7 +103,12 @@ class Barang extends Model
 
     public function scopeAvailable($query)
     {
-        $query->where('status', '1');
+        $query->when(request('start'), function ($query) {
+            $query->whereDoesntHave('barangLogs', function($q){
+                $q->where('start', '>=', dateInput(request('start')))
+                    ->where('end', '<=', dateInput(request('end')));
+            });
+        });
     }
 
     public function scopeMaxKode($query, $kategori)

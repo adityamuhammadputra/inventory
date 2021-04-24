@@ -15,17 +15,23 @@ class CreateBarangLogsTable extends Migration
     {
         Schema::create('barang_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('barang_id')->nullable();
             $table->uuid('event_id')->nullable();
             $table->uuid('rental_id')->nullable();
-            $table->string('kode')->nullable();
+            // $table->string('kode')->nullable();
             $table->date('start')->nullable();
             $table->date('end')->nullable();
             $table->dateTime('deleted')->nullable();
-            $table->timestamps();
 
+            $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('barang_logs');

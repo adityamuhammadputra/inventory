@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Barang;
+use App\BarangLog;
 use App\Client;
 use App\Rental;
 use App\RentalBarang;
@@ -89,6 +90,7 @@ class RentalController extends Controller
         $idRentalBarang = [];
         if($request->equpment) :
             $barangs = [];
+            $barangLogs = [];
             foreach($request->equpment as $key => $barang) :
                 $barangDb = Barang::where('kode', explode(' - ', $barang)[0])->first();
                 $barang_id = $barangDb->id;
@@ -110,12 +112,27 @@ class RentalController extends Controller
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ];
+
+                $barangLogs [] = [
+                    'id' => uuid(),
+                    'rental_id' => $rentalDb->id,
+                    'barang_kode' => $barangDb->kode,
+                    'start' => dateInput($rentalDb->start),
+                    'end' => dateInput($rentalDb->end),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ];
+
             endforeach;
             RentalBarang::insert($barangs);
+            BarangLog::insert($barangLogs);
+
         endif;
 
         if($request->item) :
             $items = [];
+            $barangLogs = [];
+
             foreach($request->item as $key => $item) :
                 foreach($item as $subKey => $subItem) :
                     if(!$request->item[$key][$subKey] == null) :
@@ -136,10 +153,22 @@ class RentalController extends Controller
                             'created_at' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ];
+
+                        $barangLogs [] = [
+                            'id' => uuid(),
+                            'rental_id' => $rentalDb->id,
+                            'barang_kode' => $barangDb->kode,
+                            'start' => dateInput($rentalDb->start),
+                            'end' => dateInput($rentalDb->end),
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()
+                        ];
+
                     endif;
                 endforeach;
             endforeach;
             RentalBarangItem::insert($items);
+            BarangLog::insert($barangLogs);
         endif;
     }
 

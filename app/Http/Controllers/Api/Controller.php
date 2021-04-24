@@ -90,7 +90,6 @@ class Controller extends BaseController
             $barang = Barang::item()->available()->filtered()->get();
         else
             $barang = Barang::equipment()->available()->filtered()->get();
-
         $data = [];
         foreach($barang as $c) :
             $data [] = [
@@ -170,6 +169,5 @@ class Controller extends BaseController
             ];
         }
         return json_encode($results);
-
     }
 }
