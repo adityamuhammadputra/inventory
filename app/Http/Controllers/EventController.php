@@ -397,7 +397,7 @@ class EventController extends Controller
             $templateProcessor->setValue("equipmentName#$no", $val->barang_name);
             $templateProcessor->setValue("equipmentSn#$no", $val->barang->serial_number);
             $templateProcessor->setValue("items#$no", $val->items);
-            $templateProcessor->setValue("harga#$no", '-');
+            $templateProcessor->setValue("harga#$no", $val->barang_item_harga);
             $templateProcessor->setValue("day#$no", $val->barang_qty);
             $templateProcessor->setValue("price#$no", outputRupiah($val->barang_item_total));
             $no++;
