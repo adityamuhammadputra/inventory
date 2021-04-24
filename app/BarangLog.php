@@ -15,11 +15,11 @@ class BarangLog extends Model
     {
         $check = '';
         if($this->deleted_at)
-            $check = '| <span class="mdi mdi-check text-primary"></span>';
+            $check = ' <span class="mdi mdi-check text-primary"></span>';
 
-        $position = '';
+        $position = 'E';
         if($this->rental_id)
-            $position = 'r';
+            $position = 'R';
         return "{$this->start} s/d {$this->end} $position {$check}";
     }
 

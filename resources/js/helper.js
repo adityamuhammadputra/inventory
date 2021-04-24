@@ -49,7 +49,14 @@ $(document).on('click','.approveData', function(){
                 },
                 success: function(res){
                     toastr.info('Data Berhasil Approve')
-                    table.api().ajax.reload()
+                    if (window.location.href.indexOf("edit") != -1) {
+                        setTimeout(function(){
+                            window.location.reload();
+                         }, 1500);
+                    } else {
+                        table.api().ajax.reload()
+                    }
+
                 },
                 error: function(){
                 }

@@ -62,12 +62,13 @@ class EventController extends Controller
                     'updated_at' => Carbon::now()
                 ];
 
+
                 $barangLogs [] = [
-                    'id' => $uuid,
+                    'id' => uuid(),
                     'event_id' => $eventDb->id,
-                    'barang_id' => $barang_id,
-                    'start' => $eventDb->date_start,
-                    'end' => $eventDb->date_end,
+                    'barang_kode' => $barangDb->kode,
+                    'start' => dateInput($eventDb->date_start),
+                    'end' => dateInput($eventDb->date_end),
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ];
@@ -75,7 +76,6 @@ class EventController extends Controller
             endforeach;
             EventBarang::insert($barangs);
             BarangLog::insert($barangLogs);
-
         endif;
 
         if($request->item) :
@@ -103,11 +103,11 @@ class EventController extends Controller
                         ];
 
                         $barangLogs [] = [
-                            'id' => $uuid,
+                            'id' => uuid(),
                             'event_id' => $eventDb->id,
-                            'barang_id' => $barang_id,
-                            'start' => $eventDb->date_start,
-                            'end' => $eventDb->date_end,
+                            'barang_kode' => $barangDb->kode,
+                            'start' => dateInput($eventDb->date_start),
+                            'end' => dateInput($eventDb->date_end),
                             'created_at' => Carbon::now(),
                             'updated_at' => Carbon::now()
                         ];
@@ -132,7 +132,8 @@ class EventController extends Controller
                     $op_name = $opDb->nama;
                     $op_tugas = $opDb->tugas;
                     $op_temp = inputRupiah($opDb->harga);
-                    $op_harga = inputRupiah($request->harga[$subKeyOp]);
+                    $op_harga = inputRupiah($opDb->harga);
+                    // $op_harga = inputRupiah($request->priceOp[$subKeyOp]);
                     $uuid = uuid();
                     $ops [] = [
                         'id' => $uuid,
@@ -218,8 +219,8 @@ class EventController extends Controller
         try {
             DB::beginTransaction();
                 BarangLog::where('event_id', $event->id)
-                    ->where('start', dateInput($event->start))
-                    ->where('end', dateInput($event->end))
+                    ->where('start', dateInput($event->date_start))
+                    ->where('end', dateInput($event->date_end))
                     ->delete();
 
                 $event->update($inputEvent);
@@ -272,7 +273,6 @@ class EventController extends Controller
         try {
             $event->status = 2;
             $event->save();
-
             BarangLog::where('event_id', $event->id)
                     ->where('start', dateInput($event->date_start))
                     ->where('end', dateInput($event->date_end))
@@ -363,43 +363,45 @@ class EventController extends Controller
     {
         $templateProcessor = new TemplateProcessor('word/event-inv.docx');
         $templateProcessor->setValues([
-            'invNo' => "#$event->noreg",
-            'date' => "$event->created_at",
-            'name' => "$event->nama",
-            'no_hp' => "$event->kontak",
-            'alamat' => "$event->alamat",
-            'start' => "$event->start",
-            'end' => "$event->end",
-            'sub_total' => "$event->sub_total",
-            'diskon' => "$event->diskon %",
-            'total' => "$event->total",
+            'invNo' => "$event->noreg",
+            'date' => "$event->create_at",
+            'vendor' => "$event->vendor_name",
+            'client' => "$event->client_name",
+            'eventName' => "$event->name",
+            'eventLocation' => "$event->location",
+            'start' => "$event->date_start $event->time_start",
+            'end' => "$event->date_end $event->time_end",
+            'subTotalOp' => $event->sub_total_op,
+            'subTotal' => $event->sub_total,
+            'sub_total_all' => $event->sub_total_all,
+            'diskon' => "$event->diskon%",
+            'total' => "$event->total"
         ]);
 
-        $values = [];
-        $no = 1;
-        foreach($event->eventBarangs as $key => $val) :
-            $values [] = [
-                    'no' => $no++,
-                    'equipmentName' => $val->barang_name,
-                    'equipmentPrice' => outputRupiah($val->barang_harga),
-                    'equipmentDay' => $val->barang_qty,
-                    'equipmentTotal' => outputRupiah($val->barang_total),
-            ];
-
-            foreach($val->eventBarangItems as $barang) :
-                $barang = [
-                    'no' => $no++,
-                    'equipmentName' => $barang->barang_name,
-                    'equipmentPrice' => outputRupiah($barang->barang_harga),
-                    'equipmentDay' => $barang->barang_qty,
-                    'equipmentTotal' => outputRupiah($barang->barang_total),
-                ];
-                array_push($values, $barang);
-            endforeach;
+        $noOp = 1;
+        $templateProcessor->cloneRow('noOp', count($event->eventOperator));
+        foreach($event->eventOperator as $valOp) :
+            $templateProcessor->setValue("noOp#$noOp", $noOp);
+            $templateProcessor->setValue("operatorJobs#$noOp", $valOp->operator_tugas);
+            $templateProcessor->setValue("operatorName#$noOp", $valOp->operator_nama);
+            $templateProcessor->setValue("hargaOp#$noOp", $valOp->operator_harga);
+            $templateProcessor->setValue("dayOp#$noOp", $valOp->operator_qty);
+            $templateProcessor->setValue("priceOp#$noOp", $valOp->operator_total);
+            $noOp++;
         endforeach;
 
-
-        $templateProcessor->cloneRowAndSetValues('no', $values);
+        $no = 1;
+        $templateProcessor->cloneRow('no', count($event->eventBarangs));
+        foreach($event->eventBarangs as $val) :
+            $templateProcessor->setValue("no#$no", $no);
+            $templateProcessor->setValue("equipmentName#$no", $val->barang_name);
+            $templateProcessor->setValue("equipmentSn#$no", $val->barang->serial_number);
+            $templateProcessor->setValue("items#$no", $val->items);
+            $templateProcessor->setValue("harga#$no", '-');
+            $templateProcessor->setValue("day#$no", $val->barang_qty);
+            $templateProcessor->setValue("price#$no", outputRupiah($val->barang_item_total));
+            $no++;
+        endforeach;
 
         header("Content-Disposition: attachment; filename=inv-$event->noreg.docx");
 

@@ -92,7 +92,7 @@
             <div class="row">
                 <div class="col-12 pt-2">
                     <div class="form-row row-multiple">
-                        <table class="table">
+                        <table class="table" id="table-op">
                             <thead>
                                 <tr>
                                     <th style="width: 5px;">#</th>
@@ -188,7 +188,7 @@
             <div class="row">
                 <div class="col-12 pt-2">
                     <div class="form-row row-multiple">
-                        <table class="table">
+                        <table class="table" id="table-barang">
                             <thead>
                                 <tr>
                                     <th style="width: 5px;">#</th>

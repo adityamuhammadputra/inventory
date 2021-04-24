@@ -43,9 +43,9 @@
                     }
                 },
                 {
-                    data: 'date',
+                    data: 'date_start',
                     render: function (data, type, row, meta) {
-                        return data + ' ' + row.time;
+                        return data + ' s/d ' + row.date_end;
                     },
 
                 },
@@ -101,7 +101,7 @@
     })
 
     var id
-    var countRow = 1;
+    var countRow = $('#table-barang tbody tr').length;
     $("#addEquipment").on('click', function(){
         countRow++
         valueDay = $('.day1').val();
@@ -130,13 +130,13 @@
         setAutoCompleteItem()
     })
 
-    var countRow = 1;
+    var countRowItem = 1;
     $(document).on('click', '.addItem', function(){
-        countRow++
+        countRowItem++
         let idRow = $(this).data('id');
-        // <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRow+']">
+        // <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item['+idRow+']['+countRowItem+']">
         let html = '<div class="input-group">\
-                        <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item[' + idRow + '][' + countRow + ']">\
+                        <input type="text" class="form-control autoCompleteItem item' + idRow + '" dataid="' + idRow + '" name="item[' + idRow + '][' + countRowItem + ']">\
                         <div class="input-group-prepend">\
                             <div class="input-group-text">\
                                 <a class="removeItem" data-id="' + idRow + '"><span class="fa fa-trash"></span></a>\
@@ -144,11 +144,11 @@
                         </div>\
                     </div>';
         $(this).closest('td').append(html);
-        $('input[name="item[' + idRow + '][' + countRow + ']"]').focus();
+        $('input[name="item[' + idRow + '][' + countRowItem + ']"]').focus();
         setAutoCompleteItem()
     })
 
-    var idRow = 1;
+    var idRow = $('#table-op tbody tr').length;
     $(document).on('click', '.addOp', function(){
         idRow++
         let html = '<tr id="1">\
@@ -252,7 +252,7 @@
                         q : query,
                         kategori : 'EP',
                         start: $('#date_start').val(),
-                        end: $('#date_start').val(),
+                        end: $('#date_end').val(),
                     },
                     success: function(data) {
                         done(data);
@@ -283,7 +283,7 @@
                         q : query,
                         kategori : 'IP',
                         start: $('#date_start').val(),
-                        end: $('#date_start').val()
+                        end: $('#date_end').val()
                     },
                     success: function(data) {
                         done(data);
