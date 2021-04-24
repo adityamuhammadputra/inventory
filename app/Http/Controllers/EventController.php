@@ -223,6 +223,15 @@ class EventController extends Controller
                 EventOperator::where('event_id', $event->id)->delete();
                 $this->inputBarang($request, $event);
                 $this->inputOperator($request, $event);
+
+                BarangLog::where('rental_id', $event->id)
+                    ->where('start', dateInput($event->start))
+                    ->where('end', dateInput($event->end))
+                    ->update([
+                        'start' => $request->date_start,
+                        'end' => $request->date_start,
+                    ]);
+
             DB::commit();
             $status = 200;
         } catch (\Throwable $th) {
@@ -249,6 +258,11 @@ class EventController extends Controller
 
     public function destroy(Event $event)
     {
+        BarangLog::where('event_id', $event->id)
+                    ->where('start', dateInput($event->date_start))
+                    ->where('end', dateInput($event->date_end))
+                    ->delete();
+
         return $event->delete();
     }
 

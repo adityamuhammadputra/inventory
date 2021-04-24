@@ -74,6 +74,15 @@ class RentalController extends Controller
             RentalBarang::where('rental_id', $rental->id)->delete();
             RentalBarangItem::where('rental_barang_id', $rental->id)->delete();
             $this->inputBarang($request, $rental);
+
+            BarangLog::where('rental_id', $rental->id)
+                    ->where('start', dateInput($rental->start))
+                    ->where('end', dateInput($rental->end))
+                    ->update([
+                        'start' => $request->start,
+                        'end' => $request->end,
+                    ]);
+
         DB::commit();
 
         $data = [
@@ -231,6 +240,11 @@ class RentalController extends Controller
 
     public function destroy(Rental $rental)
     {
+        BarangLog::where('rental_id', $rental->id)
+                    ->where('start', dateInput($rental->start))
+                    ->where('end', dateInput($rental->end))
+                    ->delete();
+
         return $rental->delete();
     }
 
