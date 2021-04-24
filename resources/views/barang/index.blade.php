@@ -33,7 +33,7 @@
                             <th>Serial Number</th>
                             <th>Harga</th>
                             <th>created at</th>
-                            <th>Logs</th>
+                            <th>5 last Logs</th>
                             <th></th>
                         </tr>
                     </thead>

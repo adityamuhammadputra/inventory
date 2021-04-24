@@ -247,6 +247,10 @@ class EventController extends Controller
         return $event;
     }
 
+    public function destroy(Event $event)
+    {
+        return $event->delete();
+    }
 
     public function approve(Request $request, Event $event)
     {
@@ -399,7 +403,7 @@ class EventController extends Controller
 
                         <a data-id="' . $data->id . '"
                             data-title="' . $data->kode . '"
-                            data-url="/api/v1/barang/'.$data->id.'"
+                            data-url="/event/'.$data->id.'"
                             class="text-danger deleteData"><i class="fa fa-trash"></i>
                         </a>';
             })

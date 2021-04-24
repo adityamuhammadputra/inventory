@@ -231,7 +231,7 @@ class RentalController extends Controller
 
     public function destroy(Rental $rental)
     {
-        return $rental;
+        return $rental->delete();
     }
 
     public function approve(Request $request, Rental $rental)
