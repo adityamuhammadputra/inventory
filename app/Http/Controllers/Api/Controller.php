@@ -87,9 +87,9 @@ class Controller extends BaseController
     public function lookupBarang(Request $request)
     {
         if($request->kategori == 'IP')
-            $barang = Barang::item()->filtered()->get();
+            $barang = Barang::item()->available()->filtered()->get();
         else
-            $barang = Barang::equipment()->filtered()->get();
+            $barang = Barang::equipment()->available()->filtered()->get();
 
         $data = [];
         foreach($barang as $c) :
@@ -160,7 +160,6 @@ class Controller extends BaseController
 
         $results = [];
         foreach ($result as $d) {
-            // for ($i = 0; $i < $d['n']; $i++) {
             $results[] = [
                 'title' => $d['n'],
                 'color' => 'danger',
@@ -169,7 +168,6 @@ class Controller extends BaseController
                 'backgroundColor' => '#ffe2bc',
                 'borderColor' => "#ffe2bc",
             ];
-            // }
         }
         return json_encode($results);
 

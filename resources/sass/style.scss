@@ -199,6 +199,10 @@ table tr td > input.form-control:focus, table tr td div > input.form-control:foc
     background: #f88d01 !important;
 }
 
+.sidebar-dropdown .sidebar-item.active .sidebar-link {
+    color: #f88e00 !important;
+}
+
 @media (min-width: 992px) {
     .content {
         padding: 1.8rem 1.8rem 0.5rem !important;
