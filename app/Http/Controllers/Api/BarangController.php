@@ -41,7 +41,10 @@ class BarangController extends Controller
             ->addColumn('status_label', function ($data) {
                 return $data->status_label;
             })
-            ->rawColumns(['action', 'barcode', 'status_label'])
+            ->addColumn('logs_str', function ($data) {
+                return $data->logs->implode(' <br>  ');
+            })
+            ->rawColumns(['action', 'barcode', 'status_label', 'logs_str'])
             ->make(true);
     }
 

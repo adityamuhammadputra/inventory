@@ -32,8 +32,8 @@
                             <th>Type</th>
                             <th>Serial Number</th>
                             <th>Harga</th>
-                            <th>Status</th>
                             <th>created at</th>
+                            <th>Logs</th>
                             <th></th>
                         </tr>
                     </thead>

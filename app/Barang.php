@@ -9,11 +9,16 @@ class Barang extends Model
     protected $guarded = [''];
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $appends = ['status_label'];
+    protected $appends = ['status_label', 'logs'];
 
     public function barangLogs()
     {
-        return $this->hasMany(BarangLog::class, 'barang_kode', 'kode');
+        return $this->hasMany(BarangLog::class, 'barang_kode', 'kode')->orderBy('start', 'desc')->take(5);
+    }
+
+    public function getLogsAttribute($val)
+    {
+        return $this->barangLogs->pluck('date');
     }
 
     public function getCreatedAtAttribute($val)

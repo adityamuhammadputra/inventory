@@ -35,15 +35,15 @@
                 { data: 'type'},
                 { data: 'serial_number'},
                 { data: 'harga'},
-                { data: 'status_label'},
                 { data: 'created_at', searchable:false },
+                { data: 'logs_str'},
                 {
                     data: 'action',
                     orderable:false,
                     searchable:false,
                 },
             ],
-            order:[[9, 'desc']],
+            order:[[8, 'desc']],
         });
     });
 
