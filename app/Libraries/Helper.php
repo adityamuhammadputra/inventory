@@ -118,7 +118,16 @@ function getMaxRental()
         $max = Rental::max('noreg');
         $maxDigit = substr($max, 2) + 1;
         $maxKode = substr($max, 0, 2);
-        $noReg = $maxKode . '0000' . $maxDigit;
+        if($maxDigit < 9)
+            $nol = "0000";
+        else if ($maxDigit < 99)
+            $nol = "000";
+        else if ($maxDigit < 999)
+            $nol = "00";
+        else
+            $nol = "0";
+
+        $noReg = $maxKode . $nol . $maxDigit;
     endif;
 
     return $noReg;
@@ -131,8 +140,18 @@ function getMaxEvent()
     if(Event::count() > 0) :
         $max = Event::max('noreg');
         $maxDigit = substr($max, 2) + 1;
+        if($maxDigit < 9)
+            $nol = "0000";
+        else if ($maxDigit < 99)
+            $nol = "000";
+        else if ($maxDigit < 999)
+            $nol = "00";
+        else
+            $nol = "0";
+
+
         $maxKode = substr($max, 0, 2);
-        $noReg = $maxKode . '0000' . $maxDigit;
+        $noReg = $maxKode . $nol . $maxDigit;
     endif;
 
     return $noReg;

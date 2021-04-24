@@ -119,8 +119,27 @@ class Barang extends Model
 
     public function scopeMaxKode($query, $kategori)
     {
-        $max = $query->max('kategori_no');
-        $maxPlus = str_pad($max + 1, 3, '00', STR_PAD_LEFT);
-        return $kategori . $maxPlus;
+
+        if($kategori == 'IP')
+            $query->where('kategori', 'IP');
+        else
+            $query->where('kategori', 'EP');
+
+        $max = $query->max('kode');
+        if(!isset($max))
+            return $kategori . '000' . '1';
+
+        $maxDigit = substr($max, 2) + 1;
+        if($maxDigit < 9)
+            $nol = "000";
+        else if ($maxDigit < 99)
+            $nol = "00";
+        else
+            $nol = "0";
+
+        $maxKode = substr($max, 0, 2);
+        $noReg = $maxKode . $nol . $maxDigit;
+
+        return $noReg;
     }
 }

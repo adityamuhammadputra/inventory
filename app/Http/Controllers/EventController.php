@@ -21,7 +21,6 @@ class EventController extends Controller
 
     public function index(Request $request)
     {
-
         $data = (object) [
             'noReg' => getMaxEvent(),
             'dateNow' => Carbon::now()->format('d F Y'),
