@@ -217,20 +217,21 @@ class EventController extends Controller
 
         try {
             DB::beginTransaction();
+                BarangLog::where('event_id', $event->id)
+                    ->where('start', dateInput($event->start))
+                    ->where('end', dateInput($event->end))
+                    ->delete();
+
                 $event->update($inputEvent);
                 EventBarang::where('event_id', $event->id)->delete();
                 EventBarangItem::where('event_barang_id', $event->id)->delete();
                 EventOperator::where('event_id', $event->id)->delete();
+
+
                 $this->inputBarang($request, $event);
                 $this->inputOperator($request, $event);
 
-                BarangLog::where('rental_id', $event->id)
-                    ->where('start', dateInput($event->start))
-                    ->where('end', dateInput($event->end))
-                    ->update([
-                        'start' => $request->date_start,
-                        'end' => $request->date_start,
-                    ]);
+
 
             DB::commit();
             $status = 200;
