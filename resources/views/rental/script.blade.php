@@ -78,7 +78,6 @@
         table.api(urlTable).ajax.url("{{ url('rental/datatable') }}?" + $('#wrap-filter').serialize()).load();
     })
 
-
     $('#noreg').on('keyup', function(){
         let val = $(this).val();
         if(val.length > 4){

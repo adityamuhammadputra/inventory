@@ -203,6 +203,14 @@ table tr td > input.form-control:focus, table tr td div > input.form-control:foc
     color: #f88e00 !important;
 }
 
+
+.label-approved {
+    position: absolute !important;
+    left: 100px;
+    padding-top: 18px;
+    z-index: 1;
+}
+
 @media (min-width: 992px) {
     .content {
         padding: 1.8rem 1.8rem 0.5rem !important;

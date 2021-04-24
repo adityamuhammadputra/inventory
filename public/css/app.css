@@ -12905,6 +12905,17 @@ table tr td div > input.form-control:focus {
   background: #f88d01 !important;
 }
 
+.sidebar-dropdown .sidebar-item.active .sidebar-link {
+  color: #f88e00 !important;
+}
+
+.label-approved {
+  position: absolute !important;
+  left: 100px;
+  padding-top: 18px;
+  z-index: 1;
+}
+
 @media (min-width: 992px) {
   .content {
     padding: 1.8rem 1.8rem 0.5rem !important;

@@ -6,7 +6,6 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        {{-- @include('rental.filter') --}}
         @include('event._form')
     </div>
 </div>
@@ -20,7 +19,7 @@
                 </h6>
             </div>
             <div class="card-body pt-0">
-                <a class="filter-icon"><span class="fa fa-filter"></span></a>
+                @include('event.filter')
                 <table class="table" id="dataTable">
                     <thead>
                         <tr>

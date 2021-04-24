@@ -11,14 +11,14 @@
         <div class="form-row form-group col-md-6">
             <div class="form-label-group col-5">
                 <input type="text" id="start" name="start" class="form-control datepicker" placeholder="Rental Start" required value="{{ $data->dateNow }}">
-                <label for="start">Rental Date Start</label>
+                <label for="start">Event Date Start</label>
             </div>
             <div class="col-2 text-center">
                 <label class="">s/d</label>
             </div>
             <div class="form-label-group col-md-5">
                 <input type="text" id="end" name="end" class="form-control datepicker" placeholder="Rental End" required value="{{ $data->rental->end ?? '' }}">
-                <label for="end">Rental Date End</label>
+                <label for="end">Event Date End</label>
             </div>
         </div>
     </div>

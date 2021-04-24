@@ -20,7 +20,6 @@
             </div>
             <div class="card-body pt-0">
                 @include('rental.filter')
-                <a class="filter-icon-transaksi"><span class="fa fa-filter"></span></a>
                 <table class="table" id="dataTable">
                     <thead>
                         <tr>

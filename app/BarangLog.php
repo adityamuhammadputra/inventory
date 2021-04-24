@@ -13,7 +13,14 @@ class BarangLog extends Model
 
     public function getDateAttribute()
     {
-        return $this->start . ' s/d ' . $this->end;
+        $check = '';
+        if($this->deleted_at)
+            $check = '| <span class="mdi mdi-check text-primary"></span>';
+
+        $position = '';
+        if($this->rental_id)
+            $position = 'r';
+        return "{$this->start} s/d {$this->end} $position {$check}";
     }
 
     public function getStartAttribute($val)

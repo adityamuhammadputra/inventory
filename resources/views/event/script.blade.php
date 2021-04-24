@@ -84,11 +84,10 @@
     });
 
     $('#aproved-filter').on('change', function(){
-        console.log('x')
-        table.api(urlTable).ajax.url("{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize()).load();
+        table.api(urlTable).ajax.url("{{ url('event/datatable') }}?" + $('#wrap-filter').serialize()).load();
     })
     $('#total-filter').on('keyup', function(){
-        table.api(urlTable).ajax.url("{{ url('api/v1/barang/datatable') }}?" + $('#wrap-filter').serialize()).load();
+        table.api(urlTable).ajax.url("{{ url('event/datatable') }}?" + $('#wrap-filter').serialize()).load();
     })
 
     $('#noreg').on('keyup', function(){
