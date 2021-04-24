@@ -35,9 +35,24 @@ class Event extends Model
         //for custom datatable
         $query->when(request('search'), function ($query) {
             $param = '%' . request('search')['value'] . '%';
+            $query->where(function ($query) use ($param){
             $query->where('vendor_name', 'like', $param)
                 ->orWhere('client_name', 'like', $param)
                 ->orWhere('location', 'like', $param);
+            });
+        });
+
+        $query->when(!request('aproved'), function ($query) {
+            $query->where('status', 1);
+        });
+
+        $query->when(request('aproved'), function ($query) {
+            $query->where('status', 2);
+        });
+
+        $query->when(request('total'), function ($query) {
+            if(inputRupiah(request('total')))
+                $query->where('total','>=', inputRupiah(request('total')));
         });
 
     }

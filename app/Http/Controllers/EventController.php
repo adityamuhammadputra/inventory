@@ -409,7 +409,6 @@ class EventController extends Controller
     }
 
 
-
     public function dataTable(Request $request)
     {
         $event = Event::with('eventBarangs')->filtered();
