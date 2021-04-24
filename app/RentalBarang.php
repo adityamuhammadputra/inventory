@@ -10,7 +10,7 @@ class RentalBarang extends Model
     protected $keyType = 'string';
     public $incrementing = false;
     protected $appends = ['count_item', 'equpment', 'items'];
-    protected $with = ['barang'];
+    protected $with = ['barang', 'rentalBarangItems'];
 
     public function rentalBarangItems()
     {

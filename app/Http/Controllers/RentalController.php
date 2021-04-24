@@ -240,6 +240,14 @@ class RentalController extends Controller
             $rental->status = 2;
             $rental->save();
 
+            BarangLog::where('rental_id', $rental->id)
+                    ->where('start', dateInput($rental->start))
+                    ->where('end', dateInput($rental->end))
+                    ->update([
+                        'deleted_at' => Carbon::now()
+                    ]);
+
+
             $data = [
                 'status' => 200,
                 'rental' => $rental,

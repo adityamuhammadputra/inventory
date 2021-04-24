@@ -21,7 +21,7 @@ class CreateBarangLogsTable extends Migration
             // $table->string('kode')->nullable();
             $table->date('start')->nullable();
             $table->date('end')->nullable();
-            $table->dateTime('deleted')->nullable();
+            $table->dateTime('deleted_at')->nullable();
 
             $table->timestamps();
         });

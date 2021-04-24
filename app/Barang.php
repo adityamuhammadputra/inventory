@@ -111,7 +111,8 @@ class Barang extends Model
         $query->when(request('start'), function ($query) {
             $query->whereDoesntHave('barangLogs', function($q){
                 $q->where('start', '>=', dateInput(request('start')))
-                    ->where('end', '<=', dateInput(request('end')));
+                    ->where('end', '<=', dateInput(request('end')))
+                    ->whereNull('deleted_at');
             });
         });
     }

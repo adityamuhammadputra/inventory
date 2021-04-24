@@ -258,6 +258,13 @@ class EventController extends Controller
             $event->status = 2;
             $event->save();
 
+            BarangLog::where('event_id', $event->id)
+                    ->where('start', dateInput($event->date_start))
+                    ->where('end', dateInput($event->date_end))
+                    ->update([
+                        'deleted_at' => Carbon::now()
+                    ]);
+
             $data = [
                 'status' => 200,
                 'event' => $event,
