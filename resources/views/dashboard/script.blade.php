@@ -127,13 +127,14 @@ $(function() {
         allDayDefault: true,
         eventRender: function(event, element) {
             // element.html('<span class="badge badge-'+event.color+' pull-right">'+event.title+'</span>');
-            element.html('<span class="fc-title" style="position: absolute;top: -54px;font-size: 9px;right: 4px;color: #cb8528;">'+event.title+'</span>');
+            element.html('<span class="fc-title" style="position: absolute;top: '+event.top+'px;font-size: 10px; right: '+event.right+'px;color: '+event.color+'">'+event.title+'</span>');
         },
         dayClick: function(date) {
             console.log(date);
         }
     })
 });
+
 </script>
 @endpush
 

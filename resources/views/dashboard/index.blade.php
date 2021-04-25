@@ -9,6 +9,9 @@
         <div class="card flex-fill w-100">
             <div class="card-body">
                 <div id="calendar"></div>
+                <a class="eventOnly"><span class="mdi mdi-checkbox-blank-circle" style="color: #f98c01;"></span> Event</a>
+                <a class="rentalOnly"><span class="mdi mdi-checkbox-blank-circle pl-4" style="color: #3b7ddd;"></span> Rental</a>
+                <a class="rentalOnly"><span class="mdi mdi-checkbox-blank-circle pl-4" style="color: #d0d0d0;"></span> Approved</a>
             </div>
         </div>
     </div>

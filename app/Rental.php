@@ -10,8 +10,8 @@ class Rental extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
+    protected $appends = ['color'];
     protected $with = ['rentalBarangs'];
-
 
     public function rentalBarangs()
     {
@@ -86,5 +86,10 @@ class Rental extends Model
         if($val)
             return dateOutput($val);
         return '-';
+    }
+
+    public function getColorAttribute()
+    {
+       return 'blue';
     }
 }

@@ -22,16 +22,22 @@
             <hr class="my-0" />
             <div class="card-body">
                 <h5 class="h6 card-title">Notes</h5>
-                <textarea class="form-control notes" name=""></textarea>
-                <textarea class="form-control" name="notes"></textarea>
+                <textarea class="form-control notes" name="" id="notes-temp"></textarea>
+                <textarea class="form-control" name="notes" id="notes" style="display: none;"></textarea>
             </div>
             <hr class="my-0" />
             <div class="card-body">
                 <h5 class="h6 card-title">About</h5>
                 <ul class="list-unstyled mb-0">
-                    <li class="mb-1"><span data-feather="mail" class="feather-sm mr-1"></span> <a href="#">{{ request()->user()->email }}</a></li>
-                    <li class="mb-1"><span data-feather="smartphone" class="feather-sm mr-1"></span> <a href="#">{{ request()->user()->phone ?? '-' }}</a></li>
-                    <li class="mb-1"><span data-feather="power" class="feather-sm mr-1"></span> Created At <a href="#">{{ dateTimeOutput(request()->user()->created_at) ?? '' }}</a></li>
+                    <li class="mb-1">
+                        <span data-feather="mail" class="feather-sm mr-1"></span> <a href="#">{{ request()->user()->email }}</a>
+                    </li>
+                    <li class="mb-1">
+                        <span data-feather="smartphone" class="feather-sm mr-1"></span> <a href="#">{{ request()->user()->phone ?? '-' }}</a>
+                    </li>
+                    <li class="mb-1">
+                        <span data-feather="power" class="feather-sm mr-1"></span> Created At <a href="#">{{ dateTimeOutput(request()->user()->created_at) ?? '' }}</a>
+                    </li>
                 </ul>
             </div>
         </div>

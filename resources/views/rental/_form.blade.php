@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-12 pt-2">
                     <div class="form-row row-multiple">
-                        <table class="table">
+                        <table class="table" id="table-eq">
                             <thead>
                                 <tr>
                                     <th style="width: 50px">No</th>

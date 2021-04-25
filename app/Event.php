@@ -10,7 +10,7 @@ class Event extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $appends = ['sub_total_all'];
+    protected $appends = ['sub_total_all', 'color'];
     protected $with = ['eventBarangs', 'eventOperator'];
 
     public function eventOperator()
@@ -99,6 +99,11 @@ class Event extends Model
         if($val)
             return dateOutput($val);
         return '-';
+    }
+
+    public function getColorAttribute()
+    {
+       return 'red';
     }
 
 }

@@ -377,6 +377,7 @@ class EventController extends Controller
             'total' => "$event->total"
         ]);
 
+
         $noOp = 1;
         $templateProcessor->cloneRow('noOp', count($event->eventOperator));
         foreach($event->eventOperator as $valOp) :
@@ -389,18 +390,32 @@ class EventController extends Controller
             $noOp++;
         endforeach;
 
+
+        $values = [];
         $no = 1;
-        $templateProcessor->cloneRow('no', count($event->eventBarangs));
-        foreach($event->eventBarangs as $val) :
-            $templateProcessor->setValue("no#$no", $no);
-            $templateProcessor->setValue("equipmentName#$no", $val->barang_name);
-            $templateProcessor->setValue("equipmentSn#$no", $val->barang->serial_number);
-            $templateProcessor->setValue("items#$no", $val->items);
-            $templateProcessor->setValue("harga#$no", $val->barang_item_harga);
-            $templateProcessor->setValue("day#$no", $val->barang_qty);
-            $templateProcessor->setValue("price#$no", outputRupiah($val->barang_item_total));
-            $no++;
+        foreach($event->eventBarangs as $key => $val) :
+            $values [] = [
+                    'no' => $no++,
+                    'equipmentName' => $val->barang_name,
+                    'harga' => outputRupiah($val->barang_harga),
+                    'day' => $val->barang_qty,
+                    'price' => outputRupiah($val->barang_total),
+            ];
+
+            foreach($val->eventBarangItems as $barang) :
+                $barang = [
+                    'no' => $no++,
+                    'equipmentName' => $barang->barang_name,
+                    'harga' => outputRupiah($barang->barang_harga),
+                    'day' => $barang->barang_qty,
+                    'price' => outputRupiah($barang->barang_total),
+                ];
+                array_push($values, $barang);
+            endforeach;
         endforeach;
+
+
+        $templateProcessor->cloneRowAndSetValues('no', $values);
 
         header("Content-Disposition: attachment; filename=inv-$event->noreg.docx");
 
@@ -421,7 +436,6 @@ class EventController extends Controller
                                     data-url="/event/'.$data->id.'/approve"
                                     class="text-warning approveData"><i class="fa fa-check"></i>
                                 </a>
-
                                 <a data-id="' . $data->id . '"
                                     data-title="' . $data->kode . '"
                                     data-url="/event/'.$data->id.'"

@@ -125,24 +125,109 @@ class Controller extends BaseController
     {
         $start = $request->start ? new DateTime($request->start) : (new DateTime())->modify('first day of this month');
         $end = $request->end ? new DateTime($request->end) : (new DateTime())->modify('last day of this month');
-        $event = Event::select('date_start as start', 'date_end as end', 'sub_total', 'sub_total_op')
+        $resultsEvent = Event::select('date_start as start', 'date_end as end', 'sub_total', 'sub_total_op')
                     ->where('date_start', '>=', $start)
                     ->where('date_end', '<=', $end)
-                    ->get()
-                    ->toArray();
+                    ->where('status', 1)
+                    ->get();
+
+
+        $bulanEvent = collect([]);
+        foreach ($resultsEvent as $k) {
+            $x = collect(CarbonPeriod::create($k['start'], $k['end']));
+            $color = $k['color'];
+            $x = $x->map(function ($item, $_) use($color) {
+                return [
+                    'date' => $item->format('Y-m-d'),
+                    // 'color' => $color,
+                ];
+            });
+            $bulanEvent = $bulanEvent->merge($x);
+        }
+
+        $resultEvent = $bulanEvent->groupBy('date')->map(function ($item,  $_) {
+            return [
+                'date' => $item[0]['date'],
+                'n' => count($item),
+                // 'color' => $item[0]['color'],
+            ];
+        });
+
+        $resultsEvent = [];
+        foreach ($resultEvent as $d) {
+            $resultsEvent[] = [
+                'title' => "{$d['n']}",
+                'color' => 'blue',
+                'right' => 14,
+                'top' => -54,
+                'start' => $d['date'],
+                'end' => date('Y-m-d', strtotime($d['date'] . '+' . 1 . 'days')),
+                'backgroundColor' => '#ffe2bc',
+                'borderColor' => "#ffe2bc",
+            ];
+
+        }
+
+
+        $resultsRental = Rental::select('start', 'end', 'sub_total as sub_total', 'total as sub_total_op')
+                    ->where('start', '>=', $start)
+                    ->where('end', '<=', $end)
+                    ->where('status', 1)
+                    ->get();
+
+        $bulanRental = collect([]);
+        foreach ($resultsRental as $k) {
+            $x = collect(CarbonPeriod::create($k['start'], $k['end']));
+            $color = $k['color'];
+            $x = $x->map(function ($item, $_) use($color) {
+                return [
+                    'date' => $item->format('Y-m-d'),
+                ];
+            });
+            $bulanRental = $bulanRental->merge($x);
+        }
+
+        $resultRental = $bulanRental->groupBy('date')->map(function ($item,  $_) {
+            return [
+                'date' => $item[0]['date'],
+                'n' => count($item),
+            ];
+        });
+
+        $resultsRental = [];
+        foreach ($resultRental as $d) {
+            $resultsRental[] = [
+                'title' => "{$d['n']}",
+                'color' => '#f98c01',
+                'right' => 20,
+                'top' => -56,
+                'start' => $d['date'],
+                'end' => date('Y-m-d', strtotime($d['date'] . '+' . 1 . 'days')),
+                'backgroundColor' => '#ffe2bc',
+                'borderColor' => "#ffe2bc",
+            ];
+        }
+
+
 
         $rental = Rental::select('start', 'end', 'sub_total as sub_total', 'total as sub_total_op')
                     ->where('start', '>=', $start)
                     ->where('end', '<=', $end)
-                    ->get()
-                    ->toArray();
+                    ->where('status', 2)
+                    ->get()->toArray();
 
-        $results = array_merge($event,$rental);
+        $event = Event::select('date_start as start', 'date_end as end', 'sub_total', 'sub_total_op')
+                    ->where('date_start', '>=', $start)
+                    ->where('date_end', '<=', $end)
+                    ->where('status', 2)
+                    ->get()->toArray();
 
+        $results = array_merge($event, $rental);
         $bulan = collect([]);
         foreach ($results as $k) {
             $x = collect(CarbonPeriod::create($k['start'], $k['end']));
-            $x = $x->map(function ($item, $_) {
+            $color = $k['color'];
+            $x = $x->map(function ($item, $_) use($color) {
                 return [
                     'date' => $item->format('Y-m-d'),
                 ];
@@ -160,14 +245,19 @@ class Controller extends BaseController
         $results = [];
         foreach ($result as $d) {
             $results[] = [
-                'title' => $d['n'],
-                'color' => 'danger',
+                'title' => "{$d['n']}",
+                'color' => '#d0d0d0',
+                'right' => 14,
+                'top' => -44,
                 'start' => $d['date'],
                 'end' => date('Y-m-d', strtotime($d['date'] . '+' . 1 . 'days')),
                 'backgroundColor' => '#ffe2bc',
                 'borderColor' => "#ffe2bc",
             ];
         }
-        return json_encode($results);
+
+        $result = array_merge($resultsEvent, $resultsRental);
+        $resultAll = array_merge($results, $result);
+        return json_encode($resultAll);
     }
 }
