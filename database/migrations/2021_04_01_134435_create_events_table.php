@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('noreg')->unique();
             $table->uuid('vendor_id')->nullable();
-            $table->uuid('vendor_name')->nullable();
+            $table->string('vendor_name')->nullable();
             $table->uuid('client_id')->nullable();
             $table->string('client_name')->nullable();
             $table->string('name')->nullable();
