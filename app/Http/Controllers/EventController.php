@@ -181,6 +181,7 @@ class EventController extends Controller
         $data = [
             'noReg' => getMaxEvent(),
             'status' => $status,
+            'url' => null,
         ];
 
         return response()->json($data, $status);
