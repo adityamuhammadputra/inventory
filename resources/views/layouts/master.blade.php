@@ -91,7 +91,7 @@
                         </a>
                     </li>
                 </ul>
-			    <div class="sidebar-cta">
+			    {{-- <div class="sidebar-cta">
 					<div class="sidebar-cta-content">
 						<strong class="d-inline-block mb-2">Help Center</strong>
 						<div class="mb-3 text-sm">
@@ -99,7 +99,7 @@
 						</div>
 						<a href="https://ariusdev.bins.co.id" target="_blank" class="btn btn-outline-primary btn-block">Contact Me</a>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 		</nav>
 
@@ -195,8 +195,8 @@
 							<div class="dropdown-menu dropdown-menu-right">
 								<a class="dropdown-item" href="/user"><i class="align-middle mr-1" data-feather="users"></i> Users</a>
 								<a class="dropdown-item" href="/profile"><i class="align-middle mr-1" data-feather="user"></i> Profile</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="https://ariusdev.bins.co.id" target="_blank"><i class="align-middle mr-1" data-feather="help-circle"></i> Help Center</a>
+								{{-- <div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="https://ariusdev.bins.co.id" target="_blank"><i class="align-middle mr-1" data-feather="help-circle"></i> Help Center</a> --}}
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="/logout"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -242,7 +242,7 @@
 					<div class="row text-muted">
 						<div class="col-6 text-left">
 							<p class="mb-0">
-								<a href="index.html" class="text-muted"><strong>Powered by Arius DEV</strong></a>
+								<a href="https://ariusdev.com/" class="text-muted" target="_blank"><strong>Powered by Arius DEV</strong></a>
 							</p>
 						</div>
 						<div class="col-6 text-right">
