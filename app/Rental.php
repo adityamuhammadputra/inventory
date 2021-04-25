@@ -53,7 +53,14 @@ class Rental extends Model
 
         $query->when(request('total'), function ($query) {
             if(inputRupiah(request('total')))
-                $query->where('total','>=', inputRupiah(request('total')));
+                $query->where('total','>=', inputRupiah((int)request('total')));
+        });
+
+        $query->when(request('date_end'), function ($query) {
+            $query->where(function($query){
+                $query->whereBetween('start', [dateInput(request('date_start')), dateInput(request('date_end'))])
+                        ->orWhereBetween('end', [dateInput(request('date_start')), dateInput(request('date_end'))]);
+            });
         });
     }
 

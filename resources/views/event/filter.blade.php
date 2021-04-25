@@ -17,7 +17,7 @@
                 <label class="">s/d</label>
             </div>
             <div class="form-label-group col-md-5">
-                <input type="text" id="end" name="end" class="form-control datepicker" placeholder="Rental End" required value="{{ $data->rental->end ?? '' }}">
+                <input type="text" id="end" name="end" class="form-control datepicker" placeholder="Rental End" required value="">
                 <label for="end">Event Date End</label>
             </div>
         </div>

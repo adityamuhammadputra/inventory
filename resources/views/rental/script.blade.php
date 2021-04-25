@@ -71,12 +71,21 @@
         });
     });
 
-    $('#aproved-filter').on('change', function(){
+    $('#aproved-filter, #date_start, #date_end').on('change', function(){
         table.api(urlTable).ajax.url("{{ url('rental/datatable') }}?" + $('#wrap-filter').serialize()).load();
     })
+
+    $('.filter-export-transaksi').on('click', function(){
+        $(this).attr('href', '/rental?export=true&' + $('#wrap-filter').serialize());
+        window.location.href = $(this).attr('href');
+        return false;
+    })
+
     $('#total-filter').on('keyup', function(){
         table.api(urlTable).ajax.url("{{ url('rental/datatable') }}?" + $('#wrap-filter').serialize()).load();
     })
+
+
 
     $('#noreg').on('keyup', function(){
         let val = $(this).val();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Barang;
 use App\BarangLog;
 use App\Client;
+use App\Export\ExportRental;
 use App\Rental;
 use App\RentalBarang;
 use App\RentalBarangItem;
@@ -14,12 +15,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Yajra\DataTables\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RentalController extends Controller
 {
 
     public function index(Request $request)
     {
+        if($request->export) :
+            $events = Rental::filtered()->get();
+            $data = (object) [
+                'data' => $events,
+                'attr' => (object) [
+                    'dateStart' => $request->date_start ?? Rental::where('status', 2)->orderBy('created_at', 'asc')->first()->start,
+                    'dateEnd' => $request->date_end ?? Rental::where('status', 2)->orderBy('created_at', 'desc')->first()->end,
+                    'total' => ($request->total) ? " | Total > $request->total" : "",
+                    'title' => ($request->aproved) ? 'Has Approved' : 'Not Approved',
+                ]
+            ];
+
+            $name = ($request->aproved) ? 'has-approved' : 'not-approved';
+            return Excel::download(new ExportRental($data), "rental-$name.xlsx");
+
+        endif;
 
         $data = (object) [
             'noReg' => getMaxRental(),

@@ -10,15 +10,15 @@
         </div>
         <div class="form-row form-group col-md-6">
             <div class="form-label-group col-5">
-                <input type="text" id="start" name="start" class="form-control datepicker" placeholder="Rental Start" required value="{{ $data->dateNow }}">
+                <input type="text" id="date_start" name="date_start" class="form-control datepicker" placeholder="Rental Start" required value="{{ $data->dateNow }}">
                 <label for="start">Rental Date Start</label>
             </div>
             <div class="col-2 text-center">
                 <label class="">s/d</label>
             </div>
             <div class="form-label-group col-md-5">
-                <input type="text" id="end" name="end" class="form-control datepicker" placeholder="Rental End" required value="{{ $data->rental->end ?? '' }}">
-                <label for="end">Rental Date End</label>
+                <input type="text" id="date_end" name="date_end" class="form-control datepicker" placeholder="Rental End" required value="{{ $data->rental->end ?? '' }}">
+                <label for="date_end">Rental Date End</label>
             </div>
         </div>
     </div>
@@ -26,5 +26,7 @@
         <input type="checkbox" class="custom-control-input" name="aproved" id="aproved-filter" value="1">
         <span class="custom-control-label">Lihat Approved</span>
     </label>
+
+    <a class="filter-export-transaksi text-secondary"><span class="mdi mdi-file-excel"></span>Export</a>
     <a class="filter-icon-transaksi"><span class="fa fa-filter"></span></a>
 </form>
