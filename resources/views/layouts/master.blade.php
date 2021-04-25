@@ -111,7 +111,7 @@
 
 				<form class="form-inline d-none d-sm-inline-block mb-0">
 					<div class="input-group input-group-navbar">
-						<input type="text" class="form-control" placeholder="Search…" aria-label="Search">
+						<input type="text" class="form-control" placeholder="Search Transaction" aria-label="Search">
 						<div class="input-group-append">
 							<button class="btn" type="button">
                                 <i class="align-middle" data-feather="search"></i>
@@ -126,12 +126,12 @@
 							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-toggle="dropdown">
 								<div class="position-relative" style="top: 5px;">
 									<i class="align-middle" data-feather="bell"></i>
-									<span class="indicator">4</span>
+									<span class="indicator">5</span>
 								</div>
 							</a>
 							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="alertsDropdown">
 								<div class="dropdown-menu-header">
-									4 New Notifications
+									5 Last Logs
 								</div>
 								<div class="list-group">
 									<a href="#" class="list-group-item">
@@ -181,9 +181,6 @@
 											</div>
 										</div>
 									</a>
-								</div>
-								<div class="dropdown-menu-footer">
-									<a href="#" class="text-muted">Show all notifications</a>
 								</div>
 							</div>
 						</li>

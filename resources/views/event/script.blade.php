@@ -392,13 +392,14 @@
             $('.total').val(outputRupiah(total))
     })
 
-    $(document).on('keyup', '.dayOp', function(){
+    // keyup
+    $(document).on('keyup mouseup', '.dayOp', function(){
         let id = $(this).attr('dataid');
         console.log(id);
         setPrice(id)
     })
 
-    $(document).on('keyup', '.day', function(){
+    $(document).on('keyup mouseup', '.day', function(){
         let id = $(this).attr('dataid');
         console.log(id);
         setPrice(id)

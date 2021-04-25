@@ -288,12 +288,11 @@
     $('.diskon').on('keyup', function(){
         let diskonTemp = inputRupiah($('.subtotal').val()) * $(this).val() / 100;
         let total = inputRupiah($('.subtotal').val()) - diskonTemp;
-        console.log(total);
         if(total && total !== NaN)
             $('.total').val(outputRupiah(total))
     })
 
-    $(document).on('keyup', '.day', function(){
+    $(document).on('keyup mouseup', '.day', function(){
         let id = $(this).attr('dataid');
         console.log(id);
         setPrice(id)
