@@ -52,9 +52,15 @@ class Event extends Model
 
         $query->when(request('total'), function ($query) {
             if(inputRupiah(request('total')))
-                $query->where('total','>=', inputRupiah(request('total')));
+                $query->where('total','>=', inputRupiah((int)request('total')));
         });
 
+        $query->when(request('end'), function ($query) {
+            $query->where(function($query){
+                $query->whereBetween('date_start', [dateInput(request('date_start')), dateInput(request('end'))])
+                        ->orWhereBetween('date_end', [dateInput(request('date_start')), dateInput(request('end'))]);
+            });
+        });
     }
 
     public function getSubTotalAllAttribute()

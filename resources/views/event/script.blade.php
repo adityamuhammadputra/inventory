@@ -83,14 +83,16 @@
         });
     });
 
-    $('#aproved-filter').on('change', function(){
+    $('#aproved-filter, #date_start, #end').on('change', function(){
         table.api(urlTable).ajax.url("{{ url('event/datatable') }}?" + $('#wrap-filter').serialize()).load();
-        if($(this).is(':checked')) {
-            $('.filter-export-transaksi').attr('href', '/event?export=true&aproved=1');
-        } else {
-            $('.filter-export-transaksi').attr('href', '/event?export=true');
-        }
     })
+
+    $('.filter-export-transaksi').on('click', function(){
+        $(this).attr('href', '/event?export=true&' + $('#wrap-filter').serialize());
+        window.location.href = $(this).attr('href');
+        return false;
+    })
+
     $('#total-filter').on('keyup', function(){
         table.api(urlTable).ajax.url("{{ url('event/datatable') }}?" + $('#wrap-filter').serialize()).load();
     })

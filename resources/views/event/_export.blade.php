@@ -4,7 +4,7 @@
         <td colspan="13">Data Event {{ $attr->title }}</td>
     </tr>
     <tr>
-        <td colspan="13">Date : {{ $attr->dateStart }} s/d {{ $attr->dateEnd }}</td>
+        <td colspan="13">Date : {{ $attr->dateStart }} s/d {{ $attr->dateEnd }} {{ $attr->total }}</td>
     </tr>
 </table>
 
