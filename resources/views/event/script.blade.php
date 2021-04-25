@@ -85,6 +85,11 @@
 
     $('#aproved-filter').on('change', function(){
         table.api(urlTable).ajax.url("{{ url('event/datatable') }}?" + $('#wrap-filter').serialize()).load();
+        if($(this).is(':checked')) {
+            $('.filter-export-transaksi').attr('href', '/event?export=true&aproved=1');
+        } else {
+            $('.filter-export-transaksi').attr('href', '/event?export=true');
+        }
     })
     $('#total-filter').on('keyup', function(){
         table.api(urlTable).ajax.url("{{ url('event/datatable') }}?" + $('#wrap-filter').serialize()).load();

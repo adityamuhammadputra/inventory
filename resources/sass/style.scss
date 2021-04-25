@@ -112,14 +112,18 @@ input.error{
     margin-bottom: 0;
 }
 
-.filter-icon, .filter-icon-transaksi{
+.filter-icon, .filter-icon-transaksi, .filter-export-transaksi{
     position: absolute;
     right: 210px;
     padding-top: 18px;
     z-index: 1111;
 }
 
-.filter-icon :hover, .filter-icon-transaksi:hover{
+.filter-export-transaksi{
+    right: 240px !important;
+}
+
+.filter-icon :hover, .filter-icon-transaksi:hover, .filter-export-transaksi:hover{
     cursor: pointer;
 }
 

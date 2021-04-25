@@ -8,10 +8,12 @@ use App\Event;
 use App\EventBarang;
 use App\EventBarangItem;
 use App\EventOperator;
+use App\Export\ExportEvent;
 use App\Operator;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 use PhpOffice\PhpWord\TemplateProcessor;
 
@@ -21,6 +23,22 @@ class EventController extends Controller
 
     public function index(Request $request)
     {
+        if($request->export) :
+            $events = Event::filtered()->get();
+            $data = (object) [
+                'data' => $events,
+                'attr' => (object) [
+                    'dateStart' => $request->start ?? Event::where('status', 2)->orderBy('created_at', 'asc')->first()->date_start,
+                    'dateEnd' => $request->end ?? Event::where('status', 2)->orderBy('created_at', 'desc')->first()->date_end,
+                    'title' => ($request->aproved) ? 'Has Approved' : 'Not Approved',
+                ]
+            ];
+
+            $name = ($request->aproved) ? 'has-approved' : 'not-approved';
+            return Excel::download(new ExportEvent($data), "event-$name.xlsx");
+
+        endif;
+
         $data = (object) [
             'noReg' => getMaxEvent(),
             'dateNow' => Carbon::now()->format('d F Y'),
@@ -29,6 +47,7 @@ class EventController extends Controller
             'action' => "/event",
             'event' => null,
         ];
+
 
         return view('event.index', compact('data'));
     }

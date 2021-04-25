@@ -26,5 +26,7 @@
         <input type="checkbox" class="custom-control-input" name="aproved" id="aproved-filter" value="1">
         <span class="custom-control-label">Lihat Approved</span>
     </label>
+
+    <a class="filter-export-transaksi text-secondary" href="/event?export=true"><span class="mdi mdi-file-excel"></span>Export</a>
     <a class="filter-icon-transaksi"><span class="fa fa-filter"></span></a>
 </form>
