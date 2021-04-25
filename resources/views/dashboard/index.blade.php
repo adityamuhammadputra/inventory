@@ -19,21 +19,16 @@
     <div class="col-xl-6 col-xxl-7">
         <div class="card flex-fill w-100">
             <div class="card-header">
-                <h5 class="card-title">Bordered Table</h5>
-                <h6 class="card-subtitle text-muted">Add <code>.table-bordered</code> for borders on all sides of the table and cells.</h6>
+                <h5 class="card-title">Event & Rental
+                    <a href="/dashboard" class="float-right text-secondary"><span class="mdi mdi-reload"></span></a>
+                </h5>
+                <h6 class="card-subtitle text-muted">List Active <code>Event & Rental</code> selama <b class="timeline-time">bulan {{ \Carbon\Carbon::now()->format('F, Y') }}</b>.</h6>
             </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th style="width:40%;">Name</th>
-                            <th style="width:25%">Phone Number</th>
-                            <th class="d-none d-md-table-cell" style="width:25%">Date of Birth</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+            <div class="card-body pt-0" style="height: 447px;overflow-y: auto;overflow-x: hidden;">
+                <ul class="timeline">
+                    @include('dashboard._timeline')
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -45,21 +40,21 @@
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-4">Sales</h5>
-                            <h1 class="display-5 mt-1 mb-3">2.382</h1>
+                            <h5 class="card-title mb-4">Total Event</h5>
+                            <h1 class="display-5 mt-1 mb-3">{{ $data->totalEvent }} Transaction</h1>
                             <div class="mb-1">
-                                <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-                                <span class="text-muted">Since last week</span>
+                                {{-- <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span> --}}
+                                <span class="text-muted">Since frist use this apps</span>
                             </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-4">Visitors</h5>
-                            <h1 class="display-5 mt-1 mb-3">14.212</h1>
+                            <h5 class="card-title mb-4">Total Rental</h5>
+                            <h2 class="display-5 mt-1 mb-3">{{ $data->totalRental }} Transaction</h2>
                             <div class="mb-1">
-                                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-                                <span class="text-muted">Since last week</span>
+                                {{-- <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span> --}}
+                                <span class="text-muted">Since frist use this apps</span>
                             </div>
                         </div>
                     </div>
@@ -67,21 +62,21 @@
                 <div class="col-sm-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-4">Earnings</h5>
-                            <h1 class="display-5 mt-1 mb-3">$21.300</h1>
+                            <h5 class="card-title mb-4">Earnings Event</h5>
+                            <h2 class="display-5 mt-1 mb-3">{{ $data->EarningEvent }}</h2>
                             <div class="mb-1">
-                                <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-                                <span class="text-muted">Since last week</span>
+                                {{-- <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span> --}}
+                                <span class="text-muted">Just estimation</span>
                             </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title mb-4">Orders</h5>
-                            <h1 class="display-5 mt-1 mb-3">64</h1>
+                            <h5 class="card-title mb-4">Earnings Event</h5>
+                            <h2 class="display-5 mt-1 mb-3">{{ $data->EarningRental }}</h2>
                             <div class="mb-1">
-                                <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-                                <span class="text-muted">Since last week</span>
+                                {{-- <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span> --}}
+                                <span class="text-muted">Just estimation</span>
                             </div>
                         </div>
                     </div>
@@ -93,7 +88,7 @@
     <div class="col-xl-6 col-xxl-7">
         <div class="card flex-fill w-100">
             <div class="card-header">
-                <h5 class="card-title mb-0">Penjualan <b>2021</b></h5>
+                <h5 class="card-title mb-0">Grafik <b>2021</b></h5>
             </div>
             <div class="card-body py-3">
                 <div class="chart chart-sm">

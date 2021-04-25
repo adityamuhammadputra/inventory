@@ -10,7 +10,7 @@ class Event extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $appends = ['sub_total_all', 'color'];
+    protected $appends = ['sub_total_all', 'jenis', 'items', 'total_asli'];
     protected $with = ['eventBarangs', 'eventOperator'];
 
     public function eventOperator()
@@ -70,6 +70,11 @@ class Event extends Model
         return outputRupiah($val);
     }
 
+    public function getTotalAsliAttribute()
+    {
+        return inputRupiah($this->total);
+    }
+
     public function getSubTotalOpAttribute($val)
     {
         return outputRupiah($val);
@@ -101,9 +106,13 @@ class Event extends Model
         return '-';
     }
 
-    public function getColorAttribute()
+    public function getJenisAttribute()
     {
-       return 'red';
+       return 'Event';
     }
 
+    public function getItemsAttribute()
+    {
+        return $this->eventBarangs->count() + $this->eventBarangs->sum('count_item') + $this->eventOperator->count();
+    }
 }

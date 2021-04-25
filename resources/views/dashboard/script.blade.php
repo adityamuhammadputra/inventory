@@ -130,7 +130,20 @@ $(function() {
             element.html('<span class="fc-title" style="position: absolute;top: '+event.top+'px;font-size: 10px; right: '+event.right+'px;color: '+event.color+'">'+event.title+'</span>');
         },
         dayClick: function(date) {
-            console.log(date);
+            let url = "/api/v1/lookup-calendar/" + date.format();
+            let dateStr = date.toString();
+            dateStr = dateStr.substr(0,15);
+            dateStr = dateStr.substr(3,15);
+            $('.timeline-time').html(dateStr)
+            $.ajax({
+                url : url,
+                type : "GET",
+                success: function (data) {
+                    // $('.timeline').removeAttr('style')
+                    $('.timeline').html(data);
+                }
+            });
+
         }
     })
 });
@@ -149,6 +162,70 @@ $(function() {
         top: 27px;
 
     }
+</style>
+@endpush
+
+@push('css')
+<style>
+
+    .fc-day-number:hover{
+        cursor: pointer;
+    }
+    ul.timeline {
+        list-style-type: none;
+        position: relative;
+    }
+    ul.timeline:before {
+        content: ' ';
+        background: #d4d9df;
+        display: inline-block;
+        position: absolute;
+        left: 29px;
+        width: 2px;
+        height: 100%;
+        z-index: 400;
+    }
+    ul.timeline > li {
+        margin: 20px 0;
+        padding-left: 20px;
+    }
+    ul.timeline > li:before {
+        content: ' ';
+        background: white;
+        display: inline-block;
+        position: absolute;
+        border-radius: 50%;
+        /* border: 3px solid #f18c09; */
+        left: 23px;
+        width: 15px;
+        height: 15px;
+        z-index: 400;
+    }
+
+    ul.timeline > li.Rental1:before {
+        border: 8px solid #3b7ddd;
+    }
+
+    ul.timeline > li.Event1:before {
+        border: 8px solid #f98c01;
+    }
+
+    ul.timeline > li.Event2:before, ul.timeline > li.Rental2:before{
+        border: 8px solid #d0d0d0;
+    }
+
+    code.Event1{
+        color: #f98c01;
+    }
+
+    code.Rental1{
+        color: #3b7ddd;
+    }
+    code.Event2, code.Rental2{
+        color: #d0d0d0;
+    }
+
+
 </style>
 @endpush
 

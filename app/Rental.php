@@ -10,7 +10,7 @@ class Rental extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $appends = ['color'];
+    protected $appends = ['jenis', 'items', 'total_asli'];
     protected $with = ['rentalBarangs'];
 
     public function rentalBarangs()
@@ -67,6 +67,11 @@ class Rental extends Model
         return outputRupiah($val);
     }
 
+    public function getTotalAsliAttribute()
+    {
+        return inputRupiah($this->total);
+    }
+
     public function getCreatedAtAttribute($val)
     {
         if($val)
@@ -88,8 +93,13 @@ class Rental extends Model
         return '-';
     }
 
-    public function getColorAttribute()
+    public function getJenisAttribute()
     {
-       return 'blue';
+       return 'Rental';
+    }
+
+    public function getItemsAttribute()
+    {
+        return $this->rentalBarangs->count() + $this->rentalBarangs->sum('count_item');
     }
 }
