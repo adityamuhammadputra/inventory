@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,8 +21,7 @@
 		<nav id="sidebar" class="sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="/">
-                    <img src="/img/logo-removebg-preview.png" style="width: 100%; position: relative; left: -15px;
-                ">
+                    <img src="/img/logo-removebg-preview.png" style="width: 100%; position: relative; left: -15px;">
                 </a>
                 <ul class="sidebar-nav">
                     <li class="sidebar-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
