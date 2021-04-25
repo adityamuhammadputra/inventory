@@ -158,7 +158,7 @@ class Controller extends BaseController
         foreach ($resultEvent as $d) {
             $resultsEvent[] = [
                 'title' => "{$d['n']}",
-                'color' => 'blue',
+                'color' => '#f98c01',
                 'right' => 14,
                 'top' => -54,
                 'start' => $d['date'],
@@ -199,7 +199,7 @@ class Controller extends BaseController
         foreach ($resultRental as $d) {
             $resultsRental[] = [
                 'title' => "{$d['n']}",
-                'color' => '#f98c01',
+                'color' => 'blue',
                 'right' => 20,
                 'top' => -56,
                 'start' => $d['date'],
