@@ -17,8 +17,9 @@
                         <tr>
                             <th>Name</th>
                             <th>Phone Number</th>
+                            <th>Notes</th>
                             <th>Crated At</th>
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -28,13 +29,14 @@
                                 <img src="img/avatars/1.jpg" width="48" height="48" class="rounded-circle mr-2" alt="Avatar"> {{ $item->name }} <br> <a href="#" class="email-detail">{{ $item->email }}</a>
                             </td>
                             <td> {{ $item->phone ?? '-' }}</td>
+                            <td> {{ $item->notes ?? '-' }}</td>
                             <td>{{ dateTimeOutput($item->created_at) }}</td>
-                            <td>
+                            {{-- <td>
                                 <a href="#" class="userEdit">
                                     <span data-feather="edit" class="mr-1"></span>
                                     <span data-feather="trash-2" class="mr-1"></span>
                                 </a>
-                            </td>
+                            </td> --}}
                         </tr>
                         @endforeach
                     </tbody>
