@@ -142,7 +142,7 @@
 											</div>
 											<div class="col-10">
 												<div class="text-dark">{{ $item->user->name }}</div>
-												<div class="text-muted small mt-1"> {{ $item->content }} <br> {{ $item->url }} | {{ $item->method }}</div>
+												<div class="text-muted small mt-1"> {{ $item->content }} | {{ $item->method }}</div>
 												<div class="text-muted small mt-1">{{ $item->created_at->diffforhumans() }}</div>
 											</div>
 										</div>

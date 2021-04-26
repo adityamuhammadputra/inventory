@@ -20,7 +20,10 @@ class Log extends Model
 
     public function getIconAttribute()
     {
-        if($this->method == 'GET')
+
+        if(strpos($this->content, 'Export') !== false)
+            return (object)['data' => 'upload', 'color' => 'primary'];
+        else if($this->method == 'GET')
             return (object)['data' => 'activity', 'color' => 'info'];
         else if($this->method == 'POST')
             return (object)['data' => 'plus', 'color' => 'success'];
