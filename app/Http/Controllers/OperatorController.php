@@ -10,6 +10,8 @@ class OperatorController extends Controller
 {
     public function index(Request $request)
     {
+        logActivities('View Operator page');
+
         $data = (object) [
             'model' => 'OP',
             'vendor' => Vendor::get(),

@@ -2,6 +2,7 @@
 
 use App\Barang;
 use App\Event;
+use App\Log;
 use App\Rental;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -155,4 +156,22 @@ function getMaxEvent()
     endif;
 
     return $noReg;
+}
+
+
+function logActivities($content)
+{
+    $data = [
+        'id' => uuid(),
+        'user_id' => userId(),
+        'url' => request()->fullUrl(),
+        'method' => request()->method(),
+        'content' => $content,
+    ];
+    Log::create($data);
+}
+
+function logsLastest()
+{
+    return Log::orderBy('created_at', 'desc')->paginate(5);
 }

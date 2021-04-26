@@ -35,6 +35,7 @@ class RentalController extends Controller
             ];
 
             $name = ($request->aproved) ? 'has-approved' : 'not-approved';
+            logActivities("Export Rental rental-$name.xlsx");
             return Excel::download(new ExportRental($data), "rental-$name.xlsx");
 
         endif;
@@ -47,6 +48,7 @@ class RentalController extends Controller
             'event' => null,
         ];
 
+        logActivities("View Rental page");
         return view('rental.index', compact('data'));
     }
 
@@ -65,6 +67,7 @@ class RentalController extends Controller
         DB::beginTransaction();
             $rentalDb = Rental::create($rental);
             $this->inputBarang($request, $rentalDb);
+            logActivities("Create Rental $rentalDb->id");
         DB::commit();
 
         $data = [
@@ -94,6 +97,7 @@ class RentalController extends Controller
                 ->delete();
 
             $rental->update($inputRental);
+            logActivities("Update Rental $rental->id");
             RentalBarang::where('rental_id', $rental->id)->delete();
             RentalBarangItem::where('rental_barang_id', $rental->id)->delete();
 
@@ -267,6 +271,8 @@ class RentalController extends Controller
                     ->where('end', dateInput($rental->end))
                     ->delete();
 
+        logActivities("Delete Rental $rental->id");
+
         return $rental->delete();
     }
 
@@ -289,6 +295,7 @@ class RentalController extends Controller
                 'rental' => $rental,
             ];
 
+            logActivities("Approve Rental $rental->id");
             return response()->json($data, 200);
         } catch (\Exception $e) {
             return response()->json($e, 401);
@@ -328,6 +335,8 @@ class RentalController extends Controller
         // endforeach;
 
         // $templateProcessor->cloneRowAndSetValues('no', $values);
+
+        logActivities("Export docx Rental letter-$rental->noreg");
 
         header("Content-Disposition: attachment; filename=letter-$rental->noreg.docx");
 
@@ -377,6 +386,7 @@ class RentalController extends Controller
 
         $templateProcessor->cloneRowAndSetValues('no', $values);
 
+        logActivities("Export docx Rental inv-$rental->noreg");
         header("Content-Disposition: attachment; filename=inv-$rental->noreg.docx");
 
         $templateProcessor->saveAs('php://output');

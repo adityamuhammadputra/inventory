@@ -36,9 +36,12 @@ class EventController extends Controller
             ];
 
             $name = ($request->aproved) ? 'has-approved' : 'not-approved';
+
+            logActivities("Export Event event-$name.xlsx");
             return Excel::download(new ExportEvent($data), "event-$name.xlsx");
 
         endif;
+
 
         $data = (object) [
             'noReg' => getMaxEvent(),
@@ -49,7 +52,7 @@ class EventController extends Controller
             'event' => null,
         ];
 
-
+        logActivities("View Event page");
         return view('event.index', compact('data'));
     }
 
@@ -189,6 +192,8 @@ class EventController extends Controller
         try {
             DB::beginTransaction();
                 $eventDb = Event::create($event);
+
+                logActivities("Create Event $eventDb->id");
                 $this->inputBarang($request, $eventDb);
                 $this->inputOperator($request, $eventDb);
                 $status = 200;
@@ -252,7 +257,7 @@ class EventController extends Controller
                 $this->inputBarang($request, $event);
                 $this->inputOperator($request, $event);
 
-
+                logActivities("Update Event $event->id");
 
             DB::commit();
             $status = 200;
@@ -285,6 +290,7 @@ class EventController extends Controller
                     ->where('end', dateInput($event->date_end))
                     ->delete();
 
+        logActivities("Delete Event $event->id");
         return $event->delete();
     }
 
@@ -305,6 +311,7 @@ class EventController extends Controller
                 'event' => $event,
             ];
 
+            logActivities("Aprrove Event $event->id");
             return response()->json($data, 200);
         } catch (\Exception $e) {
             return response()->json($e, 401);
@@ -343,6 +350,7 @@ class EventController extends Controller
             $no++;
         endforeach;
 
+        logActivities("Export docx Event inv-$event->noreg");
         header("Content-Disposition: attachment; filename=letter-$event->noreg.docx");
 
         $templateProcessor->saveAs('php://output');
@@ -373,8 +381,8 @@ class EventController extends Controller
             $noOp++;
         endforeach;
 
+        logActivities("Export docx Event receipt-operator-$event->noreg");
         header("Content-Disposition: attachment; filename=payment-receipt-operator-$event->noreg.docx");
-
         $templateProcessor->saveAs('php://output');
     }
 
@@ -438,6 +446,7 @@ class EventController extends Controller
 
         $templateProcessor->cloneRowAndSetValues('no', $values);
 
+        logActivities("Export docx Event inv-$event->noreg");
         header("Content-Disposition: attachment; filename=inv-$event->noreg.docx");
 
         $templateProcessor->saveAs('php://output');

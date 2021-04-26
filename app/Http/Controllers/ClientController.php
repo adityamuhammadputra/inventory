@@ -9,6 +9,7 @@ class ClientController extends Controller
 {
     public function index(Request $request)
     {
+        logActivities("View Client page");
         $data = (object) [
             'model' => 'CL',
         ];

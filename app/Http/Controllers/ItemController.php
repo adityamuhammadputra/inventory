@@ -10,6 +10,8 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
+        logActivities('View Item Page');
+
         $data = (object) [
             'maxKode' => Barang::maxKode('IP'),
             'kategori' => 'IP',

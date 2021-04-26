@@ -101,6 +101,7 @@ class DashboardController extends Controller
             'graphEvent' => $graphEvent,
         ];
 
+        logActivities("View Dashboard page");
         return view('dashboard.index', compact('data'));
     }
 

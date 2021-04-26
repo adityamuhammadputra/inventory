@@ -15,6 +15,7 @@ class UserController extends Controller
 
     public function index()
     {
+        logActivities("View User page");
         $users = User::get();
         return view('user.index', compact('users'));
     }

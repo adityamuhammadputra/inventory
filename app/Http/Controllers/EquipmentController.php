@@ -10,6 +10,7 @@ class EquipmentController extends Controller
 {
     public function index(Request $request)
     {
+        logActivities("View Equipment page");
         $data = (object) [
             'maxKode' => Barang::maxKode('EP'),
             'jenis' => getAllJenis(),
