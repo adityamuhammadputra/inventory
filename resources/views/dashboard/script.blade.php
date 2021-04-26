@@ -46,27 +46,23 @@
         new Chart(document.getElementById("chartjs-dashboard-line"), {
             type: 'line',
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Sales ($)",
-                    fill: true,
-                    backgroundColor: gradient,
-                    borderColor: window.theme.primary,
-                    data: [
-                        2115,
-                        1562,
-                        1584,
-                        1892,
-                        1587,
-                        1923,
-                        2566,
-                        2448,
-                        2805,
-                        3438,
-                        2917,
-                        3327
-                    ]
-                }]
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Total"],
+                datasets: [
+                    {
+                        label: "Rental",
+                        fill: true,
+                        backgroundColor: gradient,
+                        borderColor: window.theme.primary,
+                        data: {{ $data->graphRental }}
+                    },
+                    {
+                        label: "Event",
+                        fill: true,
+                        backgroundColor: gradient,
+                        borderColor: window.theme.danger,
+                        data: {{ $data->graphEvent }}
+                    }
+                ]
             },
             options: {
                 maintainAspectRatio: false,
