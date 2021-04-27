@@ -17,9 +17,9 @@ class BarangLog extends Model
         if($this->deleted_at)
             $check = ' <span class="mdi mdi-check text-primary"></span>';
 
-        $position = 'E';
+        $position = '<a href="/event" class="text-default">E</a>';
         if($this->rental_id)
-            $position = 'R';
+            $position = '<a href="/rental" class="text-default">R</a>';
         return "{$this->start} s/d {$this->end} $position {$check}";
     }
 
