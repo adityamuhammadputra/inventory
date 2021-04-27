@@ -25,11 +25,16 @@ class EventController extends Controller
     {
         if($request->export) :
             $events = Event::filtered()->get();
+
+            $status = 1;
+            if($request->aproved)
+                $status = 2;
+
             $data = (object) [
                 'data' => $events,
                 'attr' => (object) [
-                    'dateStart' => $request->date_start ?? Event::where('status', 2)->orderBy('created_at', 'asc')->first()->date_start,
-                    'dateEnd' => $request->end ?? Event::where('status', 2)->orderBy('created_at', 'desc')->first()->date_end,
+                    'dateStart' => $request->date_start ?? Event::where('status', $status)->orderBy('created_at', 'asc')->first()->date_start,
+                    'dateEnd' => $request->end ?? Event::where('status', $status)->orderBy('created_at', 'desc')->first()->date_end,
                     'total' => ($request->total) ? " | Total > $request->total" : "",
                     'title' => ($request->aproved) ? 'Has Approved' : 'Not Approved',
                 ]

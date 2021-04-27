@@ -24,11 +24,15 @@ class RentalController extends Controller
     {
         if($request->export) :
             $events = Rental::filtered()->get();
+            $status = 1;
+            if($request->aproved)
+                $status = 2;
+
             $data = (object) [
                 'data' => $events,
                 'attr' => (object) [
-                    'dateStart' => $request->date_start ?? Rental::where('status', 2)->orderBy('created_at', 'asc')->first()->start,
-                    'dateEnd' => $request->date_end ?? Rental::where('status', 2)->orderBy('created_at', 'desc')->first()->end,
+                    'dateStart' => $request->date_start ?? Rental::where('status', $status)->orderBy('created_at', 'asc')->first()->start,
+                    'dateEnd' => $request->date_end ?? Rental::where('status', $status)->orderBy('created_at', 'desc')->first()->end,
                     'total' => ($request->total) ? " | Total > $request->total" : "",
                     'title' => ($request->aproved) ? 'Has Approved' : 'Not Approved',
                 ]
