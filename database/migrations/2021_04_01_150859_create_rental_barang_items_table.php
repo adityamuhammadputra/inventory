@@ -22,6 +22,7 @@ class CreateRentalBarangItemsTable extends Migration
             $table->string('barang_harga')->nullable();
             $table->string('barang_qty')->nullable();
             $table->string('barang_total')->nullable();
+            $table->string('barang_item_total')->nullable();
             $table->timestamps();
         });
     }
