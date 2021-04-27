@@ -10,12 +10,7 @@ class Operator extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    /**
-     * Get the user that owns the Operator
-     *
-     * Camerament Crew SDE Editor
-     *
-     */
+
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);

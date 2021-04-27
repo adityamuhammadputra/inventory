@@ -20,14 +20,16 @@ class EventOperator extends Model
 
     public function getIdsAttribute()
     {
-        if($this->attributes['operator_tugas'] == 'Camerament')
+        if($this->attributes['operator_tugas'] == 'Fotografer')
             return 1;
-        else if($this->attributes['operator_tugas'] == 'Crew')
+        else if($this->attributes['operator_tugas'] == 'Videografer')
             return 2;
         else if($this->attributes['operator_tugas'] == 'SDE')
             return 3;
-        else
+        else if($this->attributes['operator_tugas'] == 'Crew')
             return 4;
+        else
+            return 5;
     }
 
     public function getOpNameAttribute()

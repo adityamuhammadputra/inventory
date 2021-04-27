@@ -48,10 +48,11 @@
                         <div class="form-label-group col-md-6">
                             <select name="tugas" id="tugas" class="form-control select2" required>
                                 <option value="" selected disabled></option>
-                                <option value="Camerament">Camerament</option>
-                                <option value="Crew">Crew</option>
+                                <option value="Fotografer">Fotografer</option>
+                                <option value="Videografer">Videografer</option>
                                 <option value="SDE">SDE</option>
-                                <option value="Editor">Editor</option>
+                                <option value="Crew">Crew</option>
+                                <option value="EditorVideo">Editor Video</option>
                             </select>
                             <label for="tugas">--Pilih Tugas--</label>
                         </div>
