@@ -26,7 +26,7 @@
                             <th>Vendor</th>
                             <th>Code</th>
                             <th>Operator Name</th>
-                            <th>Task</th>
+                            <th>Tasks</th>
                             <th>Price</th>
                             <th>created at</th>
                             <th></th>
