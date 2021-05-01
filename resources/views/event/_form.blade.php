@@ -294,7 +294,7 @@
                                 data-id="{{ $data->event->id }}" data-title="Event #{{ $data->event->title }}" data-url="/event/{{ $data->event->id }}/approve" >
                                 <i class="fa fa-check"></i> Approve
                             </a>
-                            <button type="submit" class="btn btn-primary btn-square float-right" id="change"><span class="fa fa-check-circle"></span> Simpan Perubahan</button>
+                            <button type="submit" class="btn btn-primary btn-square float-right" id="change"><span class="fa fa-check-circle"></span> Save Changes</button>
                         @endif
                         <a class="btn btn-secondary btn-square float-right text-white mr-2" href="/event"> Back</a>
                     @else
