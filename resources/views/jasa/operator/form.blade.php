@@ -55,7 +55,7 @@
                                 <option value="EditorVideo">Editor Video</option>
                                 <option value="EditorPhoto">Editor Photo</option>
                             </select>
-                            <label for="tugas">--Select Tugas--</label>
+                            <label for="tugas">--Select Tasks--</label>
                         </div>
                         <div class="form-label-group col-md-6 mt-4">
                             <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Save</button>
