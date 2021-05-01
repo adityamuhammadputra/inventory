@@ -21,21 +21,21 @@
                         <div class="form-label-group col-md-6">
                             <input type="text" id="kode" name="kode" class="form-control" placeholder="Kode Barang" value="{{ $data->maxKode }}" required>
                             <label id="kode-has-value" class="error kode-has-value" for="kode" style="display: none;"></label>
-                            <label for="kode">Kode Barang</label>
+                            <label for="kode">Item Code </label>
                         </div>
                         <div class="form-label-group col-md-6">
                             <input type="text" id="jenis" name="jenis" class="form-control" placeholder="Jenis Barang" required>
-                            <label for="jenis">Jenis Barang</label>
+                            <label for="jenis">Item Kind</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
                             <input type="text" id="merk" name="merk" class="form-control" placeholder="Merk Barang" required>
-                            <label for="merk">Merk Barang</label>
+                            <label for="merk">Item Brand</label>
                         </div>
                         <div class="form-label-group col-md-6">
                             <input type="text" id="type" name="type" class="form-control" placeholder="Type Barang" required>
-                            <label for="type">Type Barang</label>
+                            <label for="type">Item Type</label>
                         </div>
                     </div>
                     <div class="form-row">
@@ -45,11 +45,11 @@
                         </div>
                         <div class="form-label-group col-md-6">
                             <input type="text" id="harga" name="harga" class="form-control rupiah" placeholder="Harga Barang" required>
-                            <label for="harga">Harga Barang</label>
+                            <label for="harga">Item Price</label>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
-                    <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/api/v1/barang"> Batal</a>
+                    <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Save</button>
+                    <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/api/v1/barang"> Cancel</a>
                 </form>
             </div>
         </div>

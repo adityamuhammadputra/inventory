@@ -334,7 +334,7 @@
                     } else {
                         table.api().ajax.reload()
                         loadingIconButton($('#submit'), reset = true)
-                        toastr.info('Rental Berhasil disimpan')
+                        toastr.info('Rental Saved successfully')
                         $('#form-submit')[0].reset()
                         $('.card-form').slideUp();
                         $('#noreg').val(res.noReg);

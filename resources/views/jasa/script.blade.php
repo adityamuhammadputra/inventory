@@ -118,7 +118,7 @@
                 success: function(res) {
                     table.api().ajax.reload()
                     loadingIconButton($('#submit'), reset = true)
-                    toastr.info(res.data.nama + ' Berhasil disimpan')
+                    toastr.info(res.data.nama + ' Saved successfully')
                     $('#form-submit')[0].reset()
                     $('.card-form').slideUp();
                     return false;

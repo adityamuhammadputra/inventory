@@ -21,31 +21,31 @@
                         <div class="form-label-group col-md-6">
                             <input type="text" id="kode" name="kode" class="form-control" placeholder="Kode Vendor" value="" required>
                             <label id="kode-has-value" class="error kode-has-value" for="kode" style="display: none;"></label>
-                            <label for="kode">Kode Vendor</label>
+                            <label for="kode">Vendor Code</label>
                         </div>
                         <div class="form-label-group col-md-6">
-                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Vendor" value="" required>
-                            <label for="nama">Nama vendor</label>
+                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Vendor Name" value="" required>
+                            <label for="nama">Vendor Name</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
-                            <input type="number" id="kontak" name="kontak" class="form-control" placeholder="Nama Vendor" required>
-                            <label for="kontak">Kontak</label>
+                            <input type="number" id="kontak" name="kontak" class="form-control" placeholder="Vendor Name" required>
+                            <label for="kontak">Contact</label>
                         </div>
                         <div class="form-label-group col-md-6">
                             <input type="text" id="harga" name="harga" class="form-control rupiah" placeholder="Harga Vendor" required>
-                            <label for="harga">Harga Vendor</label>
+                            <label for="harga">Vendor Price</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
                             <textarea id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan Vendor" required></textarea>
-                            <label for="keterangan">Keterangan</label>
+                            <label for="keterangan">Information</label>
                         </div>
                         <div class="form-label-group col-md-6 mt-4">
-                            <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
-                            <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-action="/api/v1/jasa?model={{ $data->model }}"> Batal</a>
+                            <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Save</button>
+                            <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-action="/api/v1/jasa?model={{ $data->model }}"> Cancel</a>
                         </div>
                     </div>
                 </form>

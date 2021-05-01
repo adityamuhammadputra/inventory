@@ -25,22 +25,22 @@
                                     <option value="{{ $val->id }}">{{ $val->kode }} - {{ $val->nama }} </option>
                                 @endforeach
                             </select>
-                            <label for="vendor_id">--Pilih Vendor--</label>
+                            <label for="vendor_id">--Select Vendor--</label>
                         </div>
                         <div class="form-label-group col-md-6">
                             <input type="text" id="kode" name="kode" class="form-control" placeholder="KodeOperator" value="" required>
                             <label id="kode-has-value" class="error kode-has-value" for="kode" style="display: none;"></label>
-                            <label for="kode">Kode Petugas</label>
+                            <label for="kode">Officer Code</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
-                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Operator" required>
-                            <label for="nama">Nama Petugas</label>
+                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Operator Name" required>
+                            <label for="nama">Officer Name</label>
                         </div>
                         <div class="form-label-group col-md-6">
                             <input type="text" id="harga" name="harga" class="form-control rupiah" placeholder="Harga Operator" required>
-                            <label for="harga">Harga Petugas</label>
+                            <label for="harga">Officer Priice</label>
                         </div>
 
                     </div>
@@ -53,12 +53,13 @@
                                 <option value="SDE">SDE</option>
                                 <option value="Crew">Crew</option>
                                 <option value="EditorVideo">Editor Video</option>
+                                <option value="EditorPhoto">Editor Photo</option>
                             </select>
-                            <label for="tugas">--Pilih Tugas--</label>
+                            <label for="tugas">--Select Tugas--</label>
                         </div>
                         <div class="form-label-group col-md-6 mt-4">
-                            <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
-                            <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-action="/api/v1/jasa?model={{ $data->model }}"  data-action="/api/v1/barang"> Batal</a>
+                            <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Save</button>
+                            <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-action="/api/v1/jasa?model={{ $data->model }}"  data-action="/api/v1/barang"> Cancel</a>
                         </div>
                     </div>
                 </form>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('level1', 'User')
 @section('level2', 'Profile')
-@section('title', 'Profile' . request()->user()->name)
+@section('title', 'Profile ' . request()->user()->name)
 
 @section('content')
 <div class="row">

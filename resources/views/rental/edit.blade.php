@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('level1', 'Transaksi')
+@section('level1', 'Transaction')
 @section('level2', 'Rental Detail')
 @section('title', "Detail #$data->noReg")
 

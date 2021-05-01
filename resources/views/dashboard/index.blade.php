@@ -22,7 +22,7 @@
                 <h5 class="card-title">Event & Rental
                     <a href="/dashboard" class="float-right text-secondary"><span class="mdi mdi-reload"></span></a>
                 </h5>
-                <h6 class="card-subtitle text-muted">List Active <code>Event & Rental</code> selama <b class="timeline-time">bulan {{ \Carbon\Carbon::now()->format('F, Y') }}</b>.</h6>
+                <h6 class="card-subtitle text-muted">List Active <code>Event & Rental</code> During <b class="timeline-time">Month {{ \Carbon\Carbon::now()->format('F, Y') }}</b>.</h6>
             </div>
             <div class="card-body pt-0" style="height: 447px;overflow-y: auto;overflow-x: hidden;">
                 <ul class="timeline">
@@ -88,7 +88,7 @@
     <div class="col-xl-6 col-xxl-7">
         <div class="card flex-fill w-100">
             <div class="card-header">
-                <h5 class="card-title mb-0">Grafik Perbulan, tahun <b>2021</b></h5>
+                <h5 class="card-title mb-0">Monthly Chart, <b>2021</b></h5>
             </div>
             <div class="card-body py-3">
                 <div class="chart chart-sm">

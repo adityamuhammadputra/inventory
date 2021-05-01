@@ -15,7 +15,7 @@
         <div class="card">
             <div class="card-header pt-4 pb-0">
                 <h6 class="card-subtitle text-muted">Daftar Vendor
-                    <button class="btn btn-square btn-primary float-right" id="btn-add"><i class="fa fa-plus" data-action="/api/v1/jasa?model={{ $data->model }}"></i> Tambah</button>
+                    <button class="btn btn-square btn-primary float-right" id="btn-add"><i class="fa fa-plus" data-action="/api/v1/jasa?model={{ $data->model }}"></i> Add New</button>
                 </h6>
             </div>
             <div class="card-body pt-0">
@@ -23,11 +23,11 @@
                     <thead>
                         <tr>
                             <th style="width: 5px;"></th>
-                            <th>Kode Vendor</th>
-                            <th>Nama Vendor</th>
-                            <th>Kontak</th>
-                            <th>Harga</th>
-                            <th>Keterangan</th>
+                            <th>Vendor Code</th>
+                            <th>Vendor Name</th>
+                            <th>Contact</th>
+                            <th>Price</th>
+                            <th>Information</th>
                             <th>created at</th>
                             <th></th>
                         </tr>

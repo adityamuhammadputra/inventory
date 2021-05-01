@@ -14,8 +14,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pt-4 pb-0">
-                <h6 class="card-subtitle text-muted">Daftar Operator
-                    <button class="btn btn-square btn-primary float-right" id="btn-add" data-action="/api/v1/jasa?model={{ $data->model }}"><i class="fa fa-plus"></i> Tambah</button>
+                <h6 class="card-subtitle text-muted">Operator List
+                    <button class="btn btn-square btn-primary float-right" id="btn-add" data-action="/api/v1/jasa?model={{ $data->model }}"><i class="fa fa-plus"></i> Add New</button>
                 </h6>
             </div>
             <div class="card-body pt-0">
@@ -24,10 +24,10 @@
                         <tr>
                             <th></th>
                             <th>Vendor</th>
-                            <th>Kode</th>
+                            <th>Code</th>
                             <th>Nama Opertor</th>
-                            <th>Tugas</th>
-                            <th>Harga</th>
+                            <th>Task</th>
+                            <th>Price</th>
                             <th>created at</th>
                             <th></th>
                         </tr>

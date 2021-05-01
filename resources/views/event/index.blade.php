@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('level1', 'Transaksi')
+@section('level1', 'Transaction')
 @section('level2', 'Event')
 @section('title', 'Event Equipment & Item')
 
@@ -14,8 +14,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pt-4 pb-0">
-                <h6 class="card-subtitle text-muted">Daftar Rental
-                    <button class="btn btn-square btn-primary float-right" id="btn-add" data-action="/event"><i class="fa fa-plus"></i> Tambah</button>
+                <h6 class="card-subtitle text-muted">Rental List
+                    <button class="btn btn-square btn-primary float-right" id="btn-add" data-action="/event"><i class="fa fa-plus"></i> Add New</button>
                 </h6>
             </div>
             <div class="card-body pt-0">
@@ -28,12 +28,12 @@
                             <th>Vendor</th>
                             <th>Client</th>
                             <th>Event Detail</th>
-                            <th>Tanggal Event</th>
+                            <th>Event Date</th>
                             <th>Operator</th>
                             <th>Equipment</th>
                             <th>Item</th>
                             <th>Subtotal</th>
-                            <th>Diskon</th>
+                            <th>Discount</th>
                             <th>Total</th>
                             <th>created at</th>
                             <th></th>

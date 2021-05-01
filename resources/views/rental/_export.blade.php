@@ -15,11 +15,11 @@
         <th>No</th>
         <th>Noreg</th>
         <th>Client</th>
-        <th>Tanggal Rental</th>
-        <th>Jumlah Equipment</th>
-        <th>Jumlah Item</th>
+        <th>Rental Date</th>
+        <th>Equipment Total</th>
+        <th>Item Total</th>
         <th>Subtotal</th>
-        <th>Diskon</th>
+        <th>Discount</th>
         <th>Total</th>
         <th>created at</th>
     </tr>

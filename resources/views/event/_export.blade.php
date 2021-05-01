@@ -17,12 +17,12 @@
         <th>Vendor</th>
         <th>Client</th>
         <th>Event Detail</th>
-        <th>Tanggal Event</th>
+        <th>Event Date</th>
         <th>Operator</th>
         <th>Equipment</th>
         <th>Item</th>
         <th>Subtotal</th>
-        <th>Diskon</th>
+        <th>Discount</th>
         <th>Total</th>
         <th>created at</th>
     </tr>

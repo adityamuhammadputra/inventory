@@ -427,7 +427,7 @@
                     } else {
                         table.api().ajax.reload()
                         loadingIconButton($('#submit'), reset = true)
-                        toastr.info('Event Berhasil disimpan')
+                        toastr.info('Event Saved successfully')
                         $('#form-submit')[0].reset()
                         $('.card-form').slideUp();
                         $('#noreg').val(res.noReg);

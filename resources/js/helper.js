@@ -1,9 +1,9 @@
 $(document).on('click','.deleteData', function(){
     let id  = $(this).data('id');
     let url  = $(this).data('url');
-    let title = 'Yakin menghapus data ' + $(this).data('title');
+    let title = 'Sure to delete data ' + $(this).data('title');
     swal({
-        title: "Konfirmasi",
+        title: "Confirmation",
         text: title,
         icon: "warning",
         buttons: true,
@@ -19,7 +19,7 @@ $(document).on('click','.deleteData', function(){
                     '_method' : 'DELETE',
                 },
                 success: function(res){
-                    toastr.info('Data Berhasil Dihapus')
+                    toastr.info('Data Deleted Successfully')
                     table.api().ajax.reload()
                 },
                 error: function(){
@@ -31,9 +31,9 @@ $(document).on('click','.deleteData', function(){
 
 $(document).on('click','.approveData', function(){
     let url  = $(this).data('url');
-    let title = 'Yakin Approve data ' + $(this).data('title');
+    let title = 'Sure Approve Data ' + $(this).data('title');
     swal({
-        title: "Konfirmasi",
+        title: "Confirmation",
         text: title,
         icon: "warning",
         buttons: true,
@@ -48,7 +48,7 @@ $(document).on('click','.approveData', function(){
                     '_token' : $('meta[name="csrf-token"]').attr('content'),
                 },
                 success: function(res){
-                    toastr.info('Data Berhasil Approve')
+                    toastr.info('Successfully Approve Data')
                     if (window.location.href.indexOf("edit") != -1) {
                         setTimeout(function(){
                             window.location.reload();

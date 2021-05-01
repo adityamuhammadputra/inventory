@@ -14,8 +14,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pt-4 pb-0">
-                <h6 class="card-subtitle text-muted">Daftar Client
-                    <button class="btn btn-square btn-primary float-right" id="btn-add" data-action="/api/v1/jasa?model={{ $data->model }}"><i class="fa fa-plus"></i> Tambah</button>
+                <h6 class="card-subtitle text-muted">Client List
+                    <button class="btn btn-square btn-primary float-right" id="btn-add" data-action="/api/v1/jasa?model={{ $data->model }}"><i class="fa fa-plus"></i> Add New</button>
                 </h6>
             </div>
             <div class="card-body pt-0">
@@ -24,9 +24,9 @@
                         <tr>
                             <th></th>
                             <th>Nama Client</th>
-                            <th>Kontak</th>
-                            <th>Alamat</th>
-                            <th>Keterangan</th>
+                            <th>Contact</th>
+                            <th>Address</th>
+                            <th>Information</th>
                             <th>created at</th>
                             <th></th>
                         </tr>

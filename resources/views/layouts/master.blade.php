@@ -30,7 +30,7 @@
                         </a>
                     </li>
                     <li class="sidebar-header">
-                        Transaksi
+                        Transaction
                     </li>
                     <li class="sidebar-item {{ (request()->is('event*')) ? 'active' : '' }}">
                         <a class="sidebar-link" href="/event">
@@ -47,7 +47,7 @@
                     </li>
                     <li class="sidebar-item {{ (request()->is('equipment') || request()->is('item')) ? 'active' : '' }}">
                         <a href="#ui" data-toggle="collapse" class="sidebar-link collapsed">
-                            <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Barang</span>
+                            <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Equipment Items</span>
                         </a>
                         <ul id="ui" class="sidebar-dropdown list-unstyled collapse {{ (request()->is('equipment') || request()->is('item')) ? 'show' : '' }}" data-parent="#sidebar">
                             <li class="sidebar-item {{ (request()->is('equipment')) ? 'active' : '' }}">
@@ -60,7 +60,7 @@
                     </li>
                     <li class="sidebar-item {{ (request()->is('operator') || request()->is('vendor')) ? 'active' : '' }}">
                         <a href="#forms" data-toggle="collapse" class="sidebar-link collapsed">
-                            <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Jasa</span>
+                            <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Services</span>
                         </a>
                         <ul id="forms" class="sidebar-dropdown list-unstyled collapse {{ (request()->is('operator') || request()->is('vendor')) ? 'show' : '' }}" data-parent="#sidebar">
                             <li class="sidebar-item {{ (request()->is('operator')) ? 'active' : '' }}">

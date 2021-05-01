@@ -79,7 +79,7 @@
                 success: function(res) {
                     table.api().ajax.reload()
                     loadingIconButton($('#submit'), reset = true)
-                    toastr.info(res.barang.merk + ' Berhasil disimpan')
+                    toastr.info(res.barang.merk + ' Saved successfully')
                     generateBarcodeTemp(res.maxKode)
                     $('#form-submit')[0].reset()
                     $('#kode').val(res.maxKode)

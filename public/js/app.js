@@ -37489,9 +37489,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 $(document).on('click', '.deleteData', function () {
   var id = $(this).data('id');
   var url = $(this).data('url');
-  var title = 'Yakin menghapus data ' + $(this).data('title');
+  var title = 'Sure to delete data ' + $(this).data('title');
   swal({
-    title: "Konfirmasi",
+    title: "Confirmation",
     text: title,
     icon: "warning",
     buttons: true,
@@ -37506,7 +37506,7 @@ $(document).on('click', '.deleteData', function () {
           '_method': 'DELETE'
         },
         success: function success(res) {
-          toastr.info('Data Berhasil Dihapus');
+          toastr.info('Data Deleted Successfully');
           table.api().ajax.reload();
         },
         error: function error() {}
@@ -37516,9 +37516,9 @@ $(document).on('click', '.deleteData', function () {
 });
 $(document).on('click', '.approveData', function () {
   var url = $(this).data('url');
-  var title = 'Yakin Approve data ' + $(this).data('title');
+  var title = 'Sure Approve Data ' + $(this).data('title');
   swal({
-    title: "Konfirmasi",
+    title: "Confirmation",
     text: title,
     icon: "warning",
     buttons: true,
@@ -37532,7 +37532,7 @@ $(document).on('click', '.approveData', function () {
           '_token': $('meta[name="csrf-token"]').attr('content')
         },
         success: function success(res) {
-          toastr.info('Data Berhasil Approve');
+          toastr.info('Successfully Approve Data');
 
           if (window.location.href.indexOf("edit") != -1) {
             setTimeout(function () {

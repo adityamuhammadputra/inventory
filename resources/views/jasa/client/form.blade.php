@@ -20,27 +20,27 @@
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
                             <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Client" value="" required>
-                            <label for="nama">Nama</label>
+                            <label for="nama">Name</label>
                         </div>
                         <div class="form-label-group col-md-6">
                             <input type="number" id="kontak" name="kontak" class="form-control" placeholder="Nama Client" required>
-                            <label for="kontak">Kontak</label>
+                            <label for="kontak">Contact</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
                             <textarea id="keterangan" name="keterangan" class="form-control" placeholder="keterangan Client" required></textarea>
-                            <label for="keterangan">Keterangan</label>
+                            <label for="keterangan">Information</label>
                         </div>
                         <div class="form-label-group col-md-6">
                             <textarea id="alamat" name="alamat" class="form-control" placeholder="Alamat Client" required></textarea>
-                            <label for="alamat">Alamat</label>
+                            <label for="alamat">Address</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-md-12 mt-4">
-                            <button type="submit" class="btn btn-primary btn-square float-right" id="submit" data-action="/api/v1/jasa?model={{ $data->model }}"><span class="fa fa-check-circle"></span> Simpan</button>
-                            <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel"> Batal</a>
+                            <button type="submit" class="btn btn-primary btn-square float-right" id="submit" data-action="/api/v1/jasa?model={{ $data->model }}"><span class="fa fa-check-circle"></span> Save</button>
+                            <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel"> Cancel</a>
                         </div>
                     </div>
                 </form>

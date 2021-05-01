@@ -14,7 +14,7 @@
                 <label for="start">Event Date Start</label>
             </div>
             <div class="col-2 text-center">
-                <label class="">s/d</label>
+                <label class="">To</label>
             </div>
             <div class="form-label-group col-md-5">
                 <input type="text" id="end" name="end" class="form-control datepicker" placeholder="Rental End" required value="">
@@ -24,7 +24,7 @@
     </div>
     <label class="custom-control custom-checkbox label-approved">
         <input type="checkbox" class="custom-control-input" name="aproved" id="aproved-filter" value="1">
-        <span class="custom-control-label">Lihat Approved</span>
+        <span class="custom-control-label">See Approved</span>
     </label>
 
     <a class="filter-export-transaksi text-secondary"><span class="mdi mdi-file-excel"></span>Export</a>

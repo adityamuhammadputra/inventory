@@ -28,8 +28,10 @@ class EventOperator extends Model
             return 3;
         else if($this->attributes['operator_tugas'] == 'Crew')
             return 4;
-        else
+        else if($this->attributes['operator_tugas'] == 'EditorVideo')
             return 5;
+        else
+            return 6;
     }
 
     public function getOpNameAttribute()

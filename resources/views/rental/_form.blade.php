@@ -26,33 +26,33 @@
                 <div class="col-md-8 offset-md-1 pt-1">
                     <div class="form-row">
                         <div class="form-label-group col-6">
-                            <input type="text" id="noreg" name="noreg" class="form-control" placeholder="Noreg Rental" value="{{ $data->noReg }}" required>
+                            <input type="text" id="noreg" name="noreg" class="form-control" placeholder="Rental Noreg" value="{{ $data->noReg }}" required>
                             <label id="noreg-has-value" class="error noreg-has-value" for="noreg" style="display: none;"></label>
-                            <label for="noreg">Noreg Rental</label>
+                            <label for="noreg">Rental Noreg</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
                             <input type="text" id="nama" name="nama" class="form-control autocompleteNama" placeholder="Nama" required value="{{ $data->rental->nama ?? '' }}">
-                            <label for="nama">Nama </label>
+                            <label for="nama">Name </label>
                         </div>
                         <div class="form-label-group col-6">
                             <div class="custom-control custom-switch" style="top: 22px;">
                                 <input type="checkbox" class="custom-control-input" id="checkMaster" checked>
-                                <label class="custom-control-label" for="checkMaster">Ambil Dari Master</label>
+                                <label class="custom-control-label" for="checkMaster">Take From Master</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
                             <input type="number" id="kontak" name="kontak" class="form-control" placeholder="kontak" required readonly value="{{ $data->rental->kontak ?? '' }}">
-                            <label for="kontak">Kontak</label>
+                            <label for="kontak">Contact</label>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-label-group col-6">
                             <textarea id="alamat" name="alamat" class="form-control" placeholder="Alamat Client" required readonly>{{ $data->rental->alamat ?? '' }}</textarea>
-                            <label for="alamat">Alamat</label>
+                            <label for="alamat">Address</label>
                         </div>
                     </div>
                     <div class="form-row">
@@ -61,7 +61,7 @@
                             <label for="start">Rental Date Start</label>
                         </div>
                         <div class="col-2 text-center">
-                            <label class="">s/d</label>
+                            <label class="">To</label>
                         </div>
                         <div class="form-label-group col-md-5">
                             <input type="text" id="end" name="end" class="form-control datepicker" placeholder="Rental End" required value="{{ $data->rental->end ?? $data->dateNow }}">
@@ -178,8 +178,8 @@
                         @endif
                     <a class="btn btn-secondary btn-square float-right text-white mr-2" href="/rental"> Kembali</a>
                     @else
-                    <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Simpan</button>
-                    <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/rental"> Batal</a>
+                    <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Save</button>
+                    <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/rental"> Cancel</a>
                     @endif
                 </div>
             </div>
