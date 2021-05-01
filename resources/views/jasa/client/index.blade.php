@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('level1', 'Master')
-@section('level2', 'Jasa')
+@section('level2', 'Services')
 @section('title', 'Client')
 
 @section('content')
@@ -23,7 +23,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Nama Client</th>
+                            <th>Client Name</th>
                             <th>Contact</th>
                             <th>Address</th>
                             <th>Information</th>

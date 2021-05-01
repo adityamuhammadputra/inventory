@@ -19,11 +19,11 @@
                     @method('POST')
                     <div class="form-row">
                         <div class="form-label-group col-md-6">
-                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Client" value="" required>
+                            <input type="text" id="nama" name="nama" class="form-control" placeholder="Client Name" value="" required>
                             <label for="nama">Name</label>
                         </div>
                         <div class="form-label-group col-md-6">
-                            <input type="number" id="kontak" name="kontak" class="form-control" placeholder="Nama Client" required>
+                            <input type="number" id="kontak" name="kontak" class="form-control" placeholder="Client Name" required>
                             <label for="kontak">Contact</label>
                         </div>
                     </div>

@@ -144,6 +144,11 @@ $(function() {
     })
 });
 
+$(document).on('click', '.fc-day-number' , function(){
+    $('.fc-day-number').css('color', 'unset');
+    $(this).css('color', 'rgb(249 140 1)');
+})
+
 </script>
 @endpush
 

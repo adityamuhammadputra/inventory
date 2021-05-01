@@ -9,7 +9,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pt-4">
-                <h6 class="card-subtitle text-muted">Daftar <code>User/Pengguna</code> aplikasi. Hak akses semua <code>User</code> sama</h6>
+                <h6 class="card-subtitle text-muted"><code>User List</code> application. All access rights <code>User</code> is the same</h6>
             </div>
             <div class="card-body">
                 <table class="table table-striped table-hover">

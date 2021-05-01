@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('level1', 'Master')
-@section('level2', 'Barang')
+@section('level2', 'Equipment Items')
 @section('title', $data->title)
 
 @section('content')

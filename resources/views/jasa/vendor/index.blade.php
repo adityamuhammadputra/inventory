@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('level1', 'Master')
-@section('level2', 'Jasa')
+@section('level2', 'Services')
 @section('title', 'Vendor')
 
 @section('content')
@@ -14,7 +14,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header pt-4 pb-0">
-                <h6 class="card-subtitle text-muted">Daftar Vendor
+                <h6 class="card-subtitle text-muted">Vendor List
                     <button class="btn btn-square btn-primary float-right" id="btn-add"><i class="fa fa-plus" data-action="/api/v1/jasa?model={{ $data->model }}"></i> Add New</button>
                 </h6>
             </div>

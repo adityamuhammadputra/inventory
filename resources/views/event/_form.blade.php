@@ -296,7 +296,7 @@
                             </a>
                             <button type="submit" class="btn btn-primary btn-square float-right" id="change"><span class="fa fa-check-circle"></span> Simpan Perubahan</button>
                         @endif
-                        <a class="btn btn-secondary btn-square float-right text-white mr-2" href="/event"> Kembali</a>
+                        <a class="btn btn-secondary btn-square float-right text-white mr-2" href="/event"> Back</a>
                     @else
                         <button type="submit" class="btn btn-primary btn-square float-right" id="submit"><span class="fa fa-check-circle"></span> Save</button>
                         <a class="btn btn-secondary btn-square float-right text-white mr-2" id="btn-cancel" data-max-kode="true" data-action="/event"> Cancel</a>

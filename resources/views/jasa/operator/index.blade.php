@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('level1', 'Master')
-@section('level2', 'Jasa')
+@section('level2', 'Services')
 @section('title', 'Operator')
 
 @section('content')
