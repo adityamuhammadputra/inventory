@@ -249,6 +249,14 @@
     }
     setAutoCompleteOp()
 
+    let barcodeActive = () => {
+        let barcode = $('#barcode_active');
+        if (barcode.is(':checked'))
+            return true;
+        else
+            return false;
+    }
+
     let setAutoCompleteEquipment = () => {
         $('.autoCompleteEquipment').autocomplete({
             lookup: function (query, done) {
@@ -260,6 +268,7 @@
                         kategori : 'EP',
                         start: $('#date_start').val(),
                         end: $('#date_end').val(),
+                        barcode_active : barcodeActive(),
                     },
                     success: function(data) {
                         done(data);
@@ -290,7 +299,8 @@
                         q : query,
                         kategori : 'IP',
                         start: $('#date_start').val(),
-                        end: $('#date_end').val()
+                        end: $('#date_end').val(),
+                        barcode_active : barcodeActive(),
                     },
                     success: function(data) {
                         done(data);

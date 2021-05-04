@@ -94,8 +94,7 @@ class Controller extends BaseController
         foreach($barang as $c) :
             $data [] = [
                 'data' => $c,
-                // 'value' => "$c->kode - $c->jenis - $c->harga",
-                'value' => "$c->kode",
+                'value' => ($request->barcode_active == 'true') ? "$c->kode" : "$c->kode - $c->jenis $c->merk $c->type - $c->harga",
             ];
         endforeach;
 

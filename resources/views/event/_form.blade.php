@@ -188,6 +188,11 @@
             <div class="row">
                 <div class="col-12 pt-2">
                     <div class="form-row row-multiple">
+                        <div class="custom-control custom-switch" style="top: -10px;">
+                            <input type="checkbox" class="custom-control-input" id="barcode_active" checked>
+                            <label class="custom-control-label" for="barcode_active">Barcode Aktive</label>
+                        </div>
+                        <br>
                         <table class="table" id="table-barang">
                             <thead>
                                 <tr>
