@@ -402,9 +402,11 @@
     }
 
     $('.diskon').on('keyup', function(){
+        // alert('c');
         let subtotal = inputRupiah($('.subtotal').val()) + inputRupiah($('.subtotalOp').val())
         let diskonTemp = subtotal * $(this).val() / 100;
         let total = subtotal - diskonTemp;
+        console.log(total);
         if(total && total !== NaN)
             $('.total').val(outputRupiah(total))
     })
