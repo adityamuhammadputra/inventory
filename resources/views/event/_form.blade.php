@@ -211,7 +211,14 @@
                                 <tr id="{{ $key }}">
                                     <td class="text-center">{{ $key }}</td>
                                     <td>
-                                        <input type="text" class="form-control autoCompleteEquipment equipment{{ $key }}" dataid="{{ $key }}" name="equpment[{{ $key }}]" value="{{ $barang->equpment }}">
+                                        <input type="text" class="form-control autoCompleteEquipment equipment{{ $key }}"
+                                            dataid="{{ $key }}"
+                                            name="equpment[{{ $key }}]"
+                                            value="{{ $barang->equpment }}">
+                                        {{-- <select name="equpment[{{ $key }}]"
+                                            dataid="{{ $key }}"
+                                            class="form-control select2 selectEquipment{{ $key }}">
+                                        </select> --}}
                                     </td>
                                     <td>
                                         @foreach ($barang->eventBarangItems as $keyItem => $item)
