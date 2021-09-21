@@ -360,7 +360,7 @@ class RentalController extends Controller
             'start' => "$rental->start",
             'end' => "$rental->end",
             'sub_total' => "$rental->sub_total",
-            'diskon' => "$rental->diskon %",
+            'diskon' => ($rental->diskon) ? "Discount	   :            $rental->diskon %" : "",
             'total' => "$rental->total",
         ]);
 

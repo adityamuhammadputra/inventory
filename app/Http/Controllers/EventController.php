@@ -407,7 +407,7 @@ class EventController extends Controller
             'subTotalOp' => $event->sub_total_op,
             'subTotal' => $event->sub_total,
             'sub_total_all' => $event->sub_total_all,
-            'diskon' => "$event->diskon%",
+            'diskon' => ($event->diskon) ? "Discount	                  :      $event->diskon %" : "",
             'total' => "$event->total"
         ]);
 
